@@ -1,0 +1,14 @@
+D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Debug\KulturkatalogenArrangemang.Resources.resources
+D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Debug\KulturkatalogenArrangemang.vbproj.GenerateResource.Cache
+D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Debug\KulturkatalogenArrangemang.xml
+D:\devprojekt\libraries\KulturkatalogenArrangemang\bin\Debug\KulturkatalogenArrangemang.dll.config
+D:\devprojekt\libraries\KulturkatalogenArrangemang\bin\Debug\KulturkatalogenArrangemang.dll
+D:\devprojekt\libraries\KulturkatalogenArrangemang\bin\Debug\KulturkatalogenArrangemang.pdb
+D:\devprojekt\libraries\KulturkatalogenArrangemang\bin\Debug\KulturkatalogenArrangemang.xml
+D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Debug\KulturkatalogenArrangemang.dll
+D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Debug\KulturkatalogenArrangemang.pdb
+D:\devprojekt\api\kulturkatalogenAPI_v1\kulturkatalogenAPI_v1\bin\KulturkatalogenArrangemang.dll.config
+D:\devprojekt\api\kulturkatalogenAPI_v1\kulturkatalogenAPI_v1\bin\KulturkatalogenArrangemang.dll
+D:\devprojekt\api\kulturkatalogenAPI_v1\kulturkatalogenAPI_v1\bin\KulturkatalogenArrangemang.pdb
+D:\devprojekt\api\kulturkatalogenAPI_v1\kulturkatalogenAPI_v1\bin\KulturkatalogenArrangemang.xml
+D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Debug\KulturkatalogenArrangemang.vbprojResolveAssemblyReference.cache
