@@ -90,6 +90,78 @@ Public Class arrangemangDAL
 
     End Function
 
+
+    Public Function updateLookedAt(cmdtyp As updatearrcommand) As Boolean
+        Dim ret As Boolean = False
+
+        Try
+            Dim upd = From e In _linqObj.kk_aj_tbl_Arrangemangs
+                      Where e.ArrID = cmdtyp.Arrid
+                      Select e
+
+            For Each itm In upd
+                itm.LookedAt = cmdtyp.UpdValue
+            Next
+
+            _linqObj.SubmitChanges()
+            ret = True
+        Catch ex As Exception
+            ret = False
+        End Try
+
+        Return ret
+    End Function
+
+    ' uppdatera om arrangemanget är: ny, godkännd, nekad, arkiv
+    Public Function updateArrStatus(cmdtyp As updatearrcommand) As Boolean
+        Dim ret As Boolean = False
+
+        Try
+            Dim upd = From e In _linqObj.kk_aj_tbl_Arrangemangs
+                      Where e.ArrID = cmdtyp.Arrid
+                      Select e
+
+            For Each itm In upd
+                itm.ArrangemangStatusID = cmdtyp.UpdValue
+            Next
+
+            _linqObj.SubmitChanges()
+            ret = True
+        Catch ex As Exception
+            ret = False
+        End Try
+
+        Return ret
+    End Function
+
+    'publicera endast om arrangemanget är godkänt. ArrangemangStatusID = 2
+    Public Function updateArrPublicerad(cmdtyp As updatearrcommand) As Boolean
+        Dim ret As Boolean = False
+
+        Try
+            Dim upd = From e In _linqObj.kk_aj_tbl_Arrangemangs
+                      Where e.ArrID = cmdtyp.Arrid
+                      Select e
+
+            For Each itm In upd
+
+                If itm.ArrangemangStatusID = 2 Then
+                    itm.Publicerad = cmdtyp.UpdValue
+                    ret = True
+                Else
+                    itm.Publicerad = "nej"
+                End If
+
+            Next
+
+            _linqObj.SubmitChanges()
+
+        Catch ex As Exception
+            ret = False
+        End Try
+
+        Return ret
+    End Function
     Private Function getkonstformtyp(konstformid As Integer) As String
         Dim tmpobj As String = ""
 

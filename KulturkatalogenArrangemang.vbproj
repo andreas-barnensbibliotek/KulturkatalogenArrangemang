@@ -78,6 +78,7 @@
     <Compile Include="Info\faktainfo.vb" />
     <Compile Include="Info\logInfo.vb" />
     <Compile Include="Info\mediaInfo.vb" />
+    <Compile Include="Info\updatearrcommand.vb" />
     <Compile Include="kk_aj_arr_MainController.vb" />
     <Compile Include="Linq\kk_aj_ArrangemangLinq.designer.vb">
       <AutoGen>True</AutoGen>

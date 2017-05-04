@@ -11,4 +11,3 @@ D:\devprojekt\api\kulturkatalogenAPI_v1\kulturkatalogenAPI_v1\bin\Kulturkataloge
 D:\devprojekt\api\kulturkatalogenAPI_v1\kulturkatalogenAPI_v1\bin\KulturkatalogenArrangemang.dll
 D:\devprojekt\api\kulturkatalogenAPI_v1\kulturkatalogenAPI_v1\bin\KulturkatalogenArrangemang.pdb
 D:\devprojekt\api\kulturkatalogenAPI_v1\kulturkatalogenAPI_v1\bin\KulturkatalogenArrangemang.xml
-D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Debug\KulturkatalogenArrangemang.vbprojResolveAssemblyReference.cache
