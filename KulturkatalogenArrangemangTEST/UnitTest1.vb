@@ -10,7 +10,7 @@ Imports KulturkatalogenArrangemang
         Dim cmd As New commandTypeInfo
 
         cmd.CmdTyp = "bystatus"
-        cmd.CmdtypUserid = 3
+        cmd.CmdtypUserid = -2
         cmd.cmdValue = "testarna"
         cmd.ArrStatusTyp = 4
         cmd.IsAdminRoll = 0
