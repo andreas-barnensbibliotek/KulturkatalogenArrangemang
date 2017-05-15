@@ -1,12 +1,22 @@
 ﻿Public Class faktainfo
 
+    Private _faktatypid As Integer
     Private _faktarubrik As String
     Private _faktavalue As String
     Public Sub New()
+        _faktatypid = 0
         _faktarubrik = ""
         _faktavalue = ""
     End Sub
 
+    Public Property FaktaTypID() As Integer
+        Get
+            Return _faktatypid
+        End Get
+        Set(ByVal value As Integer)
+            _faktatypid = value
+        End Set
+    End Property
     Public Property Faktarubrik() As String
         Get
             Return _faktarubrik

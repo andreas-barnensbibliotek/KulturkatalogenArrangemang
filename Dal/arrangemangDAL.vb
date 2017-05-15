@@ -1,8 +1,8 @@
 ﻿
 
 Public Class arrangemangDAL
-    'Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
-    Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
+    Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
+    'Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
     Private _linqObj As New kk_aj_ArrangemangLinqDataContext(_connectionString)
 
     Public Function getArrangemangByStatus(cmdtyp As commandTypeInfo) As List(Of arrangemangInfo)
@@ -237,4 +237,202 @@ Public Class arrangemangDAL
         Return ret
 
     End Function
+
+
+#Region "CRUD"
+
+    Public Function addArrangemang(userid As Integer, arrData As arrangemangInfo) As Integer
+
+        Dim maindata As New kk_aj_tbl_Arrangemang
+
+        maindata.ArrangemangstypID = arrData.Arrangemangtyp
+        maindata.KonstformID = arrData.Konstform
+        maindata.AdminuserID = userid
+        maindata.ArrangemangStatusID = arrData.ArrangemangStatus
+        maindata.Publicerad = arrData.Publicerad
+        maindata.LookedAt = arrData.LookedAt
+        maindata.UtovarID = arrData.Utovare
+        maindata.VisningsPeriod = Date.Now.Year
+        maindata.Datum = Date.Now
+
+        _linqObj.kk_aj_tbl_Arrangemangs.InsertOnSubmit(maindata)
+        _linqObj.SubmitChanges()
+        Dim arrid As Integer = maindata.ArrID
+
+        Return arrid
+
+    End Function
+
+    Public Function addArrangemangContent(contentdata As arrangemangInfo) As Integer
+        Dim tmpcd As New kk_aj_tbl_content
+
+        tmpcd.ContentText = contentdata.Innehall
+        tmpcd.Rubrik = contentdata.Rubrik
+        tmpcd.Underrubrik = contentdata.UnderRubrik
+        tmpcd.ImageUrl = contentdata.MainImage.MediaUrl
+        tmpcd.ImageFilename = contentdata.MainImage.MediaFilename
+        tmpcd.ImageFotograf = contentdata.MainImage.MediaFoto
+        tmpcd.ImageSize = contentdata.MainImage.MediaSize
+        tmpcd.ImageAlt = contentdata.MainImage.MediaAlt
+        tmpcd.MovieClipAlt = contentdata.MediaClip.MediaAlt
+        tmpcd.MovieClipCredits = contentdata.MediaClip.MediaFoto
+        tmpcd.MovieClipFilename = contentdata.MediaClip.MediaFilename
+        tmpcd.MovieClipSize = contentdata.MediaClip.MediaSize
+        tmpcd.MovieClipUrl = contentdata.MediaClip.MediaUrl
+        tmpcd.datum = Date.Now
+        _linqObj.kk_aj_tbl_contents.InsertOnSubmit(tmpcd)
+        _linqObj.SubmitChanges()
+
+        Return tmpcd.Contentid
+    End Function
+
+    Public Function addFaktaToArrangemang(data As arrangemangInfo) As Integer
+
+        Try
+            Dim inslst As New List(Of kk_aj_tbl_fakta)
+
+            For Each itm In data.Faktalist
+                Dim tmp As New kk_aj_tbl_fakta
+
+                tmp.arrid = data.Arrid
+                tmp.faktatypid = itm.FaktaTypID
+                tmp.faktaValue = itm.FaktaValue
+                inslst.Add(tmp)
+            Next
+
+            _linqObj.kk_aj_tbl_faktas.InsertAllOnSubmit(inslst)
+            _linqObj.SubmitChanges()
+            Return True
+
+        Catch ex As Exception
+            Return False
+
+        End Try
+
+    End Function
+
+
+    Public Function addContentToArr(arrid As Integer, contentid As Integer) As Boolean
+        Dim tmpobj As New kk_aj_tbl_arridtoContent
+        Try
+            tmpobj.arrid = arrid
+            tmpobj.contentid = contentid
+            tmpobj.Version = 1
+            tmpobj.datum = Date.Now
+
+            _linqObj.kk_aj_tbl_arridtoContents.InsertOnSubmit(tmpobj)
+            _linqObj.SubmitChanges()
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function addutovare(utovare As utovareInfo) As Integer
+        Dim tmpobj As New kk_aj_tbl_Utovare
+
+        Try
+            tmpobj.Organisation = utovare.Organisation
+            tmpobj.Fornamn = utovare.Fornamn
+            tmpobj.Efternamn = utovare.Efternamn
+            tmpobj.Telefonnummer = utovare.Telefon
+            tmpobj.Adress = utovare.Adress
+            tmpobj.Postnr = utovare.Postnr
+            tmpobj.Ort = utovare.Ort
+            tmpobj.Epost = utovare.Epost
+            tmpobj.Kommun = utovare.Kommun
+            tmpobj.Hemsida = utovare.Weburl
+
+            _linqObj.kk_aj_tbl_Utovares.InsertOnSubmit(tmpobj)
+            _linqObj.SubmitChanges()
+            Return tmpobj.UtovarID
+        Catch ex As Exception
+            Return 0
+        End Try
+
+    End Function
+
+    Public Function updateArrUtovare(arrid As Integer, utovarid As Integer) As Boolean
+        Dim ret As Boolean = False
+
+        Try
+            Dim upd = From e In _linqObj.kk_aj_tbl_Arrangemangs
+                      Where e.ArrID = arrid
+                      Select e
+
+            For Each itm In upd
+                itm.UtovarID = utovarid
+            Next
+
+            _linqObj.SubmitChanges()
+
+        Catch ex As Exception
+            ret = False
+        End Try
+
+        Return ret
+    End Function
+
+#End Region
+
+#Region "DELETE Arrangemang"
+    Public Function DeleteArrangemang(arrid As Integer) As Boolean
+        Dim deleted As Boolean = False
+        Try
+            Dim itm = From c In _linqObj.kk_aj_tbl_Arrangemangs
+                      Where c.ArrID = arrid
+                      Select c
+
+            For Each i In itm
+                _linqObj.kk_aj_tbl_Arrangemangs.DeleteOnSubmit(i)
+            Next
+
+            _linqObj.SubmitChanges()
+            deleted = True
+        Catch ex As Exception
+            deleted = False
+        End Try
+
+        Return deleted
+    End Function
+
+
+    Public Function DeleteArrToContentID(arrid As Integer) As Boolean
+        Try
+            Dim itm = From c In _linqObj.kk_aj_tbl_arridtoContents
+                      Where c.arrid = arrid
+                      Select c
+
+            For Each i In itm
+                If delContentById(i.contentid) Then
+                    _linqObj.kk_aj_tbl_arridtoContents.DeleteOnSubmit(i)
+                    _linqObj.SubmitChanges()
+                End If
+            Next
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
+
+    Public Function delContentById(contentid As Integer) As Boolean
+        Try
+            Dim itm = From c In _linqObj.kk_aj_tbl_contents
+                      Where c.Contentid = contentid
+                      Select c
+
+            For Each i In itm
+                _linqObj.kk_aj_tbl_contents.DeleteOnSubmit(i)
+            Next
+
+            _linqObj.SubmitChanges()
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+#End Region
+
 End Class

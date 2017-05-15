@@ -13,6 +13,7 @@
     Private _konstform As String
     Private _username As String
     Private _arrutovare As String
+    Private _utovarinfo As utovareInfo
     Private _mainimage As mediaInfo
     Private _movieclip As mediaInfo
     Private _faktalist As List(Of faktainfo)
@@ -23,13 +24,14 @@
         _rubrik = ""
         _underrubrik = ""
         _innehall = ""
-        _publicerad = "Nej"
-        _lookedAt = "Nej"
+        _publicerad = "nej"
+        _lookedAt = "nej"
         _arrangemangstatus = ""
         _arrangemangtyp = ""
         _konstform = ""
         _username = ""
         _arrutovare = ""
+        _utovarinfo = New utovareInfo
         _mainimage = New mediaInfo
         _movieclip = New mediaInfo
         _faktalist = New List(Of faktainfo)
@@ -85,6 +87,15 @@
         End Get
         Set(ByVal value As String)
             _arrutovare = value
+        End Set
+    End Property
+
+    Public Property UtovareData() As utovareInfo
+        Get
+            Return _utovarinfo
+        End Get
+        Set(ByVal value As utovareInfo)
+            _utovarinfo = value
         End Set
     End Property
 
