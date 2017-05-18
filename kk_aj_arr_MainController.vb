@@ -15,7 +15,10 @@
     Public Function addArrangemang(cmdtyp As updatearrcommand, arrData As arrangemangInfo) As arrangemangcontainerInfo
 
         Dim obj As New CrudArrangemangController
-        Return obj.addArrangemang(cmdtyp.arrUserid, arrData)
+
+        arrData.ArrangemangStatus = 1 'Nytt"
+        arrData.Datum = Date.Now
+        Return obj.addArrangemang(arrData)
 
     End Function
 

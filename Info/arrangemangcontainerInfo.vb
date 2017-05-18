@@ -1,5 +1,20 @@
 ﻿Public Class arrangemangcontainerInfo
 
+
+    Public Sub New()
+        _arrstatus = ""
+        _approvedarrangemangCount = 0
+        _arrangemanglist = New List(Of arrangemangInfo)
+        _arrangemanglistCount = 0
+        _arrangemanglisttotalpages = 0
+        _arrstatus = 0
+        _currentpage = 0
+        _deniedarrangemangCount = 0
+        _nyaarrangemangCount = 0
+        _status = ""
+
+    End Sub
+
     Private _arrstatus As String
     Public Property ArrStatus() As String
         Get

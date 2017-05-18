@@ -162,6 +162,40 @@ Public Class arrangemangDAL
 
         Return ret
     End Function
+
+#Region "Detaljdata"
+
+    Public Function getArrangemangDetails(cmdtyp As commandTypeInfo) As arrangemangInfo
+
+
+        Dim nobj As New arrangemangInfo
+
+        Dim arr = (From p In _linqObj.kk_aj_proc_GetArrDetails(cmdtyp.ArrID)
+                   Select p).SingleOrDefault
+
+
+
+        nobj.Arrid = arr.ArrID
+        nobj.ArrangemangStatus = arr.ArrangemangStatus
+        nobj.Arrangemangtyp = arr.arrangemangtyp
+        nobj.Datum = arr.Datum.ToString
+        nobj.Rubrik = arr.Rubrik
+        nobj.UnderRubrik = arr.Underrubrik
+        nobj.LookedAt = arr.LookedAt
+        nobj.Konstform = arr.konstform
+        nobj.Publicerad = arr.Publicerad
+        nobj.Utovare = arr.Organisation
+        nobj.Username = arr.AdminuserID
+
+
+        Return nobj
+
+    End Function
+
+
+#End Region
+
+
     Private Function getkonstformtyp(konstformid As Integer) As String
         Dim tmpobj As String = ""
 
@@ -228,6 +262,7 @@ Public Class arrangemangDAL
                    Where t.UserID = userid
                    Select t
         For Each t In logs
+            'If t.RoleID = 6 Or t.RoleID = 0 Or t.RoleID =1 Then
             If t.RoleID = 6 Or t.RoleID = 0 Then
                 ret = True
                 Exit For
@@ -241,13 +276,13 @@ Public Class arrangemangDAL
 
 #Region "CRUD"
 
-    Public Function addArrangemang(userid As Integer, arrData As arrangemangInfo) As Integer
+    Public Function addArrangemang(arrData As arrangemangInfo) As Integer
 
         Dim maindata As New kk_aj_tbl_Arrangemang
 
         maindata.ArrangemangstypID = arrData.Arrangemangtyp
         maindata.KonstformID = arrData.Konstform
-        maindata.AdminuserID = userid
+        maindata.AdminuserID = 1
         maindata.ArrangemangStatusID = arrData.ArrangemangStatus
         maindata.Publicerad = arrData.Publicerad
         maindata.LookedAt = arrData.LookedAt
@@ -376,6 +411,24 @@ Public Class arrangemangDAL
 #End Region
 
 #Region "DELETE Arrangemang"
+    Public Function DoArrangemangExist(arrid As Integer) As Boolean
+        Dim exists As Boolean = False
+        Try
+            Dim itm = From c In _linqObj.kk_aj_tbl_Arrangemangs
+                      Where c.ArrID = arrid
+                      Select c
+
+            If itm.Count > 0 Then
+                exists = True
+            End If
+
+        Catch ex As Exception
+            exists = False
+        End Try
+
+        Return exists
+    End Function
+
     Public Function DeleteArrangemang(arrid As Integer) As Boolean
         Dim deleted As Boolean = False
         Try

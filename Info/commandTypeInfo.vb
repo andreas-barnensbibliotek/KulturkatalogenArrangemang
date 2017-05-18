@@ -17,6 +17,7 @@
         _isadminroll = 0
         _visningsperiod = DatePart(DateInterval.Year, Date.Now).ToString
         _cmdtypuserid = 0
+        _arrid = 0
     End Sub
 
     Private _cmdtyp As String
@@ -170,6 +171,15 @@
         End Get
         Set(ByVal value As Integer)
             _cmdtypuserid = value
+        End Set
+    End Property
+    Private _arrid As Integer
+    Public Property ArrID() As Integer
+        Get
+            Return _arrid
+        End Get
+        Set(ByVal value As Integer)
+            _arrid = value
         End Set
     End Property
 End Class

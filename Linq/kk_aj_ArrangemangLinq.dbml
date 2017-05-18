@@ -188,4 +188,46 @@
       <Column Name="KonstformID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.kk_aj_proc_GetArrDetails" Method="kk_aj_proc_GetArrDetails">
+    <Parameter Name="arrID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="kk_aj_proc_GetArrDetailsResult">
+      <Column Name="ArrID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Publicerad" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="LookedAt" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="VisningsPeriod" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="AdminuserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UtovarID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Organisation" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Fornamn" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Efternamn" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Telefonnummer" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Adress" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Postnr" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Ort" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Epost" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Kommun" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Hemsida" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="konstform" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="arrangemangtyp" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ArrangemangstypID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="KonstformID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Rubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Underrubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ContentText" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="ImageUrl" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="ImageFilename" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ImageSize" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ImageAlt" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ImageFotograf" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MovieClipUrl" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="MovieClipFilename" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MovieClipSize" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MovieClipAlt" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="MovieClipCredits" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ArrangemangStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ArrangemangStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Version" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

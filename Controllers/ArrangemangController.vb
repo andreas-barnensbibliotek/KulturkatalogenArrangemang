@@ -1,4 +1,6 @@
-﻿Public Class ArrangemangController
+﻿Imports KulturkatalogenArrangemang
+
+Public Class ArrangemangController
 
     Private _dalobj As New arrangemangDAL
     Public Function getArrlist(cmdtyp As commandTypeInfo) As arrangemangcontainerInfo
@@ -22,6 +24,7 @@
             Return retobj
         End Try
     End Function
+
 
     Public Function updateArrStatusType(cmdtyp As updatearrcommand) As arrangemangcontainerInfo
         Dim retobj As New arrangemangcontainerInfo
@@ -109,6 +112,16 @@
         End Try
     End Function
 
+    Public Function getArrangemangDetails(cmdtyp As commandTypeInfo) As arrangemangcontainerInfo
+
+
+
+    End Function
+
+
+
+
+#Region "Privata funktioner"
     Private Function pagehandler(totposts As Integer) As Integer
         Dim ret As Double = 0
 
@@ -140,4 +153,6 @@
         Return ret
 
     End Function
+#End Region
+
 End Class
