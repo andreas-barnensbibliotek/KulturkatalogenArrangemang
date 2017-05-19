@@ -16,6 +16,8 @@ Public Class ArrangemangController
                 Case "bysearch"
                     retobj = getArrbySearch(cmdtyp)
 
+                Case "details"
+                    retobj = getArrangemangDetails(cmdtyp)
             End Select
 
             Return retobj
@@ -66,33 +68,64 @@ Public Class ArrangemangController
     End Function
     Private Function getArrbyStatus(cmdtyp As commandTypeInfo) As arrangemangcontainerInfo
         Dim retobj As New arrangemangcontainerInfo
-        Dim tmpCmdtyp As commandTypeInfo = cmdtyp
-        Try
-            retobj.Arrangemanglist = _dalobj.getArrangemangByStatus(cmdtyp)
-            retobj.ArrangemanglistCount = retobj.Arrangemanglist.Count
+        Dim arrList As New List(Of arrangemangInfo)
 
-            tmpCmdtyp.ArrStatusTyp = 1
-            retobj.NyaArrangemangCount = _dalobj.getantalposter(tmpCmdtyp)
-            tmpCmdtyp.ArrStatusTyp = 2
-            retobj.ApprovedarrangemangCount = _dalobj.getantalposter(tmpCmdtyp)
-            tmpCmdtyp.ArrStatusTyp = 3
-            retobj.DeniedarrangemangCount = _dalobj.getantalposter(tmpCmdtyp)
-            retobj.ArrangemangCurrentPage = 0
-            retobj.ArrangemangTotalPages = pagehandler(retobj.ArrangemanglistCount)
-            retobj.ArrStatus = retobj.Arrangemanglist(0).ArrangemangStatus
-            retobj.Status = "Arrangemangen är listade!"
+        Try
+            arrList = _dalobj.getArrangemangByStatus(cmdtyp)
+            retobj = getBaseArrangemangData(cmdtyp, arrList)
+
             Return retobj
         Catch ex As Exception
             retobj.Status = "Fel när Arrangemangen listades!"
+
             Return retobj
         End Try
+
     End Function
 
     Public Function getArrbySearch(cmdtyp As commandTypeInfo) As arrangemangcontainerInfo
         Dim retobj As New arrangemangcontainerInfo
+        Dim arrList As New List(Of arrangemangInfo)
+
+        Try
+            arrList = _dalobj.getArrangemangBySearch(cmdtyp)
+            retobj = getBaseArrangemangData(cmdtyp, arrList)
+
+            Return retobj
+        Catch ex As Exception
+            retobj.Status = "Fel när Arrangemangen listades!"
+
+            Return retobj
+        End Try
+
+    End Function
+
+    Public Function getArrangemangDetails(cmdtyp As commandTypeInfo) As arrangemangcontainerInfo
+        Dim retobj As New arrangemangcontainerInfo
+        Dim retarrlist As New List(Of arrangemangInfo)
+        Dim arritm As New arrangemangInfo
+        Dim rollobj As New userHandler
+
+        Try
+            arritm = _dalobj.getArrangemangDetails(cmdtyp)
+            retarrlist.Add(arritm)
+
+            retobj = getBaseArrangemangData(cmdtyp, retarrlist)
+
+            Return retobj
+        Catch ex As Exception
+            retobj.Status = "Fel när Arrangemangdetaljen skulle hämtas!"
+
+            Return retobj
+        End Try
+
+    End Function
+
+    Private Function getBaseArrangemangData(cmdtyp As commandTypeInfo, arrList As List(Of arrangemangInfo)) As arrangemangcontainerInfo
+        Dim retobj As New arrangemangcontainerInfo
         Dim tmpCmdtyp As commandTypeInfo = cmdtyp
         Try
-            retobj.Arrangemanglist = _dalobj.getArrangemangBySearch(cmdtyp)
+            retobj.Arrangemanglist = arrList
             retobj.ArrangemanglistCount = retobj.Arrangemanglist.Count
 
             tmpCmdtyp.ArrStatusTyp = 1
@@ -104,21 +137,21 @@ Public Class ArrangemangController
             retobj.ArrangemangCurrentPage = 0
             retobj.ArrangemangTotalPages = pagehandler(retobj.ArrangemanglistCount)
             retobj.ArrStatus = retobj.Arrangemanglist(0).ArrangemangStatus
-            retobj.Status = "Arrangemangen är listade!"
+
+            Select Case cmdtyp.CmdTyp
+                Case "details"
+                    retobj.Status = "Arrangemangsdetaljer är listade!"
+                Case Else
+                    retobj.Status = "Arrangemangen är listade!"
+            End Select
+
             Return retobj
         Catch ex As Exception
             retobj.Status = "Fel när Arrangemangen listades!"
             Return retobj
         End Try
-    End Function
-
-    Public Function getArrangemangDetails(cmdtyp As commandTypeInfo) As arrangemangcontainerInfo
-
-
 
     End Function
-
-
 
 
 #Region "Privata funktioner"

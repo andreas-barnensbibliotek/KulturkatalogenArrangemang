@@ -230,4 +230,13 @@
       <Column Name="Version" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.kk_aj_proc_getfaktabyarrid" Method="kk_aj_proc_getfaktabyarrid">
+    <Parameter Name="arrid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="kk_aj_proc_getfaktabyarridResult">
+      <Column Name="Faktarubrik" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="faktaValue" Type="System.String" DbType="NVarChar(450)" CanBeNull="true" />
+      <Column Name="faktaid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="faktatypid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

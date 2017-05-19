@@ -207,6 +207,12 @@ Partial Public Class kk_aj_ArrangemangLinqDataContext
 		Dim result As IExecuteResult = Me.ExecuteMethodCall(Me, CType(MethodInfo.GetCurrentMethod,MethodInfo), arrID)
 		Return CType(result.ReturnValue,ISingleResult(Of kk_aj_proc_GetArrDetailsResult))
 	End Function
+	
+	<Global.System.Data.Linq.Mapping.FunctionAttribute(Name:="dbo.kk_aj_proc_getfaktabyarrid")>  _
+	Public Function kk_aj_proc_getfaktabyarrid(<Global.System.Data.Linq.Mapping.ParameterAttribute(DbType:="Int")> ByVal arrid As System.Nullable(Of Integer)) As ISingleResult(Of kk_aj_proc_getfaktabyarridResult)
+		Dim result As IExecuteResult = Me.ExecuteMethodCall(Me, CType(MethodInfo.GetCurrentMethod,MethodInfo), arrid)
+		Return CType(result.ReturnValue,ISingleResult(Of kk_aj_proc_getfaktabyarridResult))
+	End Function
 End Class
 
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.kk_aj_tbl_Arrangemang")>  _
@@ -2971,6 +2977,70 @@ Partial Public Class kk_aj_proc_GetArrDetailsResult
 		Set
 			If (Me._Version.Equals(value) = false) Then
 				Me._Version = value
+			End If
+		End Set
+	End Property
+End Class
+
+Partial Public Class kk_aj_proc_getfaktabyarridResult
+	
+	Private _Faktarubrik As String
+	
+	Private _faktaValue As String
+	
+	Private _faktaid As Integer
+	
+	Private _faktatypid As System.Nullable(Of Integer)
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Faktarubrik", DbType:="NVarChar(150)")>  _
+	Public Property Faktarubrik() As String
+		Get
+			Return Me._Faktarubrik
+		End Get
+		Set
+			If (String.Equals(Me._Faktarubrik, value) = false) Then
+				Me._Faktarubrik = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_faktaValue", DbType:="NVarChar(450)")>  _
+	Public Property faktaValue() As String
+		Get
+			Return Me._faktaValue
+		End Get
+		Set
+			If (String.Equals(Me._faktaValue, value) = false) Then
+				Me._faktaValue = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_faktaid", DbType:="Int NOT NULL")>  _
+	Public Property faktaid() As Integer
+		Get
+			Return Me._faktaid
+		End Get
+		Set
+			If ((Me._faktaid = value)  _
+						= false) Then
+				Me._faktaid = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_faktatypid", DbType:="Int")>  _
+	Public Property faktatypid() As System.Nullable(Of Integer)
+		Get
+			Return Me._faktatypid
+		End Get
+		Set
+			If (Me._faktatypid.Equals(value) = false) Then
+				Me._faktatypid = value
 			End If
 		End Set
 	End Property

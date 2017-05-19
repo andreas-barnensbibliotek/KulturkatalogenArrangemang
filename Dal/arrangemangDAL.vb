@@ -1,8 +1,10 @@
 ﻿
 
+Imports KulturkatalogenArrangemang
+
 Public Class arrangemangDAL
-    Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
-    'Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
+    ' Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
+    Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
     Private _linqObj As New kk_aj_ArrangemangLinqDataContext(_connectionString)
 
     Public Function getArrangemangByStatus(cmdtyp As commandTypeInfo) As List(Of arrangemangInfo)
@@ -56,7 +58,7 @@ Public Class arrangemangDAL
             nobj.Arrangemangtyp = t.arrangemangtyp
             nobj.Datum = t.Datum.ToString
             nobj.Rubrik = t.Rubrik
-            nobj.UnderRubrik = t.UnderRubrik
+            nobj.UnderRubrik = t.Underrubrik
             nobj.LookedAt = t.LookedAt
             nobj.Konstform = t.konstform
             nobj.Publicerad = t.Publicerad
@@ -166,30 +168,82 @@ Public Class arrangemangDAL
 #Region "Detaljdata"
 
     Public Function getArrangemangDetails(cmdtyp As commandTypeInfo) As arrangemangInfo
-
-
         Dim nobj As New arrangemangInfo
+        Try
+            Dim arr = (From p In _linqObj.kk_aj_proc_GetArrDetails(cmdtyp.ArrID)
+                       Select p).SingleOrDefault
 
-        Dim arr = (From p In _linqObj.kk_aj_proc_GetArrDetails(cmdtyp.ArrID)
-                   Select p).SingleOrDefault
+            nobj.Arrid = arr.ArrID
+            nobj.ArrangemangStatus = arr.ArrangemangStatus
+            nobj.Arrangemangtyp = arr.arrangemangtyp
+            nobj.Datum = arr.Datum.ToString
+            nobj.Rubrik = arr.Rubrik
+            nobj.UnderRubrik = arr.Underrubrik
+            nobj.LookedAt = arr.LookedAt
+            nobj.Konstform = arr.konstform
+            nobj.Publicerad = arr.Publicerad
+            nobj.Utovare = arr.Organisation
+            nobj.Username = arr.AdminuserID
+            nobj.Innehall = arr.ContentText
+            nobj.Konstform = arr.konstform
+            nobj.MainImage = fillmedia(arr.ImageUrl, arr.ImageAlt, arr.ImageFilename, arr.ImageFotograf, arr.ImageSize)
+            nobj.MediaClip = fillmedia(arr.MovieClipUrl, arr.MovieClipAlt, arr.MovieClipFilename, arr.MovieClipCredits, arr.MovieClipSize)
+            nobj.UtovareData = getutovardata(arr)
 
+            nobj.Faktalist = getfaktalist(arr.ArrID)
+        Catch ex As Exception
 
-
-        nobj.Arrid = arr.ArrID
-        nobj.ArrangemangStatus = arr.ArrangemangStatus
-        nobj.Arrangemangtyp = arr.arrangemangtyp
-        nobj.Datum = arr.Datum.ToString
-        nobj.Rubrik = arr.Rubrik
-        nobj.UnderRubrik = arr.Underrubrik
-        nobj.LookedAt = arr.LookedAt
-        nobj.Konstform = arr.konstform
-        nobj.Publicerad = arr.Publicerad
-        nobj.Utovare = arr.Organisation
-        nobj.Username = arr.AdminuserID
-
-
+        End Try
         Return nobj
 
+    End Function
+
+    Private Function getutovardata(arr As kk_aj_proc_GetArrDetailsResult) As utovareInfo
+        Dim utovare As New utovareInfo
+        With utovare
+            .Adress = arr.Adress
+            .Efternamn = arr.Efternamn
+            .Epost = arr.Epost
+            .Fornamn = arr.Fornamn
+            .Kommun = arr.Kommun
+            .Organisation = arr.Organisation
+            .Ort = arr.Ort
+            .Postnr = arr.Postnr
+            .Telefon = arr.Telefonnummer
+            .UtovarID = arr.UtovarID
+            .Weburl = arr.Hemsida
+        End With
+        Return utovare
+    End Function
+
+    Private Function getfaktalist(arrID As Integer) As List(Of faktainfo)
+        Dim retobj As New List(Of faktainfo)
+
+        Dim faktobj = From p In _linqObj.kk_aj_proc_getfaktabyarrid(arrID)
+                      Select p
+
+        For Each itm In faktobj
+            Dim tmp As New faktainfo
+            tmp.Faktarubrik = itm.Faktarubrik
+            tmp.FaktaTypID = itm.faktatypid
+            tmp.Faktaid = itm.faktatypid
+            tmp.FaktaValue = itm.faktaValue
+            retobj.Add(tmp)
+        Next
+
+        Return retobj
+    End Function
+
+    Private Function fillmedia(mUrl As String, mAlt As String, mFilename As String, mFotograf As String, mSize As String) As mediaInfo
+        Dim retmedia As New mediaInfo
+        With retmedia
+            .MediaUrl = mUrl
+            .MediaAlt = mAlt
+            .MediaFilename = mFilename
+            .MediaFoto = mFotograf
+            .MediaSize = mSize
+        End With
+        Return retmedia
     End Function
 
 

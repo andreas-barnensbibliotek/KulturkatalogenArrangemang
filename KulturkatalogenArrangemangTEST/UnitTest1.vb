@@ -74,7 +74,20 @@ Imports KulturkatalogenArrangemang
         Dim tmp As String = ret.Status
 
     End Sub
+    <TestMethod()> Public Sub getdetaljtest()
 
+        Dim testar As New kk_aj_arr_MainController
+        Dim cmd As New commandTypeInfo
+
+        cmd.CmdTyp = "details"
+        cmd.ArrID = 3
+        cmd.CmdtypUserid = 2
+
+        Dim ret As arrangemangcontainerInfo = testar.getArrangemang(cmd)
+
+        Dim x As arrangemangcontainerInfo = ret
+
+    End Sub
     Private Function insertfuntion(vald As Integer) As arrangemangInfo
         Dim tmparr As New arrangemangInfo
 
