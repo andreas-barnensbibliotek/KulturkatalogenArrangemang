@@ -53,7 +53,9 @@ Public Class CrudArrangemangController
         Try
             If _dalobj.DoArrangemangExist(arrid) Then
                 If _dalobj.DeleteArrToContentID(arrid) Then
-                    ret = _dalobj.DeleteArrangemang(arrid)
+                    If _dalobj.DeleteFaktaByArrID(arrid) Then
+                        ret = _dalobj.DeleteArrangemang(arrid)
+                    End If
                 Else
                     ret = False
                 End If

@@ -316,8 +316,8 @@ Public Class arrangemangDAL
                    Where t.UserID = userid
                    Select t
         For Each t In logs
-            'If t.RoleID = 6 Or t.RoleID = 0 Or t.RoleID =1 Then
-            If t.RoleID = 6 Or t.RoleID = 0 Then
+            If t.RoleID = 6 Or t.RoleID = 0 Or t.RoleID = 1 Then
+                'If t.RoleID = 6 Or t.RoleID = 0 Then
                 ret = True
                 Exit For
             End If
@@ -327,6 +327,59 @@ Public Class arrangemangDAL
 
     End Function
 
+#Region "getlatest arrangemang"
+
+    Public Function getArrangemangByLatest(cmdtyp As commandTypeInfo, antal As Integer) As List(Of arrangemangInfo)
+        Dim tmpobj As New List(Of arrangemangInfo)
+        Try
+            Dim arr = From p In _linqObj.kk_aj_proc_GetArrby_LatestEvent(cmdtyp.IsAdminRoll, cmdtyp.CmdRoll1, cmdtyp.CmdRoll2, cmdtyp.CmdRoll3, cmdtyp.CmdRoll4, cmdtyp.CmdRoll5, cmdtyp.CmdRoll6, cmdtyp.CmdRoll7, cmdtyp.CmdRoll8, cmdtyp.CmdRoll9, cmdtyp.CmdRoll10, 0, 0, 0, 0, cmdtyp.Visningsperiod)
+                      Select p
+
+            Dim i As Integer = 1
+            For Each t In arr
+                If i <= antal Then
+                    Dim nobj As New arrangemangInfo
+                    nobj.Arrid = t.ArrID
+                    nobj.ArrangemangStatus = t.ArrangemangStatus
+                    nobj.Datum = t.datum.ToString
+                    nobj = getArrContentbyarrid(nobj)
+
+                    tmpobj.Add(nobj)
+                Else
+                    Exit For
+                End If
+                i += 1
+            Next
+
+            If tmpobj.Count <= 0 Then
+                Dim noresult As New arrangemangInfo
+                noresult.Rubrik = "Finns inget att visa"
+                tmpobj.Add(noresult)
+            End If
+        Catch
+
+        End Try
+
+        Return tmpobj
+
+    End Function
+
+    Private Function getArrContentbyarrid(tmparr As arrangemangInfo) As arrangemangInfo
+
+        Dim nobj As arrangemangInfo = tmparr
+
+        Dim arr = (From p In _linqObj.kk_aj_proc_Getarrby_Latest(tmparr.Arrid)
+                   Select p).SingleOrDefault
+
+        nobj.Rubrik = arr.Rubrik
+        nobj.UnderRubrik = arr.Underrubrik
+        nobj.Innehall = arr.ContentText
+
+        Return nobj
+
+    End Function
+
+#End Region
 
 #Region "CRUD"
 
@@ -539,6 +592,24 @@ Public Class arrangemangDAL
         Catch ex As Exception
             Return False
         End Try
+    End Function
+
+    Public Function DeleteFaktaByArrID(arrid As Integer) As Boolean
+        Try
+            Dim itm = From c In _linqObj.kk_aj_tbl_faktas
+                      Where c.arrid = arrid
+                      Select c
+
+            For Each i In itm
+                _linqObj.kk_aj_tbl_faktas.DeleteOnSubmit(i)
+            Next
+            _linqObj.SubmitChanges()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
     End Function
 #End Region
 

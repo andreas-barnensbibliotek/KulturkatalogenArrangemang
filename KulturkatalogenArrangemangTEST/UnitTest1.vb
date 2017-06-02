@@ -281,4 +281,23 @@ Imports KulturkatalogenArrangemang
         Return retobj
 
     End Function
+
+    <TestMethod()> Public Sub Testarrbylatest()
+
+        Dim testar As New kk_aj_arr_MainController
+        Dim cmd As New commandTypeInfo
+
+        cmd.CmdTyp = "bylatest"
+        cmd.cmdValue = "top10"
+        cmd.IsAdminRoll = 0
+        cmd.CmdRoll1 = 6
+        cmd.CmdRoll2 = 10
+
+
+        Dim ret As arrangemangcontainerInfo = testar.getArrangemang(cmd)
+
+        Dim x As arrangemangcontainerInfo = ret
+
+    End Sub
+
 End Class

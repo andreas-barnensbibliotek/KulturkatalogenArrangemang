@@ -16,6 +16,9 @@ Public Class ArrangemangController
                 Case "bysearch"
                     retobj = getArrbySearch(cmdtyp)
 
+                Case "bylatest"
+                    retobj = getArrbyLatest(cmdtyp)
+
                 Case "details"
                     retobj = getArrangemangDetails(cmdtyp)
             End Select
@@ -121,6 +124,36 @@ Public Class ArrangemangController
 
     End Function
 
+    Public Function getArrbyLatest(cmdtyp As commandTypeInfo) As arrangemangcontainerInfo
+        Dim retobj As New arrangemangcontainerInfo
+        Dim arrList As New List(Of arrangemangInfo)
+        Dim antalToGet As Integer = 0
+
+        Select Case cmdtyp.cmdValue
+            Case "top5"
+                antalToGet = 5
+            Case "top10"
+                antalToGet = 10
+            Case "top30"
+                antalToGet = 30
+            Case "top50"
+                antalToGet = 50
+            Case Else
+                antalToGet = 100
+        End Select
+
+        Try
+            arrList = _dalobj.getArrangemangByLatest(cmdtyp, antalToGet)
+            retobj = getBaseArrangemangData(cmdtyp, arrList)
+            retobj.ArrStatus = "Latest"
+            Return retobj
+        Catch ex As Exception
+            retobj.Status = "Fel när dom sena Arrangemangen listades!"
+
+            Return retobj
+        End Try
+
+    End Function
     Private Function getBaseArrangemangData(cmdtyp As commandTypeInfo, arrList As List(Of arrangemangInfo)) As arrangemangcontainerInfo
         Dim retobj As New arrangemangcontainerInfo
         Dim tmpCmdtyp As commandTypeInfo = cmdtyp

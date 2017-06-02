@@ -1,7 +1,7 @@
 ﻿Public Class commandTypeInfo
 
     Public Sub New()
-        _cmdtyp = 0
+        _cmdtyp = ""
         _searchstr = ""
         _arrstatustyp = 1
         _cmdroll1 = 0
