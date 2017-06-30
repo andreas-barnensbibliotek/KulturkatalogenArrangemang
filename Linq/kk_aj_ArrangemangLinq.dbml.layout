@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="kk_aj_ArrangemangLinq">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9" name="kk_aj_ArrangemangLinq">
   <DataContextMoniker Name="/kk_aj_ArrangemangLinqDataContext" />
   <nestedChildShapes>
     <classShape Id="da214a79-d2f0-4820-8809-304fcbc922a4" absoluteBounds="0.5, 0.5, 2, 2.7324039713541666">
@@ -38,16 +38,16 @@
         <elementListCompartment Id="ebd1bd23-5723-45dc-a3a6-bbd0e46e8600" absoluteBounds="0.51500000000000012, 5.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c0f8dae7-dc4d-49f2-a4da-2b6de149e27b" absoluteBounds="5.25, 5.5, 2, 1.1939925130208333">
+    <classShape Id="c0f8dae7-dc4d-49f2-a4da-2b6de149e27b" absoluteBounds="5, 5.375, 2, 1.1939925130208333">
       <DataClassMoniker Name="/kk_aj_ArrangemangLinqDataContext/kk_aj_tbl_Arrangemangtyp" />
       <nestedChildShapes>
-        <elementListCompartment Id="8c62d40b-01e7-4fea-9be6-97fdc38adc58" absoluteBounds="5.2650000000000006, 5.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8c62d40b-01e7-4fea-9be6-97fdc38adc58" absoluteBounds="5.0150000000000006, 5.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="1ed73437-4cc2-4fb6-9747-aa3c5b13cb33" absoluteBounds="5.75, 0.625, 2, 1.1939925130208333">
+    <classShape Id="1ed73437-4cc2-4fb6-9747-aa3c5b13cb33" absoluteBounds="5.75, 0.5, 2, 1.1939925130208333">
       <DataClassMoniker Name="/kk_aj_ArrangemangLinqDataContext/kk_aj_tbl_faktatyp" />
       <nestedChildShapes>
-        <elementListCompartment Id="1794bc2a-a353-49cc-bda0-59bef92ce252" absoluteBounds="5.765, 1.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1794bc2a-a353-49cc-bda0-59bef92ce252" absoluteBounds="5.765, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="55bc6547-1fd0-4552-a005-ade552629616" absoluteBounds="3, 2.25, 2, 1.3862939453125">
@@ -56,10 +56,22 @@
         <elementListCompartment Id="810d6664-0954-44b6-a4c6-be90b3c7a10d" absoluteBounds="3.0149999999999997, 2.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="1618db31-ca78-4507-b48f-5e7adb59d8e8" absoluteBounds="7.25, 3.875, 2, 3.1170068359375">
+    <classShape Id="1618db31-ca78-4507-b48f-5e7adb59d8e8" absoluteBounds="7.25, 5.625, 2, 3.1170068359375">
       <DataClassMoniker Name="/kk_aj_ArrangemangLinqDataContext/UserRole" />
       <nestedChildShapes>
-        <elementListCompartment Id="8e710ced-f10c-423d-89af-e076f605fb0e" absoluteBounds="7.265, 4.335, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8e710ced-f10c-423d-89af-e076f605fb0e" absoluteBounds="7.265, 6.085, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bf942f00-d63c-4ab0-872f-54e0a7b188cc" absoluteBounds="7.375, 4.375, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/kk_aj_ArrangemangLinqDataContext/kk_aj_tbl_MediaTyp" />
+      <nestedChildShapes>
+        <elementListCompartment Id="04a5d0ce-b212-4ed8-873f-dc786f3e7bd5" absoluteBounds="7.39, 4.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3286f70f-98d8-42c8-b5c2-18abc1f846c7" absoluteBounds="7.5, 2.75, 2, 2.5401025390625">
+      <DataClassMoniker Name="/kk_aj_ArrangemangLinqDataContext/kk_aj_tbl_Media" />
+      <nestedChildShapes>
+        <elementListCompartment Id="96774b11-803a-42aa-923f-7b319ae8adb4" absoluteBounds="7.515, 3.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

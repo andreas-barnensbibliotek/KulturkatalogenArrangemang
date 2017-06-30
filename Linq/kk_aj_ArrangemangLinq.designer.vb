@@ -91,6 +91,18 @@ Partial Public Class kk_aj_ArrangemangLinqDataContext
     End Sub
   Partial Private Sub DeleteUserRole(instance As UserRole)
     End Sub
+  Partial Private Sub Insertkk_aj_tbl_MediaTyp(instance As kk_aj_tbl_MediaTyp)
+    End Sub
+  Partial Private Sub Updatekk_aj_tbl_MediaTyp(instance As kk_aj_tbl_MediaTyp)
+    End Sub
+  Partial Private Sub Deletekk_aj_tbl_MediaTyp(instance As kk_aj_tbl_MediaTyp)
+    End Sub
+  Partial Private Sub Insertkk_aj_tbl_Media(instance As kk_aj_tbl_Media)
+    End Sub
+  Partial Private Sub Updatekk_aj_tbl_Media(instance As kk_aj_tbl_Media)
+    End Sub
+  Partial Private Sub Deletekk_aj_tbl_Media(instance As kk_aj_tbl_Media)
+    End Sub
   #End Region
 	
 	Public Sub New()
@@ -175,6 +187,18 @@ Partial Public Class kk_aj_ArrangemangLinqDataContext
 	Public ReadOnly Property UserRoles() As System.Data.Linq.Table(Of UserRole)
 		Get
 			Return Me.GetTable(Of UserRole)
+		End Get
+	End Property
+	
+	Public ReadOnly Property kk_aj_tbl_MediaTyps() As System.Data.Linq.Table(Of kk_aj_tbl_MediaTyp)
+		Get
+			Return Me.GetTable(Of kk_aj_tbl_MediaTyp)
+		End Get
+	End Property
+	
+	Public ReadOnly Property kk_aj_tbl_Medias() As System.Data.Linq.Table(Of kk_aj_tbl_Media)
+		Get
+			Return Me.GetTable(Of kk_aj_tbl_Media)
 		End Get
 	End Property
 	
@@ -2076,6 +2100,328 @@ Partial Public Class UserRole
 				Me._IsOwner = value
 				Me.SendPropertyChanged("IsOwner")
 				Me.OnIsOwnerChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.kk_aj_tbl_MediaTyp")>  _
+Partial Public Class kk_aj_tbl_MediaTyp
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _mediatypID As Integer
+	
+	Private _mediatyp As String
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnmediatypIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnmediatypIDChanged()
+    End Sub
+    Partial Private Sub OnmediatypChanging(value As String)
+    End Sub
+    Partial Private Sub OnmediatypChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_mediatypID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property mediatypID() As Integer
+		Get
+			Return Me._mediatypID
+		End Get
+		Set
+			If ((Me._mediatypID = value)  _
+						= false) Then
+				Me.OnmediatypIDChanging(value)
+				Me.SendPropertyChanging
+				Me._mediatypID = value
+				Me.SendPropertyChanged("mediatypID")
+				Me.OnmediatypIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_mediatyp", DbType:="NVarChar(50)")>  _
+	Public Property mediatyp() As String
+		Get
+			Return Me._mediatyp
+		End Get
+		Set
+			If (String.Equals(Me._mediatyp, value) = false) Then
+				Me.OnmediatypChanging(value)
+				Me.SendPropertyChanging
+				Me._mediatyp = value
+				Me.SendPropertyChanged("mediatyp")
+				Me.OnmediatypChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.kk_aj_tbl_Media")>  _
+Partial Public Class kk_aj_tbl_Media
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _mediaID As Integer
+	
+	Private _arrID As System.Nullable(Of Integer)
+	
+	Private _mediaUrl As String
+	
+	Private _mediaFileName As String
+	
+	Private _mediaSize As String
+	
+	Private _mediaAlt As String
+	
+	Private _mediaFoto As String
+	
+	Private _mediaTyp As String
+	
+	Private _mediaVald As String
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnmediaIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnmediaIDChanged()
+    End Sub
+    Partial Private Sub OnarrIDChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnarrIDChanged()
+    End Sub
+    Partial Private Sub OnmediaUrlChanging(value As String)
+    End Sub
+    Partial Private Sub OnmediaUrlChanged()
+    End Sub
+    Partial Private Sub OnmediaFileNameChanging(value As String)
+    End Sub
+    Partial Private Sub OnmediaFileNameChanged()
+    End Sub
+    Partial Private Sub OnmediaSizeChanging(value As String)
+    End Sub
+    Partial Private Sub OnmediaSizeChanged()
+    End Sub
+    Partial Private Sub OnmediaAltChanging(value As String)
+    End Sub
+    Partial Private Sub OnmediaAltChanged()
+    End Sub
+    Partial Private Sub OnmediaFotoChanging(value As String)
+    End Sub
+    Partial Private Sub OnmediaFotoChanged()
+    End Sub
+    Partial Private Sub OnmediaTypChanging(value As String)
+    End Sub
+    Partial Private Sub OnmediaTypChanged()
+    End Sub
+    Partial Private Sub OnmediaValdChanging(value As String)
+    End Sub
+    Partial Private Sub OnmediaValdChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_mediaID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property mediaID() As Integer
+		Get
+			Return Me._mediaID
+		End Get
+		Set
+			If ((Me._mediaID = value)  _
+						= false) Then
+				Me.OnmediaIDChanging(value)
+				Me.SendPropertyChanging
+				Me._mediaID = value
+				Me.SendPropertyChanged("mediaID")
+				Me.OnmediaIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_arrID", DbType:="Int")>  _
+	Public Property arrID() As System.Nullable(Of Integer)
+		Get
+			Return Me._arrID
+		End Get
+		Set
+			If (Me._arrID.Equals(value) = false) Then
+				Me.OnarrIDChanging(value)
+				Me.SendPropertyChanging
+				Me._arrID = value
+				Me.SendPropertyChanged("arrID")
+				Me.OnarrIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_mediaUrl", DbType:="NVarChar(250)")>  _
+	Public Property mediaUrl() As String
+		Get
+			Return Me._mediaUrl
+		End Get
+		Set
+			If (String.Equals(Me._mediaUrl, value) = false) Then
+				Me.OnmediaUrlChanging(value)
+				Me.SendPropertyChanging
+				Me._mediaUrl = value
+				Me.SendPropertyChanged("mediaUrl")
+				Me.OnmediaUrlChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_mediaFileName", DbType:="NVarChar(150)")>  _
+	Public Property mediaFileName() As String
+		Get
+			Return Me._mediaFileName
+		End Get
+		Set
+			If (String.Equals(Me._mediaFileName, value) = false) Then
+				Me.OnmediaFileNameChanging(value)
+				Me.SendPropertyChanging
+				Me._mediaFileName = value
+				Me.SendPropertyChanged("mediaFileName")
+				Me.OnmediaFileNameChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_mediaSize", DbType:="NVarChar(20)")>  _
+	Public Property mediaSize() As String
+		Get
+			Return Me._mediaSize
+		End Get
+		Set
+			If (String.Equals(Me._mediaSize, value) = false) Then
+				Me.OnmediaSizeChanging(value)
+				Me.SendPropertyChanging
+				Me._mediaSize = value
+				Me.SendPropertyChanged("mediaSize")
+				Me.OnmediaSizeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_mediaAlt", DbType:="NVarChar(250)")>  _
+	Public Property mediaAlt() As String
+		Get
+			Return Me._mediaAlt
+		End Get
+		Set
+			If (String.Equals(Me._mediaAlt, value) = false) Then
+				Me.OnmediaAltChanging(value)
+				Me.SendPropertyChanging
+				Me._mediaAlt = value
+				Me.SendPropertyChanged("mediaAlt")
+				Me.OnmediaAltChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_mediaFoto", DbType:="NVarChar(150)")>  _
+	Public Property mediaFoto() As String
+		Get
+			Return Me._mediaFoto
+		End Get
+		Set
+			If (String.Equals(Me._mediaFoto, value) = false) Then
+				Me.OnmediaFotoChanging(value)
+				Me.SendPropertyChanging
+				Me._mediaFoto = value
+				Me.SendPropertyChanged("mediaFoto")
+				Me.OnmediaFotoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_mediaTyp", DbType:="NVarChar(50)")>  _
+	Public Property mediaTyp() As String
+		Get
+			Return Me._mediaTyp
+		End Get
+		Set
+			If (String.Equals(Me._mediaTyp, value) = false) Then
+				Me.OnmediaTypChanging(value)
+				Me.SendPropertyChanging
+				Me._mediaTyp = value
+				Me.SendPropertyChanged("mediaTyp")
+				Me.OnmediaTypChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_mediaVald", DbType:="NVarChar(10)")>  _
+	Public Property mediaVald() As String
+		Get
+			Return Me._mediaVald
+		End Get
+		Set
+			If (String.Equals(Me._mediaVald, value) = false) Then
+				Me.OnmediaValdChanging(value)
+				Me.SendPropertyChanging
+				Me._mediaVald = value
+				Me.SendPropertyChanged("mediaVald")
+				Me.OnmediaValdChanged
 			End If
 		End Set
 	End Property

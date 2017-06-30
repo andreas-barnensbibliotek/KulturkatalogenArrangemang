@@ -16,6 +16,7 @@
     Private _utovarinfo As utovareInfo
     Private _mainimage As mediaInfo
     Private _movieclip As mediaInfo
+    Private _medialist As List(Of mediaInfo)
     Private _faktalist As List(Of faktainfo)
 
     Public Sub New()
@@ -35,6 +36,7 @@
         _mainimage = New mediaInfo
         _movieclip = New mediaInfo
         _faktalist = New List(Of faktainfo)
+        _medialist = New List(Of mediaInfo)
     End Sub
     Public Property Arrid() As Integer
         Get
@@ -114,6 +116,15 @@
         End Get
         Set(ByVal value As mediaInfo)
             _movieclip = value
+        End Set
+    End Property
+
+    Public Property MediaList() As List(Of mediaInfo)
+        Get
+            Return _medialist
+        End Get
+        Set(ByVal value As List(Of mediaInfo))
+            _medialist = value
         End Set
     End Property
     Public Property Publicerad() As String

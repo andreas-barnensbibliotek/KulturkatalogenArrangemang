@@ -1,4 +1,5 @@
 ﻿Public Class mediaInfo
+    Private _mediaid As Integer
     Private _mediaurl As String
     Private _mediafilename As String
     Private _mediasize As String
@@ -8,6 +9,7 @@
     Private _mediaVald As String
 
     Public Sub New()
+        _mediaid = 0
         _mediaurl = ""
         _mediafilename = ""
         _mediasize = ""
@@ -16,6 +18,14 @@
         _mediatyp = ""
         _mediaVald = "nej"
     End Sub
+    Public Property MediaID() As Integer
+        Get
+            Return _mediaid
+        End Get
+        Set(ByVal value As Integer)
+            _mediaid = value
+        End Set
+    End Property
     Public Property MediaUrl() As String
         Get
             Return _mediaurl
@@ -63,11 +73,11 @@
         End Set
     End Property
 
-    Public Property MediaTyp() As Integer
+    Public Property MediaTyp() As String
         Get
             Return _mediatyp
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As String)
             _mediatyp = value
         End Set
     End Property

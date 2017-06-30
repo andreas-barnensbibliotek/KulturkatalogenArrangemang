@@ -87,6 +87,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>kk_aj_ArrangemangLinq.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Linq\kk_aj_ArrangemangLinq.vb">
+      <DependentUpon>kk_aj_ArrangemangLinq.dbml</DependentUpon>
+    </Compile>
     <Compile Include="model\userHandler.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

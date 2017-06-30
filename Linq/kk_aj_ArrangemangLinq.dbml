@@ -106,6 +106,25 @@
       <Column Name="IsOwner" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.kk_aj_tbl_MediaTyp" Member="kk_aj_tbl_MediaTyps">
+    <Type Name="kk_aj_tbl_MediaTyp">
+      <Column Name="mediatypID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="mediatyp" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.kk_aj_tbl_Media" Member="kk_aj_tbl_Medias">
+    <Type Name="kk_aj_tbl_Media">
+      <Column Name="mediaID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="arrID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="mediaUrl" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="mediaFileName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="mediaSize" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="mediaAlt" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="mediaFoto" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="mediaTyp" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="mediaVald" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.kk_aj_proc_GetArrby_ArrStatus" Method="kk_aj_proc_GetArrby_ArrStatus">
     <Parameter Name="arrStatusTyp" Type="System.Int32" DbType="Int" />
     <Parameter Name="rolltypAdmin" Type="System.Int32" DbType="Int" />

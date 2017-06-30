@@ -22,12 +22,16 @@ Public Class CrudArrangemangController
                 If contentid > 0 Then
                     If _dalobj.addContentToArr(arrData.Arrid, contentid) Then
                         If _dalobj.addFaktaToArrangemang(arrData) Then
+                            If _dalobj.addMediaToArrangemang(arrData) Then
 
-                            'skicka tillbaka dom nya värdena så som arrid till anropande funktion
-                            nyttarr.Arrid = arrData.Arrid
-                            tmparrlist.Add(nyttarr)
-                            ret.Arrangemanglist = tmparrlist
-                            ret.Status = "OK! Arrangemanget Inlagt!"
+                                'skicka tillbaka dom nya värdena så som arrid till anropande funktion
+                                nyttarr.Arrid = arrData.Arrid
+                                tmparrlist.Add(nyttarr)
+                                ret.Arrangemanglist = tmparrlist
+                                ret.Status = "OK! Arrangemanget Inlagt!"
+                            Else
+                                ret.Status = "Error fel vid inläggning av Media!"
+                            End If
                         Else
                             ret.Status = "Error fel vid inläggning av fakta!"
                         End If
@@ -54,7 +58,9 @@ Public Class CrudArrangemangController
             If _dalobj.DoArrangemangExist(arrid) Then
                 If _dalobj.DeleteArrToContentID(arrid) Then
                     If _dalobj.DeleteFaktaByArrID(arrid) Then
-                        ret = _dalobj.DeleteArrangemang(arrid)
+                        If _dalobj.DeleteMediaByArrID(arrid) Then
+                            ret = _dalobj.DeleteArrangemang(arrid)
+                        End If
                     End If
                 Else
                     ret = False

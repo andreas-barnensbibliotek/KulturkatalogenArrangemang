@@ -42,7 +42,7 @@ Imports KulturkatalogenArrangemang
     <TestMethod()> Public Sub deleteArr()
         ' Behöver bara arrid för att tabort arrangemanget och content och arrtocontent
         Dim cmdtyp As New updatearrcommand
-        cmdtyp.Arrid = 24
+        cmdtyp.Arrid = 62
         Dim obj As New kk_aj_arr_MainController
 
         Dim rettyp As arrangemangcontainerInfo = obj.DelArrangemang(cmdtyp)
@@ -80,7 +80,7 @@ Imports KulturkatalogenArrangemang
         Dim cmd As New commandTypeInfo
 
         cmd.CmdTyp = "details"
-        cmd.ArrID = 3
+        cmd.ArrID = 1
         cmd.CmdtypUserid = 2
 
         Dim ret As arrangemangcontainerInfo = testar.getArrangemang(cmd)
@@ -91,12 +91,13 @@ Imports KulturkatalogenArrangemang
     Private Function insertfuntion(vald As Integer) As arrangemangInfo
         Dim tmparr As New arrangemangInfo
 
-        tmparr.Arrangemangtyp = 3 'författarbesök
+        tmparr.Arrangemangtyp = 2 'författarbesök
         tmparr.ArrangemangStatus = 1
         tmparr.Innehall = gettext(vald)
-        tmparr.Konstform = 2 'dans
-        tmparr.MainImage = getimg(vald)
-        tmparr.MediaClip = getmovie(vald)
+        tmparr.Konstform = 4 'dans
+        'tmparr.MainImage = getimg(vald)
+        'tmparr.MediaClip = getmovie(vald)
+        tmparr.MediaList = getmedia()
         tmparr.Rubrik = "Konstrunda Ulricehamn"
         tmparr.UnderRubrik = "av ulricehamnare för ulricehamnare"
         tmparr.Utovare = 0 ' är denna större än 0 körs utövardata annar inte!
@@ -161,6 +162,38 @@ Imports KulturkatalogenArrangemang
 
     End Function
 
+
+    Private Function getmedia() As List(Of mediaInfo)
+        Dim img As New mediaInfo
+        Dim ret As New List(Of mediaInfo)
+
+        img.MediaAlt = "finbild"
+        img.MediaFilename = "bildnummer1.jpg"
+        img.MediaFoto = "andreas Josefsson"
+        img.MediaSize = "300kb"
+        img.MediaUrl = "s-media-cache-ak0.pinimg.com/originals/a1/3d/7f/a13d7f89a80cad02f76830f87a7eaf52.jpg"
+        img.MediaTyp = "3"
+        ret.Add(img)
+        Dim img2 As New mediaInfo
+        img2.MediaAlt = "finbild med banan"
+        img2.MediaFilename = "banan1.jpg"
+        img2.MediaFoto = "andreas Josefsson"
+        img2.MediaSize = "300kb"
+        img2.MediaUrl = "p1.pichost.me/i/40/1636199.jpg"
+        img2.MediaTyp = "2"
+        ret.Add(img2)
+        Dim img3 As New mediaInfo
+        img3.MediaAlt = "finbild drak Ulla"
+        img3.MediaFilename = "drakenummer1.jpg"
+        img3.MediaFoto = "andreas Josefsson"
+        img3.MediaSize = "300kb"
+        img3.MediaUrl = "s-media-cache-ak0.pinimg.com/736x/9e/fd/27/9efd27afef4e8127923fbce92b8c967d.jpg"
+        img3.MediaTyp = "2"
+        ret.Add(img3)
+
+        Return ret
+
+    End Function
     Private Function getimg(v As Integer) As mediaInfo
         Dim img As New mediaInfo
 
@@ -171,18 +204,21 @@ Imports KulturkatalogenArrangemang
                 img.MediaFoto = "andreas Josefsson"
                 img.MediaSize = "300kb"
                 img.MediaUrl = "s-media-cache-ak0.pinimg.com/originals/a1/3d/7f/a13d7f89a80cad02f76830f87a7eaf52.jpg"
-            Case 2
-                img.MediaAlt = "finbild med banan"
-                img.MediaFilename = "banan1.jpg"
-                img.MediaFoto = "andreas Josefsson"
-                img.MediaSize = "300kb"
-                img.MediaUrl = "p1.pichost.me/i/40/1636199.jpg"
+                img.MediaTyp = "1"
             Case 3
-                img.MediaAlt = "finbild drak Ulla"
-                img.MediaFilename = "drakenummer1.jpg"
+                img.MediaAlt = "finFILM Blade runner"
+                img.MediaFilename = "FILMnummer1.jpg"
                 img.MediaFoto = "andreas Josefsson"
                 img.MediaSize = "300kb"
-                img.MediaUrl = "s-media-cache-ak0.pinimg.com/736x/9e/fd/27/9efd27afef4e8127923fbce92b8c967d.jpg"
+                img.MediaUrl = "youtu.be/gCcx85zbxz4"
+                img.MediaTyp = "2"
+            Case 2
+                img.MediaAlt = "finFILM med Avengers"
+                img.MediaFilename = "FILM1.jpg"
+                img.MediaFoto = "andreas Josefsson"
+                img.MediaSize = "300kb"
+                img.MediaUrl = "youtu.be/GQ7kdlggtUU"
+                img.MediaTyp = "2"
 
         End Select
 
@@ -199,18 +235,21 @@ Imports KulturkatalogenArrangemang
                 img.MediaFoto = "andreas Josefsson"
                 img.MediaSize = "300kb"
                 img.MediaUrl = "youtu.be/gCcx85zbxz4"
+                img.MediaTyp = "2"
             Case 2
                 img.MediaAlt = "finFILM med Avengers"
                 img.MediaFilename = "FILM1.jpg"
                 img.MediaFoto = "andreas Josefsson"
                 img.MediaSize = "300kb"
                 img.MediaUrl = "youtu.be/GQ7kdlggtUU"
+                img.MediaTyp = "2"
             Case 3
                 img.MediaAlt = "finFILM WOT ulla"
                 img.MediaFilename = "Wot.jpg"
                 img.MediaFoto = "andreas Josefsson"
                 img.MediaSize = "300kb"
                 img.MediaUrl = "youtu.be/3SKj4V6hyd0"
+                img.MediaTyp = "2"
 
         End Select
 

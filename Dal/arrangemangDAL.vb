@@ -3,8 +3,8 @@
 Imports KulturkatalogenArrangemang
 
 Public Class arrangemangDAL
-    'Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
-    Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
+    Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
+    'Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
     Private _linqObj As New kk_aj_ArrangemangLinqDataContext(_connectionString)
 
     Public Function getArrangemangByStatus(cmdtyp As commandTypeInfo) As List(Of arrangemangInfo)
@@ -189,7 +189,7 @@ Public Class arrangemangDAL
             nobj.MainImage = fillmedia(arr.ImageUrl, arr.ImageAlt, arr.ImageFilename, arr.ImageFotograf, arr.ImageSize)
             nobj.MediaClip = fillmedia(arr.MovieClipUrl, arr.MovieClipAlt, arr.MovieClipFilename, arr.MovieClipCredits, arr.MovieClipSize)
             nobj.UtovareData = getutovardata(arr)
-
+            nobj.MediaList = getMedialist(arr.ArrID)
             nobj.Faktalist = getfaktalist(arr.ArrID)
         Catch ex As Exception
 
@@ -234,15 +234,38 @@ Public Class arrangemangDAL
         Return retobj
     End Function
 
+    Private Function getMedialist(arrID As Integer) As List(Of mediaInfo)
+        Dim retobj As New List(Of mediaInfo)
+
+        Dim mediaobj = From p In _linqObj.kk_aj_tbl_Medias
+                       Select p
+                       Where p.arrID = arrID
+
+        For Each itm In mediaobj
+            Dim tmp As New mediaInfo
+            tmp.MediaID = itm.mediaID
+            tmp.MediaAlt = itm.mediaAlt
+            tmp.MediaFilename = itm.mediaFileName
+            tmp.MediaFoto = itm.mediaFoto
+            tmp.MediaSize = itm.mediaSize
+            tmp.MediaTyp = itm.mediaTyp
+            tmp.MediaUrl = itm.mediaUrl
+            tmp.MediaVald = itm.mediaVald
+            retobj.Add(tmp)
+        Next
+
+        Return retobj
+    End Function
+
     Private Function fillmedia(mUrl As String, mAlt As String, mFilename As String, mFotograf As String, mSize As String) As mediaInfo
         Dim retmedia As New mediaInfo
-        With retmedia
-            .MediaUrl = mUrl
-            .MediaAlt = mAlt
-            .MediaFilename = mFilename
-            .MediaFoto = mFotograf
-            .MediaSize = mSize
-        End With
+        'With retmedia
+        '    .MediaUrl = mUrl
+        '    .MediaAlt = mAlt
+        '    .MediaFilename = mFilename
+        '    .MediaFoto = mFotograf
+        '    .MediaSize = mSize
+        'End With
         Return retmedia
     End Function
 
@@ -411,16 +434,16 @@ Public Class arrangemangDAL
         tmpcd.ContentText = contentdata.Innehall
         tmpcd.Rubrik = contentdata.Rubrik
         tmpcd.Underrubrik = contentdata.UnderRubrik
-        tmpcd.ImageUrl = contentdata.MainImage.MediaUrl
-        tmpcd.ImageFilename = contentdata.MainImage.MediaFilename
-        tmpcd.ImageFotograf = contentdata.MainImage.MediaFoto
-        tmpcd.ImageSize = contentdata.MainImage.MediaSize
-        tmpcd.ImageAlt = contentdata.MainImage.MediaAlt
-        tmpcd.MovieClipAlt = contentdata.MediaClip.MediaAlt
-        tmpcd.MovieClipCredits = contentdata.MediaClip.MediaFoto
-        tmpcd.MovieClipFilename = contentdata.MediaClip.MediaFilename
-        tmpcd.MovieClipSize = contentdata.MediaClip.MediaSize
-        tmpcd.MovieClipUrl = contentdata.MediaClip.MediaUrl
+        'tmpcd.ImageUrl = contentdata.MainImage.MediaUrl
+        'tmpcd.ImageFilename = contentdata.MainImage.MediaFilename
+        'tmpcd.ImageFotograf = contentdata.MainImage.MediaFoto
+        'tmpcd.ImageSize = contentdata.MainImage.MediaSize
+        'tmpcd.ImageAlt = contentdata.MainImage.MediaAlt
+        'tmpcd.MovieClipAlt = contentdata.MediaClip.MediaAlt
+        'tmpcd.MovieClipCredits = contentdata.MediaClip.MediaFoto
+        'tmpcd.MovieClipFilename = contentdata.MediaClip.MediaFilename
+        'tmpcd.MovieClipSize = contentdata.MediaClip.MediaSize
+        'tmpcd.MovieClipUrl = contentdata.MediaClip.MediaUrl
         tmpcd.datum = Date.Now
         _linqObj.kk_aj_tbl_contents.InsertOnSubmit(tmpcd)
         _linqObj.SubmitChanges()
@@ -452,7 +475,35 @@ Public Class arrangemangDAL
         End Try
 
     End Function
+    Public Function addMediaToArrangemang(data As arrangemangInfo) As Integer
 
+        Try
+            Dim inslst As New List(Of kk_aj_tbl_Media)
+
+            For Each itm In data.MediaList
+                Dim tmp As New kk_aj_tbl_Media
+
+                tmp.arrID = data.Arrid
+                tmp.mediaAlt = itm.MediaAlt
+                tmp.mediaFileName = itm.MediaFilename
+                tmp.mediaFoto = itm.MediaFoto
+                tmp.mediaSize = itm.MediaSize
+                tmp.mediaTyp = itm.MediaTyp
+                tmp.mediaUrl = itm.MediaUrl
+                tmp.mediaVald = itm.MediaVald
+                inslst.Add(tmp)
+            Next
+
+            _linqObj.kk_aj_tbl_Medias.InsertAllOnSubmit(inslst)
+            _linqObj.SubmitChanges()
+            Return True
+
+        Catch ex As Exception
+            Return False
+
+        End Try
+
+    End Function
 
     Public Function addContentToArr(arrid As Integer, contentid As Integer) As Boolean
         Dim tmpobj As New kk_aj_tbl_arridtoContent
@@ -602,6 +653,48 @@ Public Class arrangemangDAL
 
             For Each i In itm
                 _linqObj.kk_aj_tbl_faktas.DeleteOnSubmit(i)
+            Next
+            _linqObj.SubmitChanges()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
+
+    Public Function DeleteMediaByArrID(arrid As Integer) As Boolean
+        Try
+            Dim itm = From c In _linqObj.kk_aj_tbl_Medias
+                      Where c.arrID = arrid
+                      Select c
+
+            For Each i In itm
+                _linqObj.kk_aj_tbl_Medias.DeleteOnSubmit(i)
+            Next
+            _linqObj.SubmitChanges()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
+
+    Public Function EditMediaByMediaID(media As mediaInfo) As Boolean
+        Try
+            Dim itm = From c In _linqObj.kk_aj_tbl_Medias
+                      Where c.mediaID = media.MediaID
+                      Select c
+
+            For Each i In itm
+                i.mediaAlt = media.MediaAlt
+                i.mediaFileName = media.MediaFilename
+                i.mediaFoto = media.MediaFoto
+                i.mediaSize = media.MediaSize
+                i.mediaTyp = media.MediaTyp
+                i.mediaUrl = media.MediaUrl
+                i.mediaVald = media.MediaVald
             Next
             _linqObj.SubmitChanges()
 
