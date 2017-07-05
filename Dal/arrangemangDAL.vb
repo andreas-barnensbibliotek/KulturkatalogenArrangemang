@@ -177,6 +177,7 @@ Public Class arrangemangDAL
             nobj.ArrangemangStatus = arr.ArrangemangStatus
             nobj.Arrangemangtyp = arr.arrangemangtyp
             nobj.Datum = arr.Datum.ToString
+            nobj.ContentID = arr.Contentid
             nobj.Rubrik = arr.Rubrik
             nobj.UnderRubrik = arr.Underrubrik
             nobj.LookedAt = arr.LookedAt
@@ -186,8 +187,8 @@ Public Class arrangemangDAL
             nobj.Username = arr.AdminuserID
             nobj.Innehall = arr.ContentText
             nobj.Konstform = arr.konstform
-            nobj.MainImage = fillmedia(arr.ImageUrl, arr.ImageAlt, arr.ImageFilename, arr.ImageFotograf, arr.ImageSize)
-            nobj.MediaClip = fillmedia(arr.MovieClipUrl, arr.MovieClipAlt, arr.MovieClipFilename, arr.MovieClipCredits, arr.MovieClipSize)
+            ' nobj.MainImage = fillmedia(arr.ImageUrl, arr.ImageAlt, arr.ImageFilename, arr.ImageFotograf, arr.ImageSize)
+            ' nobj.MediaClip = fillmedia(arr.MovieClipUrl, arr.MovieClipAlt, arr.MovieClipFilename, arr.MovieClipCredits, arr.MovieClipSize)
             nobj.UtovareData = getutovardata(arr)
             nobj.MediaList = getMedialist(arr.ArrID)
             nobj.Faktalist = getfaktalist(arr.ArrID)
@@ -226,7 +227,7 @@ Public Class arrangemangDAL
             Dim tmp As New faktainfo
             tmp.Faktarubrik = itm.Faktarubrik
             tmp.FaktaTypID = itm.faktatypid
-            tmp.Faktaid = itm.faktatypid
+            tmp.Faktaid = itm.faktaid
             tmp.FaktaValue = itm.faktaValue
             retobj.Add(tmp)
         Next
@@ -681,6 +682,68 @@ Public Class arrangemangDAL
 
     End Function
 
+    Public Function DeleteMediaBymediaID(mediaid As Integer) As Boolean
+        Try
+            Dim itm = From c In _linqObj.kk_aj_tbl_Medias
+                      Where c.mediaID = mediaid
+                      Select c
+
+            For Each i In itm
+                _linqObj.kk_aj_tbl_Medias.DeleteOnSubmit(i)
+            Next
+            _linqObj.SubmitChanges()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
+
+    Public Function DeleteFaktaByFaktaID(faktaid As Integer) As Boolean
+        Try
+            Dim itm = From c In _linqObj.kk_aj_tbl_faktas
+                      Where c.faktaid = faktaid
+                      Select c
+
+            For Each i In itm
+                _linqObj.kk_aj_tbl_faktas.DeleteOnSubmit(i)
+            Next
+            _linqObj.SubmitChanges()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
+
+#End Region
+
+#Region "EDIT"
+    Public Function EditArrangemangByArrID(arrObj As arrangemangInfo) As Boolean
+        Try
+            Dim itm = From c In _linqObj.kk_aj_tbl_Arrangemangs
+                      Where c.ArrID = arrObj.Arrid
+                      Select c
+
+            For Each i In itm
+                i.KonstformID = CInt(arrObj.Konstform)
+                i.ArrangemangstypID = CInt(arrObj.Arrangemangtyp)
+                i.UtovarID = CInt(arrObj.Utovare)
+                i.Publicerad = arrObj.Publicerad
+                i.Datum = Date.Now
+
+            Next
+            _linqObj.SubmitChanges()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
+
     Public Function EditMediaByMediaID(media As mediaInfo) As Boolean
         Try
             Dim itm = From c In _linqObj.kk_aj_tbl_Medias
@@ -695,6 +758,44 @@ Public Class arrangemangDAL
                 i.mediaTyp = media.MediaTyp
                 i.mediaUrl = media.MediaUrl
                 i.mediaVald = media.MediaVald
+            Next
+            _linqObj.SubmitChanges()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
+
+    Public Function EditFaktaByFaktaID(fakta As faktainfo) As Boolean
+        Try
+            Dim itm = From c In _linqObj.kk_aj_tbl_faktas
+                      Where c.faktaid = fakta.Faktaid
+                      Select c
+
+            For Each i In itm
+                i.faktaValue = fakta.FaktaValue
+            Next
+            _linqObj.SubmitChanges()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
+
+    Public Function EditContentBycontentID(arrobj As arrangemangInfo) As Boolean
+        Try
+            Dim itm = From c In _linqObj.kk_aj_tbl_contents
+                      Where c.Contentid = arrobj.ContentID
+                      Select c
+
+            For Each i In itm
+                i.Rubrik = arrobj.Rubrik
+                i.Underrubrik = arrobj.UnderRubrik
+                i.ContentText = arrobj.Innehall
             Next
             _linqObj.SubmitChanges()
 

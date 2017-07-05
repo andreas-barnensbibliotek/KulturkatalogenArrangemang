@@ -272,6 +272,9 @@ Imports KulturkatalogenArrangemang
             Case 3
                 str &= "Text nr 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. "
                 str &= "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. "
+            Case 4
+                str &= "Andreas har ändrat detta ordentligt!!!  "
+                str &= "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. "
 
         End Select
         Return str
@@ -338,5 +341,109 @@ Imports KulturkatalogenArrangemang
         Dim x As arrangemangcontainerInfo = ret
 
     End Sub
+    <TestMethod()> Public Sub TestEditArrangemangParametrar()
 
+        Dim testar As New kk_aj_arr_MainController
+        Dim cmd As New commandTypeInfo
+
+        cmd.CmdTyp = "bylatest"
+        cmd.cmdValue = "top10"
+        cmd.IsAdminRoll = 0
+        cmd.CmdRoll1 = 6
+        cmd.CmdRoll2 = 10
+
+
+        Dim ret As arrangemangcontainerInfo = testar.getArrangemang(cmd)
+
+        Dim x As arrangemangcontainerInfo = ret
+
+    End Sub
+    <TestMethod()> Public Sub TestEditMedia()
+
+        Dim testar As New kk_aj_arr_MainController
+        Dim cmd As New commandTypeInfo
+
+        Dim arrid As Integer = 28
+        Dim medieid As Integer = 3
+
+        Dim img2 As New mediaInfo
+        img2.MediaID = medieid
+        img2.MediaAlt = "finbild med banan"
+        img2.MediaFilename = "till ARR 1 banan1.jpg"
+        img2.MediaFoto = "andreas Josefsson"
+        img2.MediaSize = "300kb"
+        img2.MediaUrl = "http://p1.pichost.me/i/40/1636199.jpg"
+        img2.MediaTyp = "2"
+        img2.MediaVald = "nej"
+
+
+        Dim ret As arrangemangcontainerInfo = testar.editmedia(arrid, img2)
+        Dim x As arrangemangcontainerInfo = ret
+        If ret.Status = "updated" Then
+            x.Status = "updated"
+        End If
+        If ret.Status = "error" Then
+            x.Status = "error"
+        End If
+
+
+    End Sub
+    <TestMethod()> Public Sub TestEditFakta()
+
+        Dim testar As New kk_aj_arr_MainController
+        Dim cmd As New commandTypeInfo
+
+        Dim arrid As Integer = 28
+        Dim Faktaid As Integer = 96
+
+        Dim obj1 As New faktainfo
+        obj1.Faktaid = Faktaid
+        obj1.FaktaValue = "minst 100m brett!"
+
+        Dim ret As arrangemangcontainerInfo = testar.editfakta(arrid, obj1)
+        Dim x As arrangemangcontainerInfo = ret
+        If ret.Status = "updated" Then
+            x.Status = "updated"
+        End If
+        If ret.Status = "error" Then
+            x.Status = "error"
+        End If
+
+
+    End Sub
+
+    <TestMethod()> Public Sub TestEditArrangemangDATA()
+
+        Dim testar As New kk_aj_arr_MainController
+        Dim cmd As New commandTypeInfo
+
+        Dim tmpobj As New arrangemangInfo
+
+        Dim arrid As Integer = 28
+        Dim contentid As Integer = 21
+
+        tmpobj.Arrid = arrid
+        tmpobj.ContentID = contentid
+
+        tmpobj.Konstform = 10
+        tmpobj.Arrangemangtyp = 5
+        tmpobj.Utovare = 4
+        tmpobj.Publicerad = "ja"
+
+        tmpobj.Rubrik = "Andreas ändrar igen"
+        tmpobj.UnderRubrik = "ändringar fungerar!"
+        tmpobj.Innehall = gettext(4)
+
+
+        Dim ret As arrangemangcontainerInfo = testar.editArrangemang(tmpobj)
+        Dim x As arrangemangcontainerInfo = ret
+        If ret.Status = "updated" Then
+            x.Status = "updated"
+        End If
+        If ret.Status = "error" Then
+            x.Status = "error"
+        End If
+
+
+    End Sub
 End Class

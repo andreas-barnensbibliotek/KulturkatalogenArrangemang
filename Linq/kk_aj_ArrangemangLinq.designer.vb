@@ -226,12 +226,6 @@ Partial Public Class kk_aj_ArrangemangLinqDataContext
 		Return CType(result.ReturnValue,ISingleResult(Of kk_aj_proc_MapRollToKonstformResult))
 	End Function
 	
-	<Global.System.Data.Linq.Mapping.FunctionAttribute(Name:="dbo.kk_aj_proc_GetArrDetails")>  _
-	Public Function kk_aj_proc_GetArrDetails(<Global.System.Data.Linq.Mapping.ParameterAttribute(DbType:="Int")> ByVal arrID As System.Nullable(Of Integer)) As ISingleResult(Of kk_aj_proc_GetArrDetailsResult)
-		Dim result As IExecuteResult = Me.ExecuteMethodCall(Me, CType(MethodInfo.GetCurrentMethod,MethodInfo), arrID)
-		Return CType(result.ReturnValue,ISingleResult(Of kk_aj_proc_GetArrDetailsResult))
-	End Function
-	
 	<Global.System.Data.Linq.Mapping.FunctionAttribute(Name:="dbo.kk_aj_proc_getfaktabyarrid")>  _
 	Public Function kk_aj_proc_getfaktabyarrid(<Global.System.Data.Linq.Mapping.ParameterAttribute(DbType:="Int")> ByVal arrid As System.Nullable(Of Integer)) As ISingleResult(Of kk_aj_proc_getfaktabyarridResult)
 		Dim result As IExecuteResult = Me.ExecuteMethodCall(Me, CType(MethodInfo.GetCurrentMethod,MethodInfo), arrid)
@@ -264,6 +258,12 @@ Partial Public Class kk_aj_ArrangemangLinqDataContext
 				<Global.System.Data.Linq.Mapping.ParameterAttribute(DbType:="NVarChar(4)")> ByVal visningsperiod As String) As ISingleResult(Of kk_aj_proc_GetArrby_LatestEventResult)
 		Dim result As IExecuteResult = Me.ExecuteMethodCall(Me, CType(MethodInfo.GetCurrentMethod,MethodInfo), rolltypAdmin, roll1, roll2, roll3, roll4, roll5, roll6, roll7, roll8, roll9, roll10, roll11, roll12, roll13, roll14, visningsperiod)
 		Return CType(result.ReturnValue,ISingleResult(Of kk_aj_proc_GetArrby_LatestEventResult))
+	End Function
+	
+	<Global.System.Data.Linq.Mapping.FunctionAttribute(Name:="dbo.kk_aj_proc_GetArrDetails")>  _
+	Public Function kk_aj_proc_GetArrDetails(<Global.System.Data.Linq.Mapping.ParameterAttribute(DbType:="Int")> ByVal arrID As System.Nullable(Of Integer)) As ISingleResult(Of kk_aj_proc_GetArrDetailsResult)
+		Dim result As IExecuteResult = Me.ExecuteMethodCall(Me, CType(MethodInfo.GetCurrentMethod,MethodInfo), arrID)
+		Return CType(result.ReturnValue,ISingleResult(Of kk_aj_proc_GetArrDetailsResult))
 	End Function
 End Class
 
@@ -2827,6 +2827,295 @@ Partial Public Class kk_aj_proc_MapRollToKonstformResult
 	End Property
 End Class
 
+Partial Public Class kk_aj_proc_getfaktabyarridResult
+	
+	Private _Faktarubrik As String
+	
+	Private _faktaValue As String
+	
+	Private _faktaid As Integer
+	
+	Private _faktatypid As System.Nullable(Of Integer)
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Faktarubrik", DbType:="NVarChar(150)")>  _
+	Public Property Faktarubrik() As String
+		Get
+			Return Me._Faktarubrik
+		End Get
+		Set
+			If (String.Equals(Me._Faktarubrik, value) = false) Then
+				Me._Faktarubrik = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_faktaValue", DbType:="NVarChar(450)")>  _
+	Public Property faktaValue() As String
+		Get
+			Return Me._faktaValue
+		End Get
+		Set
+			If (String.Equals(Me._faktaValue, value) = false) Then
+				Me._faktaValue = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_faktaid", DbType:="Int NOT NULL")>  _
+	Public Property faktaid() As Integer
+		Get
+			Return Me._faktaid
+		End Get
+		Set
+			If ((Me._faktaid = value)  _
+						= false) Then
+				Me._faktaid = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_faktatypid", DbType:="Int")>  _
+	Public Property faktatypid() As System.Nullable(Of Integer)
+		Get
+			Return Me._faktatypid
+		End Get
+		Set
+			If (Me._faktatypid.Equals(value) = false) Then
+				Me._faktatypid = value
+			End If
+		End Set
+	End Property
+End Class
+
+Partial Public Class kk_aj_proc_Getarrby_LatestResult
+	
+	Private _Rubrik As String
+	
+	Private _Underrubrik As String
+	
+	Private _ContentText As String
+	
+	Private _ImageFotograf As String
+	
+	Private _ImageUrl As String
+	
+	Private _ImageFilename As String
+	
+	Private _ImageSize As String
+	
+	Private _ImageAlt As String
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Rubrik", DbType:="NVarChar(250)")>  _
+	Public Property Rubrik() As String
+		Get
+			Return Me._Rubrik
+		End Get
+		Set
+			If (String.Equals(Me._Rubrik, value) = false) Then
+				Me._Rubrik = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Underrubrik", DbType:="NVarChar(250)")>  _
+	Public Property Underrubrik() As String
+		Get
+			Return Me._Underrubrik
+		End Get
+		Set
+			If (String.Equals(Me._Underrubrik, value) = false) Then
+				Me._Underrubrik = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ContentText", DbType:="NVarChar(4000)")>  _
+	Public Property ContentText() As String
+		Get
+			Return Me._ContentText
+		End Get
+		Set
+			If (String.Equals(Me._ContentText, value) = false) Then
+				Me._ContentText = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImageFotograf", DbType:="NVarChar(100)")>  _
+	Public Property ImageFotograf() As String
+		Get
+			Return Me._ImageFotograf
+		End Get
+		Set
+			If (String.Equals(Me._ImageFotograf, value) = false) Then
+				Me._ImageFotograf = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImageUrl", DbType:="NVarChar(1000)")>  _
+	Public Property ImageUrl() As String
+		Get
+			Return Me._ImageUrl
+		End Get
+		Set
+			If (String.Equals(Me._ImageUrl, value) = false) Then
+				Me._ImageUrl = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImageFilename", DbType:="NVarChar(100)")>  _
+	Public Property ImageFilename() As String
+		Get
+			Return Me._ImageFilename
+		End Get
+		Set
+			If (String.Equals(Me._ImageFilename, value) = false) Then
+				Me._ImageFilename = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImageSize", DbType:="NVarChar(50)")>  _
+	Public Property ImageSize() As String
+		Get
+			Return Me._ImageSize
+		End Get
+		Set
+			If (String.Equals(Me._ImageSize, value) = false) Then
+				Me._ImageSize = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImageAlt", DbType:="NVarChar(150)")>  _
+	Public Property ImageAlt() As String
+		Get
+			Return Me._ImageAlt
+		End Get
+		Set
+			If (String.Equals(Me._ImageAlt, value) = false) Then
+				Me._ImageAlt = value
+			End If
+		End Set
+	End Property
+End Class
+
+Partial Public Class kk_aj_proc_GetArrby_LatestEventResult
+	
+	Private _ArrID As Integer
+	
+	Private _ArrangemangStatus As String
+	
+	Private _datum As System.Nullable(Of Date)
+	
+	Private _KonstformID As System.Nullable(Of Integer)
+	
+	Private _logtyp As String
+	
+	Private _statustyp As String
+	
+	Private _dnnRollid As System.Nullable(Of Integer)
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArrID", DbType:="Int NOT NULL")>  _
+	Public Property ArrID() As Integer
+		Get
+			Return Me._ArrID
+		End Get
+		Set
+			If ((Me._ArrID = value)  _
+						= false) Then
+				Me._ArrID = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArrangemangStatus", DbType:="NVarChar(50)")>  _
+	Public Property ArrangemangStatus() As String
+		Get
+			Return Me._ArrangemangStatus
+		End Get
+		Set
+			If (String.Equals(Me._ArrangemangStatus, value) = false) Then
+				Me._ArrangemangStatus = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_datum", DbType:="DateTime")>  _
+	Public Property datum() As System.Nullable(Of Date)
+		Get
+			Return Me._datum
+		End Get
+		Set
+			If (Me._datum.Equals(value) = false) Then
+				Me._datum = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KonstformID", DbType:="Int")>  _
+	Public Property KonstformID() As System.Nullable(Of Integer)
+		Get
+			Return Me._KonstformID
+		End Get
+		Set
+			If (Me._KonstformID.Equals(value) = false) Then
+				Me._KonstformID = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_logtyp", DbType:="NVarChar(50)")>  _
+	Public Property logtyp() As String
+		Get
+			Return Me._logtyp
+		End Get
+		Set
+			If (String.Equals(Me._logtyp, value) = false) Then
+				Me._logtyp = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_statustyp", DbType:="NVarChar(50)")>  _
+	Public Property statustyp() As String
+		Get
+			Return Me._statustyp
+		End Get
+		Set
+			If (String.Equals(Me._statustyp, value) = false) Then
+				Me._statustyp = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_dnnRollid", DbType:="Int")>  _
+	Public Property dnnRollid() As System.Nullable(Of Integer)
+		Get
+			Return Me._dnnRollid
+		End Get
+		Set
+			If (Me._dnnRollid.Equals(value) = false) Then
+				Me._dnnRollid = value
+			End If
+		End Set
+	End Property
+End Class
+
 Partial Public Class kk_aj_proc_GetArrDetailsResult
 	
 	Private _ArrID As Integer
@@ -2902,6 +3191,8 @@ Partial Public Class kk_aj_proc_GetArrDetailsResult
 	Private _ArrangemangStatusID As Integer
 	
 	Private _Version As System.Nullable(Of Integer)
+	
+	Private _Contentid As Integer
 	
 	Public Sub New()
 		MyBase.New
@@ -3354,292 +3645,16 @@ Partial Public Class kk_aj_proc_GetArrDetailsResult
 			End If
 		End Set
 	End Property
-End Class
-
-Partial Public Class kk_aj_proc_getfaktabyarridResult
 	
-	Private _Faktarubrik As String
-	
-	Private _faktaValue As String
-	
-	Private _faktaid As Integer
-	
-	Private _faktatypid As System.Nullable(Of Integer)
-	
-	Public Sub New()
-		MyBase.New
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Faktarubrik", DbType:="NVarChar(150)")>  _
-	Public Property Faktarubrik() As String
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contentid", DbType:="Int NOT NULL")>  _
+	Public Property Contentid() As Integer
 		Get
-			Return Me._Faktarubrik
+			Return Me._Contentid
 		End Get
 		Set
-			If (String.Equals(Me._Faktarubrik, value) = false) Then
-				Me._Faktarubrik = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_faktaValue", DbType:="NVarChar(450)")>  _
-	Public Property faktaValue() As String
-		Get
-			Return Me._faktaValue
-		End Get
-		Set
-			If (String.Equals(Me._faktaValue, value) = false) Then
-				Me._faktaValue = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_faktaid", DbType:="Int NOT NULL")>  _
-	Public Property faktaid() As Integer
-		Get
-			Return Me._faktaid
-		End Get
-		Set
-			If ((Me._faktaid = value)  _
+			If ((Me._Contentid = value)  _
 						= false) Then
-				Me._faktaid = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_faktatypid", DbType:="Int")>  _
-	Public Property faktatypid() As System.Nullable(Of Integer)
-		Get
-			Return Me._faktatypid
-		End Get
-		Set
-			If (Me._faktatypid.Equals(value) = false) Then
-				Me._faktatypid = value
-			End If
-		End Set
-	End Property
-End Class
-
-Partial Public Class kk_aj_proc_Getarrby_LatestResult
-	
-	Private _Rubrik As String
-	
-	Private _Underrubrik As String
-	
-	Private _ContentText As String
-	
-	Private _ImageFotograf As String
-	
-	Private _ImageUrl As String
-	
-	Private _ImageFilename As String
-	
-	Private _ImageSize As String
-	
-	Private _ImageAlt As String
-	
-	Public Sub New()
-		MyBase.New
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Rubrik", DbType:="NVarChar(250)")>  _
-	Public Property Rubrik() As String
-		Get
-			Return Me._Rubrik
-		End Get
-		Set
-			If (String.Equals(Me._Rubrik, value) = false) Then
-				Me._Rubrik = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Underrubrik", DbType:="NVarChar(250)")>  _
-	Public Property Underrubrik() As String
-		Get
-			Return Me._Underrubrik
-		End Get
-		Set
-			If (String.Equals(Me._Underrubrik, value) = false) Then
-				Me._Underrubrik = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ContentText", DbType:="NVarChar(4000)")>  _
-	Public Property ContentText() As String
-		Get
-			Return Me._ContentText
-		End Get
-		Set
-			If (String.Equals(Me._ContentText, value) = false) Then
-				Me._ContentText = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImageFotograf", DbType:="NVarChar(100)")>  _
-	Public Property ImageFotograf() As String
-		Get
-			Return Me._ImageFotograf
-		End Get
-		Set
-			If (String.Equals(Me._ImageFotograf, value) = false) Then
-				Me._ImageFotograf = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImageUrl", DbType:="NVarChar(1000)")>  _
-	Public Property ImageUrl() As String
-		Get
-			Return Me._ImageUrl
-		End Get
-		Set
-			If (String.Equals(Me._ImageUrl, value) = false) Then
-				Me._ImageUrl = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImageFilename", DbType:="NVarChar(100)")>  _
-	Public Property ImageFilename() As String
-		Get
-			Return Me._ImageFilename
-		End Get
-		Set
-			If (String.Equals(Me._ImageFilename, value) = false) Then
-				Me._ImageFilename = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImageSize", DbType:="NVarChar(50)")>  _
-	Public Property ImageSize() As String
-		Get
-			Return Me._ImageSize
-		End Get
-		Set
-			If (String.Equals(Me._ImageSize, value) = false) Then
-				Me._ImageSize = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImageAlt", DbType:="NVarChar(150)")>  _
-	Public Property ImageAlt() As String
-		Get
-			Return Me._ImageAlt
-		End Get
-		Set
-			If (String.Equals(Me._ImageAlt, value) = false) Then
-				Me._ImageAlt = value
-			End If
-		End Set
-	End Property
-End Class
-
-Partial Public Class kk_aj_proc_GetArrby_LatestEventResult
-	
-	Private _ArrID As Integer
-	
-	Private _ArrangemangStatus As String
-	
-	Private _datum As System.Nullable(Of Date)
-	
-	Private _KonstformID As System.Nullable(Of Integer)
-	
-	Private _logtyp As String
-	
-	Private _statustyp As String
-	
-	Private _dnnRollid As System.Nullable(Of Integer)
-	
-	Public Sub New()
-		MyBase.New
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArrID", DbType:="Int NOT NULL")>  _
-	Public Property ArrID() As Integer
-		Get
-			Return Me._ArrID
-		End Get
-		Set
-			If ((Me._ArrID = value)  _
-						= false) Then
-				Me._ArrID = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArrangemangStatus", DbType:="NVarChar(50)")>  _
-	Public Property ArrangemangStatus() As String
-		Get
-			Return Me._ArrangemangStatus
-		End Get
-		Set
-			If (String.Equals(Me._ArrangemangStatus, value) = false) Then
-				Me._ArrangemangStatus = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_datum", DbType:="DateTime")>  _
-	Public Property datum() As System.Nullable(Of Date)
-		Get
-			Return Me._datum
-		End Get
-		Set
-			If (Me._datum.Equals(value) = false) Then
-				Me._datum = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KonstformID", DbType:="Int")>  _
-	Public Property KonstformID() As System.Nullable(Of Integer)
-		Get
-			Return Me._KonstformID
-		End Get
-		Set
-			If (Me._KonstformID.Equals(value) = false) Then
-				Me._KonstformID = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_logtyp", DbType:="NVarChar(50)")>  _
-	Public Property logtyp() As String
-		Get
-			Return Me._logtyp
-		End Get
-		Set
-			If (String.Equals(Me._logtyp, value) = false) Then
-				Me._logtyp = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_statustyp", DbType:="NVarChar(50)")>  _
-	Public Property statustyp() As String
-		Get
-			Return Me._statustyp
-		End Get
-		Set
-			If (String.Equals(Me._statustyp, value) = false) Then
-				Me._statustyp = value
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_dnnRollid", DbType:="Int")>  _
-	Public Property dnnRollid() As System.Nullable(Of Integer)
-		Get
-			Return Me._dnnRollid
-		End Get
-		Set
-			If (Me._dnnRollid.Equals(value) = false) Then
-				Me._dnnRollid = value
+				Me._Contentid = value
 			End If
 		End Set
 	End Property

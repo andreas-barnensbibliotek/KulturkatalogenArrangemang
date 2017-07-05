@@ -74,4 +74,100 @@ Public Class CrudArrangemangController
         Return ret
     End Function
 
+
+#Region "ADD funktioner"
+
+    Public Function addMediaToArrangemang(arrid As Integer, mediaobj As mediaInfo) As Boolean
+        Dim ret As Boolean = False
+        Dim adddata As New arrangemangInfo
+
+        Try
+            adddata.Arrid = arrid
+            adddata.MediaList.Add(mediaobj)
+            ret = _dalobj.addMediaToArrangemang(adddata)
+        Catch ex As Exception
+            ret = False
+        End Try
+
+        Return ret
+
+    End Function
+    Public Function addFaktaToArrangemang(arrid As Integer, faktaobj As faktainfo) As Boolean
+        Dim ret As Boolean = False
+        Dim adddata As New arrangemangInfo
+
+        Try
+            adddata.Arrid = arrid
+            adddata.Faktalist.Add(faktaobj)
+            ret = _dalobj.addFaktaToArrangemang(adddata)
+        Catch ex As Exception
+            ret = False
+        End Try
+
+        Return ret
+
+    End Function
+
+#End Region
+
+#Region "EDIT funktioner"
+
+    Public Function editArrangemang(arrobj As arrangemangInfo) As Boolean
+        If arrobj.Arrid > 0 Then
+            Return _dalobj.EditArrangemangByArrID(arrobj)
+        Else
+            Return False
+        End If
+
+    End Function
+
+    Public Function editcontent(arrobj As arrangemangInfo) As Boolean
+        If arrobj.ContentID > 0 Then
+            Return _dalobj.EditContentBycontentID(arrobj)
+        Else
+            Return False
+        End If
+
+    End Function
+
+    Public Function editFaktabyfaktaid(fakta As faktainfo) As Boolean
+        Dim retval As Boolean = False
+        If fakta.Faktaid > 0 Then
+            retval = _dalobj.EditFaktaByFaktaID(fakta)
+        End If
+
+        Return retval
+    End Function
+    Public Function editmediabymediaid(media As mediaInfo) As Boolean
+        Dim retval As Boolean = False
+        If media.MediaID > 0 Then
+            retval = _dalobj.EditMediaByMediaID(media)
+        End If
+
+        Return retval
+    End Function
+#End Region
+
+#Region "DELETE funktioner"
+
+    Public Function delMediabyMediaid(mediaobj As mediaInfo) As Boolean
+        Dim retval As Boolean = False
+        If mediaobj.MediaID > 0 Then
+            retval = _dalobj.DeleteMediaBymediaID(mediaobj.MediaID)
+        End If
+
+        Return retval
+
+    End Function
+    Public Function delFaktabyFaktaid(faktaobj As faktainfo) As Boolean
+        Dim retval As Boolean = False
+        If faktaobj.Faktaid > 0 Then
+            retval = _dalobj.DeleteFaktaByFaktaID(faktaobj.Faktaid)
+        End If
+
+        Return retval
+
+    End Function
+
+#End Region
 End Class

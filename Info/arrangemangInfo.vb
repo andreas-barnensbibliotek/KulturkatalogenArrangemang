@@ -3,6 +3,7 @@
 
     Private _arrid As Integer
     Private _datum As String
+    Private _contentID As Integer
     Private _rubrik As String
     Private _underrubrik As String
     Private _innehall As String
@@ -22,6 +23,7 @@
     Public Sub New()
         _arrid = 0
         _datum = ""
+        _contentID = 0
         _rubrik = ""
         _underrubrik = ""
         _innehall = ""
@@ -53,6 +55,24 @@
         End Get
         Set(ByVal value As String)
             _datum = value
+        End Set
+    End Property
+
+
+    Public Property ContentID() As Integer
+        Get
+            Return _contentID
+        End Get
+        Set(ByVal value As Integer)
+            _contentID = value
+        End Set
+    End Property
+    Public Property NewProperty() As Integer
+        Get
+            Return _contentID
+        End Get
+        Set(ByVal value As Integer)
+            _contentID = value
         End Set
     End Property
     Public Property Rubrik() As String

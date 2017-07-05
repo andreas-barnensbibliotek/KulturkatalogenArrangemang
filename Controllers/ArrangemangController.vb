@@ -69,6 +69,9 @@ Public Class ArrangemangController
         End If
         Return retobj
     End Function
+
+
+
     Private Function getArrbyStatus(cmdtyp As commandTypeInfo) As arrangemangcontainerInfo
         Dim retobj As New arrangemangcontainerInfo
         Dim arrList As New List(Of arrangemangInfo)
@@ -185,6 +188,8 @@ Public Class ArrangemangController
         End Try
 
     End Function
+
+
 
 
 #Region "Privata funktioner"
