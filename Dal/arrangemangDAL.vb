@@ -3,8 +3,8 @@
 Imports KulturkatalogenArrangemang
 
 Public Class arrangemangDAL
-    Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
-    'Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
+    'Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
+    Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
     Private _linqObj As New kk_aj_ArrangemangLinqDataContext(_connectionString)
 
     Public Function getArrangemangByStatus(cmdtyp As commandTypeInfo) As List(Of arrangemangInfo)
@@ -28,7 +28,7 @@ Public Class arrangemangDAL
             nobj.Publicerad = t.Publicerad
             nobj.Utovare = t.Organisation
             nobj.Username = t.Username
-
+            nobj.Utovarid = t.UtovarID
             tmpobj.Add(nobj)
         Next
 
@@ -64,7 +64,7 @@ Public Class arrangemangDAL
             nobj.Publicerad = t.Publicerad
             nobj.Utovare = t.Organisation
             nobj.Username = t.Username
-
+            nobj.Utovarid = t.UtovarID
             tmpobj.Add(nobj)
         Next
 
@@ -169,8 +169,8 @@ Public Class arrangemangDAL
 
     Public Function getArrangemangDetails(cmdtyp As commandTypeInfo) As arrangemangInfo
         Dim nobj As New arrangemangInfo
-        Try
-            Dim arr = (From p In _linqObj.kk_aj_proc_GetArrDetails(cmdtyp.ArrID)
+        'Try
+        Dim arr = (From p In _linqObj.kk_aj_proc_GetArrDetails(cmdtyp.ArrID)
                        Select p).SingleOrDefault
 
             nobj.Arrid = arr.ArrID
@@ -183,18 +183,20 @@ Public Class arrangemangDAL
             nobj.LookedAt = arr.LookedAt
             nobj.Konstform = arr.konstform
             nobj.Publicerad = arr.Publicerad
-            nobj.Utovare = arr.Organisation
-            nobj.Username = arr.AdminuserID
+        nobj.Utovare = arr.Organisation
+        nobj.Utovarid = arr.UtovarID
+        nobj.Username = arr.AdminuserID
             nobj.Innehall = arr.ContentText
-            nobj.Konstform = arr.konstform
-            ' nobj.MainImage = fillmedia(arr.ImageUrl, arr.ImageAlt, arr.ImageFilename, arr.ImageFotograf, arr.ImageSize)
-            ' nobj.MediaClip = fillmedia(arr.MovieClipUrl, arr.MovieClipAlt, arr.MovieClipFilename, arr.MovieClipCredits, arr.MovieClipSize)
-            nobj.UtovareData = getutovardata(arr)
-            nobj.MediaList = getMedialist(arr.ArrID)
-            nobj.Faktalist = getfaktalist(arr.ArrID)
-        Catch ex As Exception
+        nobj.Konstform = arr.konstform
+        nobj.Utovarid = arr.UtovarID
+        ' nobj.MainImage = fillmedia(arr.ImageUrl, arr.ImageAlt, arr.ImageFilename, arr.ImageFotograf, arr.ImageSize)
+        ' nobj.MediaClip = fillmedia(arr.MovieClipUrl, arr.MovieClipAlt, arr.MovieClipFilename, arr.MovieClipCredits, arr.MovieClipSize)
+        nobj.UtovareData = getutovardata(arr)
+        nobj.MediaList = getMedialist(arr.ArrID)
+        nobj.Faktalist = getfaktalist(arr.ArrID)
+        'Catch ex As Exception
 
-        End Try
+        'End Try
         Return nobj
 
     End Function

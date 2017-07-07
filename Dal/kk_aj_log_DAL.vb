@@ -14,85 +14,85 @@ Public Class kk_aj_log_DAL
 
 #Region "Skrivboken CRUD funktioner"
 
-    Public Function getannonslog(proctyp As Integer, logtypid As Integer) As List(Of logInfo)
+    'Public Function getannonslog(proctyp As Integer, logtypid As Integer) As List(Of logInfo)
 
-        'Dim tmpobj As New List(Of logInfo)
-        'Dim logs = From p In _linqObj.kk_aj_proc_getlog(proctyp, logtypid)
-        '           Select p
+    '    'Dim tmpobj As New List(Of logInfo)
+    '    'Dim logs = From p In _linqObj.kk_aj_proc_getlog(proctyp, logtypid)
+    '    '           Select p
 
-        'For Each t In logs
-        '    Dim nobj As New logInfo
-        '    nobj.logid = t.logid
-        '    nobj.logtypid = t.logtypid
-        '    nobj.logtyp = t.logtyp
-        '    Dim arrobj As arrangemangInfo = getarrdata(t.arrid)
-        '    nobj.Arrid = arrobj.Arrid
-        '    nobj.Arrrubrik = arrobj.Rubrik
-        '    nobj.Arrutovare = "to set"
-        '    nobj.Statustypid = t.statusid
-        '    nobj.ChangebyUserid = t.changebyuserid
-        '    nobj.ChangebyUsernamn = getusername(t.changebyuserid)
-        '    nobj.Statustyp = t.statustyp
-        '    nobj.Datum = t.datum
-        '    nobj.Beskrivning = t.beskrivning
+    '    'For Each t In logs
+    '    '    Dim nobj As New logInfo
+    '    '    nobj.logid = t.logid
+    '    '    nobj.logtypid = t.logtypid
+    '    '    nobj.logtyp = t.logtyp
+    '    '    Dim arrobj As arrangemangInfo = getarrdata(t.arrid)
+    '    '    nobj.Arrid = arrobj.Arrid
+    '    '    nobj.Arrrubrik = arrobj.Rubrik
+    '    '    nobj.Arrutovare = "to set"
+    '    '    nobj.Statustypid = t.statusid
+    '    '    nobj.ChangebyUserid = t.changebyuserid
+    '    '    nobj.ChangebyUsernamn = getusername(t.changebyuserid)
+    '    '    nobj.Statustyp = t.statustyp
+    '    '    nobj.Datum = t.datum
+    '    '    nobj.Beskrivning = t.beskrivning
 
-        '    tmpobj.Add(nobj)
-        'Next
+    '    '    tmpobj.Add(nobj)
+    '    'Next
 
-        'Return tmpobj
-    End Function
+    '    'Return tmpobj
+    'End Function
 
-    Private Function getarrdata(arrid As Integer) As arrangemangInfo
-        Dim tmpobj As New arrangemangInfo
+    'Private Function getarrdata(arrid As Integer) As arrangemangInfo
+    '    Dim tmpobj As New arrangemangInfo
 
-        Dim logs = From t In _linqObj.kk_aj_tbl_Arrangemangs
-                   Where t.arrid = arrid
-                   Select t
+    '    Dim logs = From t In _linqObj.kk_aj_tbl_Arrangemangs
+    '               Where t.arrid = arrid
+    '               Select t
 
-        For Each t In logs
-            tmpobj.Arrid = t.ArrID
-        Next
-        Return tmpobj
+    '    For Each t In logs
+    '        tmpobj.Arrid = t.ArrID
+    '    Next
+    '    Return tmpobj
 
-    End Function
+    'End Function
 
 
-    Private Function getuserRols(userid As Integer) As String
-        'Dim tmpobj As String = ""
+    'Private Function getuserRols(userid As Integer) As String
+    '    'Dim tmpobj As String = ""
 
-        'Dim logs = From t In _linqObj.Users
-        '           Where t.UserID = userid
-        '           Select t
+    '    'Dim logs = From t In _linqObj.Users
+    '    '           Where t.UserID = userid
+    '    '           Select t
 
-        'For Each t In logs
-        '    tmpobj = t.Username
-        'Next
-        'Return tmpobj
+    '    'For Each t In logs
+    '    '    tmpobj = t.Username
+    '    'Next
+    '    'Return tmpobj
 
-    End Function
+    'End Function
 
 #Region "CRUD FUNCTIONS"
 
-    Public Function addlogEvent(ByVal logobj As logInfo) As Boolean
-        'Dim Inlagd As Boolean = False
-        'Try
-        '    Dim newobj As New kk_aj_tbl_Log
-        '    newobj.logtypid = logobj.logtypid
-        '    newobj.arrid = logobj.Arrid
-        '    newobj.statusid = logobj.Statustypid
-        '    newobj.beskrivning = logobj.Beskrivning
-        '    newobj.datum = logobj.Datum
-        '    newobj.changebyuserid = logobj.ChangebyUserid
+    'Public Function addlogEvent(ByVal logobj As logInfo) As Boolean
+    '    'Dim Inlagd As Boolean = False
+    '    'Try
+    '    '    Dim newobj As New kk_aj_tbl_Log
+    '    '    newobj.logtypid = logobj.logtypid
+    '    '    newobj.arrid = logobj.Arrid
+    '    '    newobj.statusid = logobj.Statustypid
+    '    '    newobj.beskrivning = logobj.Beskrivning
+    '    '    newobj.datum = logobj.Datum
+    '    '    newobj.changebyuserid = logobj.ChangebyUserid
 
-        '    _linqObj.kk_aj_tbl_Logs.InsertOnSubmit(newobj)
-        '    _linqObj.SubmitChanges()
-        '    Inlagd = True
-        'Catch ex As Exception
-        '    Inlagd = False
-        'End Try
+    '    '    _linqObj.kk_aj_tbl_Logs.InsertOnSubmit(newobj)
+    '    '    _linqObj.SubmitChanges()
+    '    '    Inlagd = True
+    '    'Catch ex As Exception
+    '    '    Inlagd = False
+    '    'End Try
 
-        'Return Inlagd
-    End Function
+    '    'Return Inlagd
+    'End Function
 
 
 #End Region

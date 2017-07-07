@@ -10,7 +10,7 @@ Imports KulturkatalogenArrangemang
         Dim cmd As New commandTypeInfo
 
         cmd.CmdTyp = "bystatus"
-        cmd.CmdtypUserid = -2
+        cmd.CmdtypUserid = 2
         cmd.cmdValue = "testarna"
         cmd.ArrStatusTyp = 4
         cmd.IsAdminRoll = 0
@@ -80,7 +80,7 @@ Imports KulturkatalogenArrangemang
         Dim cmd As New commandTypeInfo
 
         cmd.CmdTyp = "details"
-        cmd.ArrID = 1
+        cmd.ArrID = 22
         cmd.CmdtypUserid = 2
 
         Dim ret As arrangemangcontainerInfo = testar.getArrangemang(cmd)
@@ -377,7 +377,7 @@ Imports KulturkatalogenArrangemang
         img2.MediaVald = "nej"
 
 
-        Dim ret As arrangemangcontainerInfo = testar.editmedia(arrid, img2)
+        Dim ret As arrangemangcontainerInfo = testar.editMediaByMediaid(arrid, img2)
         Dim x As arrangemangcontainerInfo = ret
         If ret.Status = "updated" Then
             x.Status = "updated"
@@ -400,7 +400,7 @@ Imports KulturkatalogenArrangemang
         obj1.Faktaid = Faktaid
         obj1.FaktaValue = "minst 100m brett!"
 
-        Dim ret As arrangemangcontainerInfo = testar.editfakta(arrid, obj1)
+        Dim ret As arrangemangcontainerInfo = testar.editFaktaByFaktaid(arrid, obj1)
         Dim x As arrangemangcontainerInfo = ret
         If ret.Status = "updated" Then
             x.Status = "updated"

@@ -125,34 +125,6 @@
       <Column Name="mediaVald" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
     </Type>
   </Table>
-  <Function Name="dbo.kk_aj_proc_GetArrby_ArrStatus" Method="kk_aj_proc_GetArrby_ArrStatus">
-    <Parameter Name="arrStatusTyp" Type="System.Int32" DbType="Int" />
-    <Parameter Name="rolltypAdmin" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll1" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll2" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll3" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll4" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll5" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll6" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll7" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll8" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll9" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll10" Type="System.Int32" DbType="Int" />
-    <Parameter Name="visningsperiod" Type="System.String" DbType="NVarChar(4)" />
-    <ElementType Name="kk_aj_proc_GetArrby_ArrStatusResult">
-      <Column Name="ArrID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Rubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="UnderRubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="Publicerad" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="LookedAt" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="ArrangemangStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="arrangemangtyp" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="konstform" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="Organisation" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="Username" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.kk_aj_proc_getStatusCount" Method="kk_aj_proc_getStatusCount">
     <Parameter Name="arrStatusTyp" Type="System.Int32" DbType="Int" />
     <Parameter Name="rolltypAdmin" Type="System.Int32" DbType="Int" />
@@ -169,36 +141,6 @@
     <Parameter Name="visningsperiod" Type="System.String" DbType="NVarChar(4)" />
     <ElementType Name="kk_aj_proc_getStatusCountResult">
       <Column Name="antal" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.kk_aj_proc_GetArrby_Search" Method="kk_aj_proc_GetArrby_Search">
-    <Parameter Name="searchval" Type="System.String" DbType="NVarChar(500)" />
-    <Parameter Name="arrStatusTyp" Type="System.Int32" DbType="Int" />
-    <Parameter Name="rolltypAdmin" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll1" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll2" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll3" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll4" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll5" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll6" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll7" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll8" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll9" Type="System.Int32" DbType="Int" />
-    <Parameter Name="roll10" Type="System.Int32" DbType="Int" />
-    <Parameter Name="visningsperiod" Type="System.String" DbType="NVarChar(4)" />
-    <ElementType Name="kk_aj_proc_GetArrby_SearchResult">
-      <Column Name="ArrID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Rubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="Underrubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="Publicerad" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="LookedAt" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="ArrangemangStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="arrangemangtyp" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="ArrangemangStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="konstform" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="Organisation" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="Username" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.kk_aj_proc_MapRollToKonstform" Method="kk_aj_proc_MapRollToKonstform">
@@ -229,6 +171,35 @@
       <Column Name="ImageAlt" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.kk_aj_proc_GetArrby_ArrStatus" Method="kk_aj_proc_GetArrby_ArrStatus">
+    <Parameter Name="arrStatusTyp" Type="System.Int32" DbType="Int" />
+    <Parameter Name="rolltypAdmin" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll1" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll2" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll3" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll4" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll5" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll6" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll7" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll8" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll9" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll10" Type="System.Int32" DbType="Int" />
+    <Parameter Name="visningsperiod" Type="System.String" DbType="NVarChar(4)" />
+    <ElementType Name="kk_aj_proc_GetArrby_ArrStatusResult">
+      <Column Name="ArrID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Rubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="UnderRubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Publicerad" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="LookedAt" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ArrangemangStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UtovarID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="arrangemangtyp" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="konstform" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Organisation" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.kk_aj_proc_GetArrby_LatestEvent" Method="kk_aj_proc_GetArrby_LatestEvent">
     <Parameter Name="rolltypAdmin" Type="System.Int32" DbType="Int" />
     <Parameter Name="roll1" Type="System.Int32" DbType="Int" />
@@ -252,8 +223,82 @@
       <Column Name="datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="KonstformID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="logtyp" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UtovarID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="statustyp" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="dnnRollid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.kk_aj_proc_GetArrby_Search" Method="kk_aj_proc_GetArrby_Search">
+    <Parameter Name="searchval" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="arrStatusTyp" Type="System.Int32" DbType="Int" />
+    <Parameter Name="rolltypAdmin" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll1" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll2" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll3" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll4" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll5" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll6" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll7" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll8" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll9" Type="System.Int32" DbType="Int" />
+    <Parameter Name="roll10" Type="System.Int32" DbType="Int" />
+    <Parameter Name="visningsperiod" Type="System.String" DbType="NVarChar(4)" />
+    <ElementType Name="kk_aj_proc_GetArrby_SearchResult">
+      <Column Name="ArrID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Rubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Underrubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Publicerad" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="UtovarID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LookedAt" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ArrangemangStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="arrangemangtyp" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ArrangemangStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="konstform" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Organisation" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.kk_aj_proc_GetArrBy_Utovare" Method="kk_aj_proc_GetArrBy_Utovare">
+    <Parameter Name="utovarid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="kk_aj_proc_GetArrBy_UtovareResult">
+      <Column Name="ArrID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Publicerad" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="LookedAt" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="VisningsPeriod" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="AdminuserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UtovarID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Organisation" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Fornamn" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Efternamn" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Telefonnummer" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Adress" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Postnr" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Ort" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Epost" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Kommun" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Hemsida" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="konstform" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="arrangemangtyp" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ArrangemangstypID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="KonstformID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Rubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Underrubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ContentText" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="ImageUrl" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="ImageFilename" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ImageSize" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ImageAlt" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ImageFotograf" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MovieClipUrl" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="MovieClipFilename" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MovieClipSize" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MovieClipAlt" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="MovieClipCredits" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ArrangemangStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ArrangemangStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Version" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.kk_aj_proc_GetArrDetails" Method="kk_aj_proc_GetArrDetails">

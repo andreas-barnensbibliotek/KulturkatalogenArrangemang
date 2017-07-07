@@ -14,6 +14,7 @@
     Private _konstform As String
     Private _username As String
     Private _arrutovare As String
+    Private _utovarid As Integer
     Private _utovarinfo As utovareInfo
     Private _mainimage As mediaInfo
     Private _movieclip As mediaInfo
@@ -33,6 +34,7 @@
         _arrangemangtyp = ""
         _konstform = ""
         _username = ""
+        _utovarid = 0
         _arrutovare = ""
         _utovarinfo = New utovareInfo
         _mainimage = New mediaInfo
@@ -112,6 +114,14 @@
         End Set
     End Property
 
+    Public Property Utovarid() As Integer
+        Get
+            Return _utovarid
+        End Get
+        Set(ByVal value As Integer)
+            _utovarid = value
+        End Set
+    End Property
     Public Property UtovareData() As utovareInfo
         Get
             Return _utovarinfo
