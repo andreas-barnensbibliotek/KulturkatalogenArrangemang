@@ -4,6 +4,7 @@ Public Class CrudArrangemangController
 
 
     Public Function addArrangemang(arrData As arrangemangInfo) As arrangemangcontainerInfo
+
         Dim tmparrlist As New List(Of arrangemangInfo)
         Dim nyttarr As New arrangemangInfo
         Dim ret As New arrangemangcontainerInfo
@@ -18,6 +19,21 @@ Public Class CrudArrangemangController
                     _dalobj.updateArrUtovare(arrData.Arrid, tmputovarid)
                 End If
 
+                If arrData.Arrgruppid > 0 Then
+                    '?? kolla så att arrgruppid finns ??
+                    'add arrid and arrgrupid to tblarridtoarrgrupp
+                    _dalobj.addArrangemangToArrGrupp(arrData.Arrid, arrData.Arrgruppid)
+
+                Else
+                    'create new arrgrupp get arrgruppid back and
+                    'add arrid and arrgrupid to tblarridtoarrgrupp
+                    Dim tmparrgruppid As Integer = _dalobj.addArrGrupp(arrData.Arrid, arrData.Rubrik)
+                    If tmparrgruppid > 0 Then
+                        _dalobj.addArrangemangToArrGrupp(arrData.Arrid, tmparrgruppid)
+
+                    End If
+                End If
+
                 contentid = _dalobj.addArrangemangContent(arrData)
                 If contentid > 0 Then
                     If _dalobj.addContentToArr(arrData.Arrid, contentid) Then
@@ -28,6 +44,7 @@ Public Class CrudArrangemangController
                                 nyttarr.Arrid = arrData.Arrid
                                 tmparrlist.Add(nyttarr)
                                 ret.Arrangemanglist = tmparrlist
+                                'sendmail(nyttarr)
                                 ret.Status = "OK! Arrangemanget Inlagt!"
                             Else
                                 ret.Status = "Error fel vid inläggning av Media!"
@@ -73,7 +90,13 @@ Public Class CrudArrangemangController
 
         Return ret
     End Function
+    'Private Function sendmail(arrData As arrangemangInfo) As Boolean
 
+    '    Dim obj As New mailnewarrangemangHandler
+    '    Dim status As String = obj.newarrangemangMail(arrData)
+
+    '    Return True
+    'End Function
 
 #Region "ADD funktioner"
 

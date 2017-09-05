@@ -7,6 +7,11 @@
     Private _mediaFoto As String
     Private _mediatyp As String
     Private _mediaVald As String
+    Private _mediaTitle As String
+    Private _mediaBeskrivning As String
+    Private _mediaLink As String
+    Private _sortering As String
+
 
     Public Sub New()
         _mediaid = 0
@@ -17,6 +22,11 @@
         _mediaFoto = ""
         _mediatyp = ""
         _mediaVald = "nej"
+        _mediaTitle = ""
+        _mediaBeskrivning = ""
+        _mediaLink = ""
+        _sortering = "0"
+
     End Sub
     Public Property MediaID() As Integer
         Get
@@ -88,6 +98,43 @@
         End Get
         Set(ByVal value As String)
             _mediaVald = value
+        End Set
+    End Property
+
+    Public Property mediaTitle() As String
+        Get
+            Return _mediaTitle
+        End Get
+        Set(ByVal value As String)
+            _mediaTitle = value
+        End Set
+    End Property
+
+    Public Property mediaBeskrivning() As String
+        Get
+            Return _mediaBeskrivning
+        End Get
+        Set(ByVal value As String)
+            _mediaBeskrivning = value
+        End Set
+    End Property
+
+    Public Property mediaLink() As String
+        Get
+            Return _mediaLink
+        End Get
+        Set(ByVal value As String)
+            _mediaLink = value
+        End Set
+    End Property
+
+
+    Public Property sortering() As String
+        Get
+            Return _sortering
+        End Get
+        Set(ByVal value As String)
+            _sortering = value
         End Set
     End Property
 End Class

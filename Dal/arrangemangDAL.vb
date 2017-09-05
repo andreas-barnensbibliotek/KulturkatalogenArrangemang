@@ -3,8 +3,8 @@
 Imports KulturkatalogenArrangemang
 
 Public Class arrangemangDAL
-    'Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
-    Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
+    Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
+    'Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
     Private _linqObj As New kk_aj_ArrangemangLinqDataContext(_connectionString)
 
     Public Function getArrangemangByStatus(cmdtyp As commandTypeInfo) As List(Of arrangemangInfo)
@@ -65,6 +65,7 @@ Public Class arrangemangDAL
             nobj.Utovare = t.Organisation
             nobj.Username = t.Username
             nobj.Utovarid = t.UtovarID
+
             tmpobj.Add(nobj)
         Next
 
@@ -78,7 +79,49 @@ Public Class arrangemangDAL
         Return tmpobj
 
     End Function
+    Public Function getArrangemangByUtovarid(cmdtyp As commandTypeInfo) As List(Of arrangemangInfo)
 
+
+        Dim tmpobj As New List(Of arrangemangInfo)
+
+        Dim arr = From p In _linqObj.kk_aj_proc_GetArrBy_Utovare(cmdtyp.cmdValue)
+                  Select p
+        For Each t In arr
+            Dim nobj As New arrangemangInfo
+            nobj.Arrid = t.ArrID
+            nobj.ArrangemangStatus = t.ArrangemangStatus
+            nobj.Arrangemangtyp = t.arrangemangtyp
+            nobj.Datum = t.Datum.ToString
+            nobj.Rubrik = t.Rubrik
+            nobj.UnderRubrik = t.UnderRubrik
+            nobj.LookedAt = t.LookedAt
+            nobj.Konstform = t.konstform
+            nobj.Publicerad = t.Publicerad
+            nobj.Utovare = t.Organisation
+            nobj.Username = t.Username
+            nobj.Utovarid = t.UtovarID
+            nobj.Arrgruppid = t.arrgruppid
+
+            'Dim tmpbild = New mediaInfo
+            'tmpbild.MediaUrl = t.ImageUrl
+            'tmpbild.MediaAlt = t.ImageAlt
+            'tmpbild.MediaFilename = t.ImageFilename
+            'tmpbild.MediaFoto = t.ImageFotograf
+            'tmpbild.MediaSize = t.ImageSize
+            'nobj.MainImage = tmpbild
+
+            tmpobj.Add(nobj)
+        Next
+
+        If tmpobj.Count <= 0 Then
+            Dim noresult As New arrangemangInfo
+            noresult.Rubrik = "Finns inget att visa"
+            tmpobj.Add(noresult)
+        End If
+
+        Return tmpobj
+
+    End Function
 
     Public Function getantalposter(cmdtyp As commandTypeInfo) As Integer
         Dim ret As Integer = 0
@@ -173,23 +216,23 @@ Public Class arrangemangDAL
         Dim arr = (From p In _linqObj.kk_aj_proc_GetArrDetails(cmdtyp.ArrID)
                        Select p).SingleOrDefault
 
-            nobj.Arrid = arr.ArrID
-            nobj.ArrangemangStatus = arr.ArrangemangStatus
-            nobj.Arrangemangtyp = arr.arrangemangtyp
-            nobj.Datum = arr.Datum.ToString
-            nobj.ContentID = arr.Contentid
-            nobj.Rubrik = arr.Rubrik
-            nobj.UnderRubrik = arr.Underrubrik
-            nobj.LookedAt = arr.LookedAt
-            nobj.Konstform = arr.konstform
-            nobj.Publicerad = arr.Publicerad
+        nobj.Arrid = arr.ArrID
+        nobj.ArrangemangStatus = arr.ArrangemangStatus
+        nobj.Arrangemangtyp = arr.arrangemangtyp
+        nobj.Datum = arr.Datum.ToString
+        nobj.ContentID = arr.Contentid
+        nobj.Rubrik = arr.Rubrik
+        nobj.UnderRubrik = arr.Underrubrik
+        nobj.LookedAt = arr.LookedAt
+        nobj.Konstform = arr.konstform
+        nobj.Publicerad = arr.Publicerad
         nobj.Utovare = arr.Organisation
         nobj.Utovarid = arr.UtovarID
         nobj.Username = arr.AdminuserID
-            nobj.Innehall = arr.ContentText
+        nobj.Innehall = arr.ContentText
         nobj.Konstform = arr.konstform
         nobj.Utovarid = arr.UtovarID
-        ' nobj.MainImage = fillmedia(arr.ImageUrl, arr.ImageAlt, arr.ImageFilename, arr.ImageFotograf, arr.ImageSize)
+        nobj.MainImage = fillmedia(arr.ImageUrl, arr.ImageAlt, arr.ImageFilename, arr.ImageFotograf, arr.ImageSize)
         ' nobj.MediaClip = fillmedia(arr.MovieClipUrl, arr.MovieClipAlt, arr.MovieClipFilename, arr.MovieClipCredits, arr.MovieClipSize)
         nobj.UtovareData = getutovardata(arr)
         nobj.MediaList = getMedialist(arr.ArrID)
@@ -254,6 +297,10 @@ Public Class arrangemangDAL
             tmp.MediaTyp = itm.mediaTyp
             tmp.MediaUrl = itm.mediaUrl
             tmp.MediaVald = itm.mediaVald
+            tmp.mediaTitle = itm.mediaTitle
+            tmp.mediaBeskrivning = itm.mediaBeskrivning
+            tmp.mediaLink = itm.mediaLink
+            tmp.sortering = itm.sortering.ToString
             retobj.Add(tmp)
         Next
 
@@ -262,13 +309,13 @@ Public Class arrangemangDAL
 
     Private Function fillmedia(mUrl As String, mAlt As String, mFilename As String, mFotograf As String, mSize As String) As mediaInfo
         Dim retmedia As New mediaInfo
-        'With retmedia
-        '    .MediaUrl = mUrl
-        '    .MediaAlt = mAlt
-        '    .MediaFilename = mFilename
-        '    .MediaFoto = mFotograf
-        '    .MediaSize = mSize
-        'End With
+        With retmedia
+            .MediaUrl = mUrl
+            .MediaAlt = mAlt
+            .MediaFilename = mFilename
+            .MediaFoto = mFotograf
+            .MediaSize = mSize
+        End With
         Return retmedia
     End Function
 
@@ -437,11 +484,11 @@ Public Class arrangemangDAL
         tmpcd.ContentText = contentdata.Innehall
         tmpcd.Rubrik = contentdata.Rubrik
         tmpcd.Underrubrik = contentdata.UnderRubrik
-        'tmpcd.ImageUrl = contentdata.MainImage.MediaUrl
-        'tmpcd.ImageFilename = contentdata.MainImage.MediaFilename
-        'tmpcd.ImageFotograf = contentdata.MainImage.MediaFoto
-        'tmpcd.ImageSize = contentdata.MainImage.MediaSize
-        'tmpcd.ImageAlt = contentdata.MainImage.MediaAlt
+        tmpcd.ImageUrl = contentdata.MainImage.MediaUrl
+        tmpcd.ImageFilename = contentdata.MainImage.MediaFilename
+        tmpcd.ImageFotograf = contentdata.MainImage.MediaFoto
+        tmpcd.ImageSize = contentdata.MainImage.MediaSize
+        tmpcd.ImageAlt = contentdata.MainImage.MediaAlt
         'tmpcd.MovieClipAlt = contentdata.MediaClip.MediaAlt
         'tmpcd.MovieClipCredits = contentdata.MediaClip.MediaFoto
         'tmpcd.MovieClipFilename = contentdata.MediaClip.MediaFilename
@@ -494,6 +541,9 @@ Public Class arrangemangDAL
                 tmp.mediaTyp = itm.MediaTyp
                 tmp.mediaUrl = itm.MediaUrl
                 tmp.mediaVald = itm.MediaVald
+                tmp.mediaTitle = itm.mediaTitle
+                tmp.mediaBeskrivning = itm.mediaBeskrivning
+                tmp.mediaLink = itm.mediaLink
                 inslst.Add(tmp)
             Next
 
@@ -548,6 +598,39 @@ Public Class arrangemangDAL
 
     End Function
 
+    Public Function addArrGrupp(arrgruppid As Integer, grupptitle As String) As Integer
+
+        Dim nygrupp As New kk_aj_tbl_ArrGrupp
+
+        nygrupp.arrgruppID = arrgruppid
+        nygrupp.arrgrupptitel = grupptitle
+        nygrupp.datum = Date.Now
+
+        _linqObj.kk_aj_tbl_ArrGrupps.InsertOnSubmit(nygrupp)
+        _linqObj.SubmitChanges()
+        Dim nyttarrgruppid As Integer = nygrupp.arrgruppID
+
+        Return nyttarrgruppid
+
+    End Function
+    Public Function addArrangemangToArrGrupp(arrid As Integer, arrgruppid As Integer) As Boolean
+        Dim ret As Boolean = False
+
+        Dim addgrupp As New kk_aj_tbl_ArridToArrGrupp
+        Try
+            addgrupp.arrgruppid = arrgruppid
+            addgrupp.arrid = arrid
+            addgrupp.datum = Date.Now
+
+            _linqObj.kk_aj_tbl_ArridToArrGrupps.InsertOnSubmit(addgrupp)
+            _linqObj.SubmitChanges()
+            ret = True
+        Catch ex As Exception
+            ret = False
+        End Try
+        Return ret
+
+    End Function
     Public Function updateArrUtovare(arrid As Integer, utovarid As Integer) As Boolean
         Dim ret As Boolean = False
 
@@ -760,6 +843,10 @@ Public Class arrangemangDAL
                 i.mediaTyp = media.MediaTyp
                 i.mediaUrl = media.MediaUrl
                 i.mediaVald = media.MediaVald
+                i.mediaTitle = media.mediaTitle
+                i.mediaBeskrivning = media.mediaBeskrivning
+                i.mediaLink = media.mediaLink
+                i.sortering = CInt(media.sortering)
             Next
             _linqObj.SubmitChanges()
 
@@ -798,6 +885,10 @@ Public Class arrangemangDAL
                 i.Rubrik = arrobj.Rubrik
                 i.Underrubrik = arrobj.UnderRubrik
                 i.ContentText = arrobj.Innehall
+                i.ImageAlt = arrobj.MainImage.MediaAlt
+                i.ImageFotograf = arrobj.MainImage.MediaFoto
+                i.ImageSize = arrobj.MainImage.MediaSize
+                i.ImageUrl = arrobj.MainImage.MediaUrl
             Next
             _linqObj.SubmitChanges()
 

@@ -14,6 +14,7 @@
     Private _konstform As String
     Private _username As String
     Private _arrutovare As String
+    Private _arrgrupid As Integer
     Private _utovarid As Integer
     Private _utovarinfo As utovareInfo
     Private _mainimage As mediaInfo
@@ -36,12 +37,14 @@
         _username = ""
         _utovarid = 0
         _arrutovare = ""
+        _arrgrupid = 0
         _utovarinfo = New utovareInfo
         _mainimage = New mediaInfo
         _movieclip = New mediaInfo
         _faktalist = New List(Of faktainfo)
         _medialist = New List(Of mediaInfo)
     End Sub
+
     Public Property Arrid() As Integer
         Get
             Return _arrid
@@ -113,7 +116,14 @@
             _arrutovare = value
         End Set
     End Property
-
+    Public Property Arrgruppid() As Integer
+        Get
+            Return _arrgrupid
+        End Get
+        Set(ByVal value As Integer)
+            _arrgrupid = value
+        End Set
+    End Property
     Public Property Utovarid() As Integer
         Get
             Return _utovarid
