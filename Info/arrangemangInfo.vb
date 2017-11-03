@@ -10,6 +10,8 @@
     Private _publicerad As String
     Private _lookedAt As String
     Private _arrangemangstatus As String
+    Private _arrangemangtypid As String
+    Private _konstformid As String
     Private _arrangemangtyp As String
     Private _konstform As String
     Private _username As String
@@ -21,6 +23,9 @@
     Private _movieclip As mediaInfo
     Private _medialist As List(Of mediaInfo)
     Private _faktalist As List(Of faktainfo)
+    Private _startyear As String
+    Private _stoppyear As String
+    Private _debug As String
 
     Public Sub New()
         _arrid = 0
@@ -32,6 +37,8 @@
         _publicerad = "nej"
         _lookedAt = "nej"
         _arrangemangstatus = ""
+        _arrangemangtypid = 0
+        _konstformid = 0
         _arrangemangtyp = ""
         _konstform = ""
         _username = ""
@@ -43,6 +50,10 @@
         _movieclip = New mediaInfo
         _faktalist = New List(Of faktainfo)
         _medialist = New List(Of mediaInfo)
+        _startyear = ""
+        _stoppyear = ""
+        _debug = ""
+
     End Sub
 
     Public Property Arrid() As Integer
@@ -72,14 +83,7 @@
             _contentID = value
         End Set
     End Property
-    Public Property NewProperty() As Integer
-        Get
-            Return _contentID
-        End Get
-        Set(ByVal value As Integer)
-            _contentID = value
-        End Set
-    End Property
+
     Public Property Rubrik() As String
         Get
             Return _rubrik
@@ -204,6 +208,15 @@
         End Set
     End Property
 
+    Public Property Arrangemangtypid() As String
+        Get
+            Return _arrangemangtypid
+        End Get
+        Set(ByVal value As String)
+            _arrangemangtypid = value
+        End Set
+    End Property
+
     Public Property Arrangemangtyp() As String
         Get
             Return _arrangemangtyp
@@ -213,6 +226,14 @@
         End Set
     End Property
 
+    Public Property Konstformid() As String
+        Get
+            Return _konstformid
+        End Get
+        Set(ByVal value As String)
+            _konstformid = value
+        End Set
+    End Property
     Public Property Konstform() As String
         Get
             Return _konstform
@@ -230,4 +251,34 @@
             _username = value
         End Set
     End Property
+
+    Public Property Startyear() As String
+        Get
+            Return _startyear
+        End Get
+        Set(ByVal value As String)
+            _startyear = value
+        End Set
+    End Property
+
+    Public Property Stoppyear() As String
+        Get
+            Return _stoppyear
+        End Get
+        Set(ByVal value As String)
+            _stoppyear = value
+        End Set
+    End Property
+
+
+    Public Property debug() As String
+        Get
+            Return _debug
+        End Get
+        Set(ByVal value As String)
+            _debug = value
+        End Set
+    End Property
+
 End Class
+

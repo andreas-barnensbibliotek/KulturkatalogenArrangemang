@@ -3,8 +3,8 @@
 Imports KulturkatalogenArrangemang
 
 Public Class arrangemangDAL
-    Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
-    'Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
+    'Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
+    Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
     Private _linqObj As New kk_aj_ArrangemangLinqDataContext(_connectionString)
 
     Public Function getArrangemangByStatus(cmdtyp As commandTypeInfo) As List(Of arrangemangInfo)
@@ -19,11 +19,13 @@ Public Class arrangemangDAL
             Dim nobj As New arrangemangInfo
             nobj.Arrid = t.ArrID
             nobj.ArrangemangStatus = t.ArrangemangStatus
+            nobj.Arrangemangtypid = t.ArrangemangstypID
             nobj.Arrangemangtyp = t.arrangemangtyp
-            nobj.Datum = t.Datum.ToString
+            nobj.Datum = Format(t.Datum, "yyyy-MM-dd").ToString()
             nobj.Rubrik = t.Rubrik
             nobj.UnderRubrik = t.UnderRubrik
             nobj.LookedAt = t.LookedAt
+            nobj.Konstformid = t.KonstformID
             nobj.Konstform = t.konstform
             nobj.Publicerad = t.Publicerad
             nobj.Utovare = t.Organisation
@@ -55,12 +57,14 @@ Public Class arrangemangDAL
             Dim nobj As New arrangemangInfo
             nobj.Arrid = t.ArrID
             nobj.ArrangemangStatus = t.ArrangemangStatus
+            nobj.Arrangemangtypid = t.ArrangemangstypID
             nobj.Arrangemangtyp = t.arrangemangtyp
-            nobj.Datum = t.Datum.ToString
+            nobj.Datum = Format(t.Datum, "yyyy-MM-dd").ToString()
             nobj.Rubrik = t.Rubrik
             nobj.UnderRubrik = t.Underrubrik
             nobj.LookedAt = t.LookedAt
             nobj.Konstform = t.konstform
+            nobj.Konstformid = t.KonstformID
             nobj.Publicerad = t.Publicerad
             nobj.Utovare = t.Organisation
             nobj.Username = t.Username
@@ -90,11 +94,13 @@ Public Class arrangemangDAL
             Dim nobj As New arrangemangInfo
             nobj.Arrid = t.ArrID
             nobj.ArrangemangStatus = t.ArrangemangStatus
+            nobj.Arrangemangtypid = t.ArrangemangstypID
             nobj.Arrangemangtyp = t.arrangemangtyp
-            nobj.Datum = t.Datum.ToString
+            nobj.Datum = Format(t.Datum, "yyyy-MM-dd").ToString()
             nobj.Rubrik = t.Rubrik
-            nobj.UnderRubrik = t.UnderRubrik
+            nobj.UnderRubrik = t.Underrubrik
             nobj.LookedAt = t.LookedAt
+            nobj.Konstformid = t.KonstformID
             nobj.Konstform = t.konstform
             nobj.Publicerad = t.Publicerad
             nobj.Utovare = t.Organisation
@@ -218,8 +224,9 @@ Public Class arrangemangDAL
 
         nobj.Arrid = arr.ArrID
         nobj.ArrangemangStatus = arr.ArrangemangStatus
+        nobj.Arrangemangtypid = arr.ArrangemangstypID
         nobj.Arrangemangtyp = arr.arrangemangtyp
-        nobj.Datum = arr.Datum.ToString
+        nobj.Datum = Format(arr.Datum, "yyyy-MM-dd").ToString
         nobj.ContentID = arr.Contentid
         nobj.Rubrik = arr.Rubrik
         nobj.UnderRubrik = arr.Underrubrik
@@ -230,6 +237,7 @@ Public Class arrangemangDAL
         nobj.Utovarid = arr.UtovarID
         nobj.Username = arr.AdminuserID
         nobj.Innehall = arr.ContentText
+        nobj.Konstformid = arr.KonstformID
         nobj.Konstform = arr.konstform
         nobj.Utovarid = arr.UtovarID
         nobj.MainImage = fillmedia(arr.ImageUrl, arr.ImageAlt, arr.ImageFilename, arr.ImageFotograf, arr.ImageSize)
@@ -319,6 +327,75 @@ Public Class arrangemangDAL
         Return retmedia
     End Function
 
+
+#End Region
+
+#Region "sök"
+    Public Function getArrangemangByFreeSearch(cmdtyp As commandTypeSearchInfo) As List(Of arrangemangInfo)
+        Dim tmpobj As New List(Of arrangemangInfo)
+        Dim arr = From p In _linqObj.kk_aj_proc_Search_freetext(cmdtyp.searchstr, cmdtyp.publiceradJaNej)
+                  Select p
+
+        For Each t In arr
+            Dim nobj As New arrangemangInfo
+            nobj.Arrid = t.ArrID
+            nobj.Arrangemangtypid = t.ArrangemangstypID
+            nobj.Datum = Format(t.Datum, "yyyy-MM-dd").ToString()
+            nobj.Rubrik = t.Rubrik
+            nobj.MainImage.MediaUrl = t.ImageUrl
+            nobj.UnderRubrik = t.Underrubrik
+            nobj.Konstformid = t.KonstformID
+            nobj.Konstform = t.konstform
+            nobj.Startyear = t.startyear
+            nobj.Stoppyear = t.stoppyear
+            nobj.Utovare = t.Organisation
+            nobj.Utovarid = t.UtovarID
+            nobj.Publicerad = t.Publicerad
+            tmpobj.Add(nobj)
+        Next
+
+        If tmpobj.Count <= 0 Then
+            Dim noresult As New arrangemangInfo
+            noresult.Rubrik = "Finns inget att visa"
+            tmpobj.Add(noresult)
+        End If
+
+        Return tmpobj
+
+    End Function
+    Public Function getArrangemangByMainSearch(cmdtyp As commandTypeSearchInfo) As List(Of arrangemangInfo)
+        Dim tmpobj As New List(Of arrangemangInfo)
+
+        Dim arr = From p In _linqObj.kk_aj_proc_search(cmdtyp.arrtypid, cmdtyp.konstartid, cmdtyp.startyear, cmdtyp.stopyear, cmdtyp.publiceradJaNej)
+                  Select p
+
+        For Each t In arr
+            Dim nobj As New arrangemangInfo
+            nobj.Arrid = t.ArrID
+            nobj.Arrangemangtypid = t.ArrangemangstypID
+            nobj.Datum = Format(t.Datum, "yyyy-MM-dd").ToString()
+            nobj.Rubrik = t.Rubrik
+            nobj.UnderRubrik = t.Underrubrik
+            nobj.MainImage.MediaUrl = t.ImageUrl
+            nobj.Konstformid = t.KonstformID
+            nobj.Konstform = t.konstform
+            nobj.Startyear = t.startyear
+            nobj.Stoppyear = t.stoppyear
+            nobj.Utovare = t.Organisation
+            nobj.Utovarid = t.UtovarID
+            nobj.Publicerad = t.Publicerad
+            tmpobj.Add(nobj)
+        Next
+
+        If tmpobj.Count <= 0 Then
+            Dim noresult As New arrangemangInfo
+            noresult.Rubrik = "Finns inget att visa"
+            tmpobj.Add(noresult)
+        End If
+
+        Return tmpobj
+
+    End Function
 
 #End Region
 
@@ -414,7 +491,7 @@ Public Class arrangemangDAL
                     Dim nobj As New arrangemangInfo
                     nobj.Arrid = t.ArrID
                     nobj.ArrangemangStatus = t.statustyp
-                    nobj.Datum = t.datum.ToString
+                    nobj.Datum = Format(t.datum, "yyyy-MM-dd").ToString()
                     nobj = getArrContentbyarrid(nobj)
 
                     tmpobj.Add(nobj)

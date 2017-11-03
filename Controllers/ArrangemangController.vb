@@ -30,6 +30,37 @@ Public Class ArrangemangController
         End Try
     End Function
 
+    Public Function getArrSearchlist(cmdtyp As commandTypeSearchInfo) As arrangemangcontainerInfo
+        Dim retobj As New arrangemangcontainerInfo
+        Dim arrList As New List(Of arrangemangInfo)
+        Try
+            If String.IsNullOrEmpty(cmdtyp.publiceradJaNej) Then
+                cmdtyp.publiceradJaNej = "ja"
+            End If
+
+            Select Case cmdtyp.cmdtyp
+                Case "mainsearch"
+                    arrList = _dalobj.getArrangemangByMainSearch(cmdtyp)
+
+                Case "freesearch"
+                    arrList = _dalobj.getArrangemangByFreeSearch(cmdtyp)
+
+            End Select
+
+            retobj.Arrangemanglist = arrList
+            retobj.ArrangemanglistCount = retobj.Arrangemanglist.Count
+            retobj.Status = "Arrangemangen är listade!"
+
+            Return retobj
+        Catch ex As Exception
+            retobj.Status = "Fel när Arrangemangen listades! Error in: " & cmdtyp.cmdtyp
+            Return retobj
+        End Try
+
+
+
+
+    End Function
 
     Public Function updateArrStatusType(cmdtyp As updatearrcommand) As arrangemangcontainerInfo
         Dim retobj As New arrangemangcontainerInfo

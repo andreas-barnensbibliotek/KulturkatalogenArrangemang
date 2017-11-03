@@ -76,6 +76,7 @@
     <Compile Include="Info\arrangemangcontainerInfo.vb" />
     <Compile Include="Info\arrangemangInfo.vb" />
     <Compile Include="Info\commandTypeInfo.vb" />
+    <Compile Include="Info\commandTypeSearchInfo.vb" />
     <Compile Include="Info\faktainfo.vb" />
     <Compile Include="Info\logInfo.vb" />
     <Compile Include="Info\mediaInfo.vb" />

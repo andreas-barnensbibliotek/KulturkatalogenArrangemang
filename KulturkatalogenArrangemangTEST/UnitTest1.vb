@@ -88,6 +88,23 @@ Imports KulturkatalogenArrangemang
         Dim x As arrangemangcontainerInfo = ret
 
     End Sub
+
+
+    <TestMethod> Public Sub searchtest()
+
+        Dim testarobj As New kk_aj_arr_MainController
+        Dim cmd As New commandTypeSearchInfo
+        Dim arrobj As New arrangemangcontainerInfo
+        cmd.cmdtyp = "freesearch"
+        cmd.searchstr = "test"
+        'cmd.konstartid = 4
+
+        arrobj = testarobj.searchArrangemang(cmd)
+
+        Dim ret As arrangemangcontainerInfo = arrobj
+
+
+    End Sub
     Private Function insertfuntion(vald As Integer) As arrangemangInfo
         Dim tmparr As New arrangemangInfo
 

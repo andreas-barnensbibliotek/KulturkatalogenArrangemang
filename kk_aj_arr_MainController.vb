@@ -42,6 +42,17 @@
 
     End Function
 
+#Region "search"
+    Public Function searchArrangemang(cmdtyp As commandTypeSearchInfo) As arrangemangcontainerInfo
+        Dim retobj As New arrangemangcontainerInfo
+        Dim obj As New ArrangemangController
+
+        Return obj.getArrSearchlist(cmdtyp)
+
+    End Function
+
+#End Region
+
 #Region "ADD functions"
 
     Public Function addmediaToArrangemang(arrid As Integer, mediaobj As mediaInfo) As arrangemangcontainerInfo
