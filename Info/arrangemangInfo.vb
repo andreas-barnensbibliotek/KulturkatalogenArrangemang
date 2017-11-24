@@ -25,6 +25,7 @@
     Private _faktalist As List(Of faktainfo)
     Private _startyear As String
     Private _stoppyear As String
+    Private _inlagddatum As String
     Private _debug As String
 
     Public Sub New()
@@ -52,6 +53,7 @@
         _medialist = New List(Of mediaInfo)
         _startyear = ""
         _stoppyear = ""
+        _inlagddatum = ""
         _debug = ""
 
     End Sub
@@ -73,7 +75,6 @@
             _datum = value
         End Set
     End Property
-
 
     Public Property ContentID() As Integer
         Get
@@ -270,7 +271,14 @@
         End Set
     End Property
 
-
+    Public Property inlagddatum() As String
+        Get
+            Return _inlagddatum
+        End Get
+        Set(ByVal value As String)
+            _inlagddatum = value
+        End Set
+    End Property
     Public Property debug() As String
         Get
             Return _debug
@@ -279,6 +287,14 @@
             _debug = value
         End Set
     End Property
-
+    Private _filterfakta As filterfaktaInfo
+    Public Property Filterfakta() As filterfaktaInfo
+        Get
+            Return _filterfakta
+        End Get
+        Set(ByVal value As filterfaktaInfo)
+            _filterfakta = value
+        End Set
+    End Property
 End Class
 

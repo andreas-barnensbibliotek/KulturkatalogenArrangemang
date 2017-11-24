@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dnndev_v902.me" Class="kk_aj_ArrangemangLinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=ASUSI7-ANDREAS\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me" SettingsObjectName="KulturkatalogenArrangemang.My.MySettings" SettingsPropertyName="dnndev_v902_meConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.kk_aj_tbl_Arrangemang" Member="kk_aj_tbl_Arrangemangs">
-    <Type Name="kk_aj_tbl_Arrangemang">
-      <Column Name="ArrID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ArrangemangstypID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="KonstformID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="UtovarID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="AdminuserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ArrangemangStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Publicerad" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="LookedAt" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="VisningsPeriod" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.kk_aj_tbl_arridtoContent" Member="kk_aj_tbl_arridtoContents">
     <Type Name="kk_aj_tbl_arridtoContent">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -142,6 +128,21 @@
       <Column Name="mediaBeskrivning" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
       <Column Name="mediaLink" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
       <Column Name="sortering" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.kk_aj_tbl_Arrangemang" Member="kk_aj_tbl_Arrangemangs">
+    <Type Name="kk_aj_tbl_Arrangemang">
+      <Column Name="ArrID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ArrangemangstypID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KonstformID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UtovarID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AdminuserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ArrangemangStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Publicerad" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="LookedAt" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="VisningsPeriod" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="inlagddatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.kk_aj_proc_getStatusCount" Method="kk_aj_proc_getStatusCount">
@@ -409,6 +410,13 @@
       <Column Name="KonstformID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Publicerad" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="ContentText" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.kk_aj_proc_getFilterFaktabyArrid" Method="kk_aj_proc_getFilterFaktabyArrid">
+    <Parameter Name="arrid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="kk_aj_proc_getFilterFaktabyArridResult">
+      <Column Name="faktatypid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="faktaValue" Type="System.String" DbType="NVarChar(450)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

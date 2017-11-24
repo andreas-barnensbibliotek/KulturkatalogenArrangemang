@@ -31,12 +31,6 @@ Partial Public Class kk_aj_ArrangemangLinqDataContext
   #Region "Extensibility Method Definitions"
   Partial Private Sub OnCreated()
   End Sub
-  Partial Private Sub Insertkk_aj_tbl_Arrangemang(instance As kk_aj_tbl_Arrangemang)
-    End Sub
-  Partial Private Sub Updatekk_aj_tbl_Arrangemang(instance As kk_aj_tbl_Arrangemang)
-    End Sub
-  Partial Private Sub Deletekk_aj_tbl_Arrangemang(instance As kk_aj_tbl_Arrangemang)
-    End Sub
   Partial Private Sub Insertkk_aj_tbl_arridtoContent(instance As kk_aj_tbl_arridtoContent)
     End Sub
   Partial Private Sub Updatekk_aj_tbl_arridtoContent(instance As kk_aj_tbl_arridtoContent)
@@ -115,6 +109,12 @@ Partial Public Class kk_aj_ArrangemangLinqDataContext
     End Sub
   Partial Private Sub Deletekk_aj_tbl_Media(instance As kk_aj_tbl_Media)
     End Sub
+  Partial Private Sub Insertkk_aj_tbl_Arrangemang(instance As kk_aj_tbl_Arrangemang)
+    End Sub
+  Partial Private Sub Updatekk_aj_tbl_Arrangemang(instance As kk_aj_tbl_Arrangemang)
+    End Sub
+  Partial Private Sub Deletekk_aj_tbl_Arrangemang(instance As kk_aj_tbl_Arrangemang)
+    End Sub
   #End Region
 	
 	Public Sub New()
@@ -141,12 +141,6 @@ Partial Public Class kk_aj_ArrangemangLinqDataContext
 		MyBase.New(connection, mappingSource)
 		OnCreated
 	End Sub
-	
-	Public ReadOnly Property kk_aj_tbl_Arrangemangs() As System.Data.Linq.Table(Of kk_aj_tbl_Arrangemang)
-		Get
-			Return Me.GetTable(Of kk_aj_tbl_Arrangemang)
-		End Get
-	End Property
 	
 	Public ReadOnly Property kk_aj_tbl_arridtoContents() As System.Data.Linq.Table(Of kk_aj_tbl_arridtoContent)
 		Get
@@ -223,6 +217,12 @@ Partial Public Class kk_aj_ArrangemangLinqDataContext
 	Public ReadOnly Property kk_aj_tbl_Medias() As System.Data.Linq.Table(Of kk_aj_tbl_Media)
 		Get
 			Return Me.GetTable(Of kk_aj_tbl_Media)
+		End Get
+	End Property
+	
+	Public ReadOnly Property kk_aj_tbl_Arrangemangs() As System.Data.Linq.Table(Of kk_aj_tbl_Arrangemang)
+		Get
+			Return Me.GetTable(Of kk_aj_tbl_Arrangemang)
 		End Get
 	End Property
 	
@@ -307,266 +307,12 @@ Partial Public Class kk_aj_ArrangemangLinqDataContext
 		Dim result As IExecuteResult = Me.ExecuteMethodCall(Me, CType(MethodInfo.GetCurrentMethod,MethodInfo), searchstr, pubyesno)
 		Return CType(result.ReturnValue,ISingleResult(Of kk_aj_proc_Search_freetextResult))
 	End Function
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.kk_aj_tbl_Arrangemang")>  _
-Partial Public Class kk_aj_tbl_Arrangemang
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _ArrID As Integer
-	
-	Private _ArrangemangstypID As System.Nullable(Of Integer)
-	
-	Private _KonstformID As System.Nullable(Of Integer)
-	
-	Private _UtovarID As System.Nullable(Of Integer)
-	
-	Private _AdminuserID As System.Nullable(Of Integer)
-	
-	Private _ArrangemangStatusID As System.Nullable(Of Integer)
-	
-	Private _Datum As System.Nullable(Of Date)
-	
-	Private _Publicerad As String
-	
-	Private _LookedAt As String
-	
-	Private _VisningsPeriod As String
-	
-    #Region "Extensibility Method Definitions"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnArrIDChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnArrIDChanged()
-    End Sub
-    Partial Private Sub OnArrangemangstypIDChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnArrangemangstypIDChanged()
-    End Sub
-    Partial Private Sub OnKonstformIDChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnKonstformIDChanged()
-    End Sub
-    Partial Private Sub OnUtovarIDChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnUtovarIDChanged()
-    End Sub
-    Partial Private Sub OnAdminuserIDChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnAdminuserIDChanged()
-    End Sub
-    Partial Private Sub OnArrangemangStatusIDChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnArrangemangStatusIDChanged()
-    End Sub
-    Partial Private Sub OnDatumChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnDatumChanged()
-    End Sub
-    Partial Private Sub OnPubliceradChanging(value As String)
-    End Sub
-    Partial Private Sub OnPubliceradChanged()
-    End Sub
-    Partial Private Sub OnLookedAtChanging(value As String)
-    End Sub
-    Partial Private Sub OnLookedAtChanged()
-    End Sub
-    Partial Private Sub OnVisningsPeriodChanging(value As String)
-    End Sub
-    Partial Private Sub OnVisningsPeriodChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArrID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property ArrID() As Integer
-		Get
-			Return Me._ArrID
-		End Get
-		Set
-			If ((Me._ArrID = value)  _
-						= false) Then
-				Me.OnArrIDChanging(value)
-				Me.SendPropertyChanging
-				Me._ArrID = value
-				Me.SendPropertyChanged("ArrID")
-				Me.OnArrIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArrangemangstypID", DbType:="Int")>  _
-	Public Property ArrangemangstypID() As System.Nullable(Of Integer)
-		Get
-			Return Me._ArrangemangstypID
-		End Get
-		Set
-			If (Me._ArrangemangstypID.Equals(value) = false) Then
-				Me.OnArrangemangstypIDChanging(value)
-				Me.SendPropertyChanging
-				Me._ArrangemangstypID = value
-				Me.SendPropertyChanged("ArrangemangstypID")
-				Me.OnArrangemangstypIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KonstformID", DbType:="Int")>  _
-	Public Property KonstformID() As System.Nullable(Of Integer)
-		Get
-			Return Me._KonstformID
-		End Get
-		Set
-			If (Me._KonstformID.Equals(value) = false) Then
-				Me.OnKonstformIDChanging(value)
-				Me.SendPropertyChanging
-				Me._KonstformID = value
-				Me.SendPropertyChanged("KonstformID")
-				Me.OnKonstformIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UtovarID", DbType:="Int")>  _
-	Public Property UtovarID() As System.Nullable(Of Integer)
-		Get
-			Return Me._UtovarID
-		End Get
-		Set
-			If (Me._UtovarID.Equals(value) = false) Then
-				Me.OnUtovarIDChanging(value)
-				Me.SendPropertyChanging
-				Me._UtovarID = value
-				Me.SendPropertyChanged("UtovarID")
-				Me.OnUtovarIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AdminuserID", DbType:="Int")>  _
-	Public Property AdminuserID() As System.Nullable(Of Integer)
-		Get
-			Return Me._AdminuserID
-		End Get
-		Set
-			If (Me._AdminuserID.Equals(value) = false) Then
-				Me.OnAdminuserIDChanging(value)
-				Me.SendPropertyChanging
-				Me._AdminuserID = value
-				Me.SendPropertyChanged("AdminuserID")
-				Me.OnAdminuserIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArrangemangStatusID", DbType:="Int")>  _
-	Public Property ArrangemangStatusID() As System.Nullable(Of Integer)
-		Get
-			Return Me._ArrangemangStatusID
-		End Get
-		Set
-			If (Me._ArrangemangStatusID.Equals(value) = false) Then
-				Me.OnArrangemangStatusIDChanging(value)
-				Me.SendPropertyChanging
-				Me._ArrangemangStatusID = value
-				Me.SendPropertyChanged("ArrangemangStatusID")
-				Me.OnArrangemangStatusIDChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datum", DbType:="DateTime")>  _
-	Public Property Datum() As System.Nullable(Of Date)
-		Get
-			Return Me._Datum
-		End Get
-		Set
-			If (Me._Datum.Equals(value) = false) Then
-				Me.OnDatumChanging(value)
-				Me.SendPropertyChanging
-				Me._Datum = value
-				Me.SendPropertyChanged("Datum")
-				Me.OnDatumChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Publicerad", DbType:="NVarChar(10)")>  _
-	Public Property Publicerad() As String
-		Get
-			Return Me._Publicerad
-		End Get
-		Set
-			If (String.Equals(Me._Publicerad, value) = false) Then
-				Me.OnPubliceradChanging(value)
-				Me.SendPropertyChanging
-				Me._Publicerad = value
-				Me.SendPropertyChanged("Publicerad")
-				Me.OnPubliceradChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LookedAt", DbType:="NVarChar(10)")>  _
-	Public Property LookedAt() As String
-		Get
-			Return Me._LookedAt
-		End Get
-		Set
-			If (String.Equals(Me._LookedAt, value) = false) Then
-				Me.OnLookedAtChanging(value)
-				Me.SendPropertyChanging
-				Me._LookedAt = value
-				Me.SendPropertyChanged("LookedAt")
-				Me.OnLookedAtChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VisningsPeriod", DbType:="NVarChar(10)")>  _
-	Public Property VisningsPeriod() As String
-		Get
-			Return Me._VisningsPeriod
-		End Get
-		Set
-			If (String.Equals(Me._VisningsPeriod, value) = false) Then
-				Me.OnVisningsPeriodChanging(value)
-				Me.SendPropertyChanging
-				Me._VisningsPeriod = value
-				Me.SendPropertyChanged("VisningsPeriod")
-				Me.OnVisningsPeriodChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
+	<Global.System.Data.Linq.Mapping.FunctionAttribute(Name:="dbo.kk_aj_proc_getFilterFaktabyArrid")>  _
+	Public Function kk_aj_proc_getFilterFaktabyArrid(<Global.System.Data.Linq.Mapping.ParameterAttribute(DbType:="Int")> ByVal arrid As System.Nullable(Of Integer)) As ISingleResult(Of kk_aj_proc_getFilterFaktabyArridResult)
+		Dim result As IExecuteResult = Me.ExecuteMethodCall(Me, CType(MethodInfo.GetCurrentMethod,MethodInfo), arrid)
+		Return CType(result.ReturnValue,ISingleResult(Of kk_aj_proc_getFilterFaktabyArridResult))
+	End Function
 End Class
 
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.kk_aj_tbl_arridtoContent")>  _
@@ -2786,6 +2532,288 @@ Partial Public Class kk_aj_tbl_Media
 				Me._sortering = value
 				Me.SendPropertyChanged("sortering")
 				Me.OnsorteringChanged
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.kk_aj_tbl_Arrangemang")>  _
+Partial Public Class kk_aj_tbl_Arrangemang
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _ArrID As Integer
+	
+	Private _ArrangemangstypID As System.Nullable(Of Integer)
+	
+	Private _KonstformID As System.Nullable(Of Integer)
+	
+	Private _UtovarID As System.Nullable(Of Integer)
+	
+	Private _AdminuserID As System.Nullable(Of Integer)
+	
+	Private _ArrangemangStatusID As System.Nullable(Of Integer)
+	
+	Private _Datum As System.Nullable(Of Date)
+	
+	Private _Publicerad As String
+	
+	Private _LookedAt As String
+	
+	Private _VisningsPeriod As String
+	
+	Private _inlagddatum As System.Nullable(Of Date)
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnArrIDChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnArrIDChanged()
+    End Sub
+    Partial Private Sub OnArrangemangstypIDChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnArrangemangstypIDChanged()
+    End Sub
+    Partial Private Sub OnKonstformIDChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnKonstformIDChanged()
+    End Sub
+    Partial Private Sub OnUtovarIDChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnUtovarIDChanged()
+    End Sub
+    Partial Private Sub OnAdminuserIDChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnAdminuserIDChanged()
+    End Sub
+    Partial Private Sub OnArrangemangStatusIDChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnArrangemangStatusIDChanged()
+    End Sub
+    Partial Private Sub OnDatumChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnDatumChanged()
+    End Sub
+    Partial Private Sub OnPubliceradChanging(value As String)
+    End Sub
+    Partial Private Sub OnPubliceradChanged()
+    End Sub
+    Partial Private Sub OnLookedAtChanging(value As String)
+    End Sub
+    Partial Private Sub OnLookedAtChanged()
+    End Sub
+    Partial Private Sub OnVisningsPeriodChanging(value As String)
+    End Sub
+    Partial Private Sub OnVisningsPeriodChanged()
+    End Sub
+    Partial Private Sub OninlagddatumChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OninlagddatumChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArrID", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property ArrID() As Integer
+		Get
+			Return Me._ArrID
+		End Get
+		Set
+			If ((Me._ArrID = value)  _
+						= false) Then
+				Me.OnArrIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ArrID = value
+				Me.SendPropertyChanged("ArrID")
+				Me.OnArrIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArrangemangstypID", DbType:="Int")>  _
+	Public Property ArrangemangstypID() As System.Nullable(Of Integer)
+		Get
+			Return Me._ArrangemangstypID
+		End Get
+		Set
+			If (Me._ArrangemangstypID.Equals(value) = false) Then
+				Me.OnArrangemangstypIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ArrangemangstypID = value
+				Me.SendPropertyChanged("ArrangemangstypID")
+				Me.OnArrangemangstypIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KonstformID", DbType:="Int")>  _
+	Public Property KonstformID() As System.Nullable(Of Integer)
+		Get
+			Return Me._KonstformID
+		End Get
+		Set
+			If (Me._KonstformID.Equals(value) = false) Then
+				Me.OnKonstformIDChanging(value)
+				Me.SendPropertyChanging
+				Me._KonstformID = value
+				Me.SendPropertyChanged("KonstformID")
+				Me.OnKonstformIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UtovarID", DbType:="Int")>  _
+	Public Property UtovarID() As System.Nullable(Of Integer)
+		Get
+			Return Me._UtovarID
+		End Get
+		Set
+			If (Me._UtovarID.Equals(value) = false) Then
+				Me.OnUtovarIDChanging(value)
+				Me.SendPropertyChanging
+				Me._UtovarID = value
+				Me.SendPropertyChanged("UtovarID")
+				Me.OnUtovarIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AdminuserID", DbType:="Int")>  _
+	Public Property AdminuserID() As System.Nullable(Of Integer)
+		Get
+			Return Me._AdminuserID
+		End Get
+		Set
+			If (Me._AdminuserID.Equals(value) = false) Then
+				Me.OnAdminuserIDChanging(value)
+				Me.SendPropertyChanging
+				Me._AdminuserID = value
+				Me.SendPropertyChanged("AdminuserID")
+				Me.OnAdminuserIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArrangemangStatusID", DbType:="Int")>  _
+	Public Property ArrangemangStatusID() As System.Nullable(Of Integer)
+		Get
+			Return Me._ArrangemangStatusID
+		End Get
+		Set
+			If (Me._ArrangemangStatusID.Equals(value) = false) Then
+				Me.OnArrangemangStatusIDChanging(value)
+				Me.SendPropertyChanging
+				Me._ArrangemangStatusID = value
+				Me.SendPropertyChanged("ArrangemangStatusID")
+				Me.OnArrangemangStatusIDChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datum", DbType:="DateTime")>  _
+	Public Property Datum() As System.Nullable(Of Date)
+		Get
+			Return Me._Datum
+		End Get
+		Set
+			If (Me._Datum.Equals(value) = false) Then
+				Me.OnDatumChanging(value)
+				Me.SendPropertyChanging
+				Me._Datum = value
+				Me.SendPropertyChanged("Datum")
+				Me.OnDatumChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Publicerad", DbType:="NVarChar(10)")>  _
+	Public Property Publicerad() As String
+		Get
+			Return Me._Publicerad
+		End Get
+		Set
+			If (String.Equals(Me._Publicerad, value) = false) Then
+				Me.OnPubliceradChanging(value)
+				Me.SendPropertyChanging
+				Me._Publicerad = value
+				Me.SendPropertyChanged("Publicerad")
+				Me.OnPubliceradChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LookedAt", DbType:="NVarChar(10)")>  _
+	Public Property LookedAt() As String
+		Get
+			Return Me._LookedAt
+		End Get
+		Set
+			If (String.Equals(Me._LookedAt, value) = false) Then
+				Me.OnLookedAtChanging(value)
+				Me.SendPropertyChanging
+				Me._LookedAt = value
+				Me.SendPropertyChanged("LookedAt")
+				Me.OnLookedAtChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VisningsPeriod", DbType:="NVarChar(10)")>  _
+	Public Property VisningsPeriod() As String
+		Get
+			Return Me._VisningsPeriod
+		End Get
+		Set
+			If (String.Equals(Me._VisningsPeriod, value) = false) Then
+				Me.OnVisningsPeriodChanging(value)
+				Me.SendPropertyChanging
+				Me._VisningsPeriod = value
+				Me.SendPropertyChanged("VisningsPeriod")
+				Me.OnVisningsPeriodChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_inlagddatum", DbType:="DateTime")>  _
+	Public Property inlagddatum() As System.Nullable(Of Date)
+		Get
+			Return Me._inlagddatum
+		End Get
+		Set
+			If (Me._inlagddatum.Equals(value) = false) Then
+				Me.OninlagddatumChanging(value)
+				Me.SendPropertyChanging
+				Me._inlagddatum = value
+				Me.SendPropertyChanged("inlagddatum")
+				Me.OninlagddatumChanged
 			End If
 		End Set
 	End Property
@@ -5070,6 +5098,41 @@ Partial Public Class kk_aj_proc_Search_freetextResult
 		Set
 			If (String.Equals(Me._ContentText, value) = false) Then
 				Me._ContentText = value
+			End If
+		End Set
+	End Property
+End Class
+
+Partial Public Class kk_aj_proc_getFilterFaktabyArridResult
+	
+	Private _faktatypid As System.Nullable(Of Integer)
+	
+	Private _faktaValue As String
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_faktatypid", DbType:="Int")>  _
+	Public Property faktatypid() As System.Nullable(Of Integer)
+		Get
+			Return Me._faktatypid
+		End Get
+		Set
+			If (Me._faktatypid.Equals(value) = false) Then
+				Me._faktatypid = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_faktaValue", DbType:="NVarChar(450)")>  _
+	Public Property faktaValue() As String
+		Get
+			Return Me._faktaValue
+		End Get
+		Set
+			If (String.Equals(Me._faktaValue, value) = false) Then
+				Me._faktaValue = value
 			End If
 		End Set
 	End Property

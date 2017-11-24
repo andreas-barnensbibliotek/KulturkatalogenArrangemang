@@ -174,6 +174,13 @@ Public Class arrangemangDAL
 
             For Each itm In upd
                 itm.ArrangemangStatusID = cmdtyp.UpdValue
+                If cmdtyp.UpdValue = "2" Then ' om den är godkänd, publicera!
+                    itm.Publicerad = "ja"
+                End If
+                If cmdtyp.UpdValue = "3" Then ' om den är nekad, AVpublicera!
+                    itm.Publicerad = "nej"
+                End If
+                itm.Datum = Date.Now
             Next
 
             _linqObj.SubmitChanges()
@@ -202,7 +209,7 @@ Public Class arrangemangDAL
                 Else
                     itm.Publicerad = "nej"
                 End If
-
+                itm.Datum = Date.Now
             Next
 
             _linqObj.SubmitChanges()
@@ -351,6 +358,7 @@ Public Class arrangemangDAL
             nobj.Utovare = t.Organisation
             nobj.Utovarid = t.UtovarID
             nobj.Publicerad = t.Publicerad
+            nobj.Filterfakta = getfilterfakta(t.ArrID)
             tmpobj.Add(nobj)
         Next
 
@@ -365,6 +373,7 @@ Public Class arrangemangDAL
     End Function
     Public Function getArrangemangByMainSearch(cmdtyp As commandTypeSearchInfo) As List(Of arrangemangInfo)
         Dim tmpobj As New List(Of arrangemangInfo)
+        Dim filterfaktaobj As New FilterFaktaHelper
 
         Dim arr = From p In _linqObj.kk_aj_proc_search(cmdtyp.arrtypid, cmdtyp.konstartid, cmdtyp.startyear, cmdtyp.stopyear, cmdtyp.publiceradJaNej)
                   Select p
@@ -384,6 +393,7 @@ Public Class arrangemangDAL
             nobj.Utovare = t.Organisation
             nobj.Utovarid = t.UtovarID
             nobj.Publicerad = t.Publicerad
+            nobj.Filterfakta = getfilterfakta(t.ArrID)
             tmpobj.Add(nobj)
         Next
 
@@ -531,6 +541,37 @@ Public Class arrangemangDAL
 
 #End Region
 
+#Region "helpers"
+
+    Private Function getfilterfakta(arrid As Integer) As filterfaktaInfo
+        Dim helperobj As New FilterFaktaHelper
+        Dim tmpobj As New filterfaktaInfo
+
+        Dim faktalist = From f In _linqObj.kk_aj_proc_getFilterFaktabyArrid(arrid)
+                        Select f
+
+        For Each f In faktalist
+            Select Case f.faktatypid
+                Case "5" 'bokningsbar
+                    tmpobj.Bokningsbar = helperobj.getbokningsbar(f.faktaValue)
+
+                Case "14" 'Takhöjd över scen
+                    tmpobj.Takhojd = helperobj.gettakhojd(f.faktaValue)
+
+                Case "27" 'Mörkläggning krävs
+                    tmpobj.Morklaggning = helperobj.getmorklaggning(f.faktaValue)
+
+                Case "26" 'Speltid (min)
+                    tmpobj.Speltid = f.faktaValue
+            End Select
+        Next
+
+        Return tmpobj
+
+    End Function
+
+#End Region
+
 #Region "CRUD"
 
     Public Function addArrangemang(arrData As arrangemangInfo) As Integer
@@ -546,6 +587,7 @@ Public Class arrangemangDAL
         maindata.UtovarID = arrData.Utovare
         maindata.VisningsPeriod = Date.Now.Year
         maindata.Datum = Date.Now
+        maindata.inlagddatum = Date.Now
 
         _linqObj.kk_aj_tbl_Arrangemangs.InsertOnSubmit(maindata)
         _linqObj.SubmitChanges()

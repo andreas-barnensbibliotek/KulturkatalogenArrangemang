@@ -78,6 +78,7 @@
     <Compile Include="Info\commandTypeInfo.vb" />
     <Compile Include="Info\commandTypeSearchInfo.vb" />
     <Compile Include="Info\faktainfo.vb" />
+    <Compile Include="Info\filterfaktaInfo.vb" />
     <Compile Include="Info\logInfo.vb" />
     <Compile Include="Info\mediaInfo.vb" />
     <Compile Include="Info\updatearrcommand.vb" />
@@ -91,6 +92,7 @@
     <Compile Include="Linq\kk_aj_ArrangemangLinq.vb">
       <DependentUpon>kk_aj_ArrangemangLinq.dbml</DependentUpon>
     </Compile>
+    <Compile Include="model\FilterFaktaHelper.vb" />
     <Compile Include="model\userHandler.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

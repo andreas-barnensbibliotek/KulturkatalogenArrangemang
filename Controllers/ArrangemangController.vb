@@ -33,6 +33,8 @@ Public Class ArrangemangController
     Public Function getArrSearchlist(cmdtyp As commandTypeSearchInfo) As arrangemangcontainerInfo
         Dim retobj As New arrangemangcontainerInfo
         Dim arrList As New List(Of arrangemangInfo)
+
+
         Try
             If String.IsNullOrEmpty(cmdtyp.publiceradJaNej) Then
                 cmdtyp.publiceradJaNej = "ja"
@@ -49,6 +51,7 @@ Public Class ArrangemangController
 
             retobj.Arrangemanglist = arrList
             retobj.ArrangemanglistCount = retobj.Arrangemanglist.Count
+
             retobj.Status = "Arrangemangen är listade!"
 
             Return retobj

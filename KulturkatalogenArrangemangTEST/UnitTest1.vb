@@ -95,9 +95,9 @@ Imports KulturkatalogenArrangemang
         Dim testarobj As New kk_aj_arr_MainController
         Dim cmd As New commandTypeSearchInfo
         Dim arrobj As New arrangemangcontainerInfo
-        cmd.cmdtyp = "freesearch"
-        cmd.searchstr = "test"
-        'cmd.konstartid = 4
+        cmd.cmdtyp = "mainsearch"
+        'cmd.searchstr = "test"
+        cmd.konstartid = 2
 
         arrobj = testarobj.searchArrangemang(cmd)
 
