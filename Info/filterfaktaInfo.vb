@@ -5,6 +5,7 @@
         _morklaggning = "0"
         _speltid = "0"
         _takhojd = "0"
+        _kostnad = "0"
     End Sub
 
     Private _bokningsbar As String
@@ -44,6 +45,16 @@
         End Get
         Set(ByVal value As String)
             _speltid = value
+        End Set
+    End Property
+
+    Private _kostnad As String
+    Public Property Kostnad() As String
+        Get
+            Return _kostnad
+        End Get
+        Set(ByVal value As String)
+            _kostnad = value
         End Set
     End Property
 End Class

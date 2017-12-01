@@ -89,6 +89,29 @@ Public Class ArrangemangController
                         Else
                             retobj.Status = "Fel vid uppdatering av Publicerad!"
                         End If
+                    Case "pubbrytpunkt"
+                        Dim datum As Date = CDate(cmdtyp.UpdValue)
+                        cmdtyp.UpdValue = datum.Year
+
+                        If _dalobj.BreakpointPubliceraArrangemang(cmdtyp) Then
+                            retobj.Status = "Publicerad via brytpunkt " & cmdtyp.UpdValue ' måste vara ett gilltigt datum
+                        Else
+                            retobj.Status = "Fel vid uppdatering av brytpunktpublicering!"
+                        End If
+                    Case "pubhuvudbrytpunkt"
+                        Dim datum As Date = CDate(cmdtyp.UpdValue)
+                        cmdtyp.UpdValue = datum.Year
+                        If _dalobj.BreakpointPubliceraArrangemang(cmdtyp) Then
+                            retobj.Status = "Publicerad via brytpunkt " & cmdtyp.UpdValue ' måste vara ett gilltigt datum
+                        Else
+                            retobj.Status = "Fel vid uppdatering av brytpunktpublicering!"
+                        End If
+                        cmdtyp.UpdValue = datum
+                        If _dalobj.BreakpointArkiveraArrangemang(cmdtyp) Then
+                            retobj.Status = "Publicerad uppdated to arrid: " & cmdtyp.UpdValue ' måste vara ett gilltigt datum
+                        Else
+                            retobj.Status = "Fel vid uppdatering av Publicerad!"
+                        End If
                     Case Else
                         retobj.Status = "Fel vid uppdatering. command saknas!"
                 End Select
@@ -253,6 +276,16 @@ Public Class ArrangemangController
                 If cmdtyp.UpdValue = "ja" Or cmdtyp.UpdValue = "nej" Then
                     ret = True
                 End If
+            Case "pubbrytpunkt"
+                If Not String.IsNullOrEmpty(cmdtyp.UpdValue) Then
+                    ret = True
+                End If
+
+            Case "pubhuvudbrytpunkt"
+                If Not String.IsNullOrEmpty(cmdtyp.UpdValue) Then
+                    ret = True
+                End If
+
         End Select
 
         Return ret

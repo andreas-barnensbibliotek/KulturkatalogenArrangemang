@@ -39,6 +39,23 @@ Imports KulturkatalogenArrangemang
         Dim tmp As String = ret.Status
 
     End Sub
+    <TestMethod()> Public Sub updatebrytpunkttest()
+        Dim cmdtyp As New updatearrcommand
+        cmdtyp.Arrid = 1
+        cmdtyp.ArrRollID = 1
+        cmdtyp.arrUserid = 1
+        cmdtyp.UpdValue = "2019-12-01"
+        cmdtyp.CmdTyp = "pubhuvudbrytpunkt" 'arrstat pub lookedat
+
+        Dim testar As New kk_aj_arr_MainController
+
+        Dim ret As arrangemangcontainerInfo = testar.updateArrPropeties(cmdtyp)
+
+        Dim tmp As String = ret.Status
+
+    End Sub
+
+
     <TestMethod()> Public Sub deleteArr()
         ' Behöver bara arrid för att tabort arrangemanget och content och arrtocontent
         Dim cmdtyp As New updatearrcommand

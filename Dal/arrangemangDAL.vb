@@ -3,8 +3,8 @@
 Imports KulturkatalogenArrangemang
 
 Public Class arrangemangDAL
-    'Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
-    Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
+    Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
+    'Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
     Private _linqObj As New kk_aj_ArrangemangLinqDataContext(_connectionString)
 
     Public Function getArrangemangByStatus(cmdtyp As commandTypeInfo) As List(Of arrangemangInfo)
@@ -174,12 +174,57 @@ Public Class arrangemangDAL
 
             For Each itm In upd
                 itm.ArrangemangStatusID = cmdtyp.UpdValue
-                If cmdtyp.UpdValue = "2" Then ' om den är godkänd, publicera!
-                    itm.Publicerad = "ja"
-                End If
+                'If cmdtyp.UpdValue = "2" Then ' om den är godkänd, publicera!
+                '    itm.Publicerad = "ja"
+                'End If
                 If cmdtyp.UpdValue = "3" Then ' om den är nekad, AVpublicera!
                     itm.Publicerad = "nej"
                 End If
+                itm.Datum = Date.Now
+            Next
+
+            _linqObj.SubmitChanges()
+            ret = True
+        Catch ex As Exception
+            ret = False
+        End Try
+
+        Return ret
+    End Function
+
+    Public Function BreakpointPubliceraArrangemang(cmdtyp As updatearrcommand) As Boolean
+        Dim ret As Boolean = False
+        Try
+            Dim upd = From e In _linqObj.kk_aj_tbl_Arrangemangs
+                      Where e.ArrangemangStatusID = 2 And e.Publicerad = "nej" And e.VisningsPeriod = cmdtyp.UpdValue
+                      Select e
+
+            For Each itm In upd
+                itm.Publicerad = "ja"
+                itm.Datum = Date.Now
+            Next
+
+            _linqObj.SubmitChanges()
+            ret = True
+        Catch ex As Exception
+            ret = False
+        End Try
+
+        Return ret
+    End Function
+
+    Public Function BreakpointArkiveraArrangemang(cmdtyp As updatearrcommand) As Boolean
+        Dim ret As Boolean = False
+        Try
+
+            Dim yearbefore As String = DateAndTime.DateAdd(DateInterval.Year, -1, CDate(cmdtyp.UpdValue)).Year().ToString
+            Dim upd = From e In _linqObj.kk_aj_tbl_Arrangemangs
+                      Where e.ArrangemangStatusID = 2 And e.Publicerad = "ja" And e.VisningsPeriod = yearbefore.ToString
+                      Select e
+
+            For Each itm In upd
+                itm.ArrangemangStatusID = 4
+                itm.Publicerad = "nej"
                 itm.Datum = Date.Now
             Next
 
@@ -557,6 +602,9 @@ Public Class arrangemangDAL
 
                 Case "14" 'Takhöjd över scen
                     tmpobj.Takhojd = helperobj.gettakhojd(f.faktaValue)
+
+                Case "19" 'Kostnad första arrangemanget
+                    tmpobj.Kostnad = f.faktaValue
 
                 Case "27" 'Mörkläggning krävs
                     tmpobj.Morklaggning = helperobj.getmorklaggning(f.faktaValue)
