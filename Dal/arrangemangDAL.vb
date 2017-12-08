@@ -3,8 +3,8 @@
 Imports KulturkatalogenArrangemang
 
 Public Class arrangemangDAL
-    Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
-    'Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
+    'Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
+    Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
     Private _linqObj As New kk_aj_ArrangemangLinqDataContext(_connectionString)
 
     Public Function getArrangemangByStatus(cmdtyp As commandTypeInfo) As List(Of arrangemangInfo)
@@ -193,6 +193,8 @@ Public Class arrangemangDAL
     End Function
 
     Public Function BreakpointPubliceraArrangemang(cmdtyp As updatearrcommand) As Boolean
+        ' brytpunkt gör att alla arrangemang som är godkända men ej publicerade, publiceras vid körning av denna.
+        'körs denna tillsammans med BreakpointArkiveraArrangemang är det en huvudbrytpunkt
         Dim ret As Boolean = False
         Try
             Dim upd = From e In _linqObj.kk_aj_tbl_Arrangemangs
@@ -213,7 +215,9 @@ Public Class arrangemangDAL
         Return ret
     End Function
 
+
     Public Function BreakpointArkiveraArrangemang(cmdtyp As updatearrcommand) As Boolean
+        ' huvudbrytpunkt gör att arrangemang som är publicerade under perioden/året före nuvarande period arkiveras( om nuvarande period är 2018 är perioden som arkiveras 2017)
         Dim ret As Boolean = False
         Try
 
@@ -292,6 +296,13 @@ Public Class arrangemangDAL
         nobj.Konstformid = arr.KonstformID
         nobj.Konstform = arr.konstform
         nobj.Utovarid = arr.UtovarID
+        nobj.Konstform2 = arr.konstform2
+        nobj.Konstform3 = arr.konstform3
+        nobj.Kontaktfornamn = arr.kontaktfornamn
+        nobj.KontaktEfternamn = arr.kontaktefternamn
+        nobj.KontaktEpost = arr.kontaktepost
+        nobj.KontaktTelefon = arr.Telefon
+
         nobj.MainImage = fillmedia(arr.ImageUrl, arr.ImageAlt, arr.ImageFilename, arr.ImageFotograf, arr.ImageSize)
         ' nobj.MediaClip = fillmedia(arr.MovieClipUrl, arr.MovieClipAlt, arr.MovieClipFilename, arr.MovieClipCredits, arr.MovieClipSize)
         nobj.UtovareData = getutovardata(arr)
@@ -404,6 +415,8 @@ Public Class arrangemangDAL
             nobj.Utovarid = t.UtovarID
             nobj.Publicerad = t.Publicerad
             nobj.Filterfakta = getfilterfakta(t.ArrID)
+            nobj.Konstform2 = t.konstform2
+            nobj.Konstform3 = t.konstform3
             tmpobj.Add(nobj)
         Next
 
@@ -636,6 +649,9 @@ Public Class arrangemangDAL
         maindata.VisningsPeriod = Date.Now.Year
         maindata.Datum = Date.Now
         maindata.inlagddatum = Date.Now
+        maindata.konstform2 = arrData.Konstform2
+        maindata.konstform3 = arrData.Konstform3
+        maindata.kontaktid = addKontakt(arrData)
 
         _linqObj.kk_aj_tbl_Arrangemangs.InsertOnSubmit(maindata)
         _linqObj.SubmitChanges()
@@ -759,6 +775,23 @@ Public Class arrangemangDAL
             _linqObj.kk_aj_tbl_Utovares.InsertOnSubmit(tmpobj)
             _linqObj.SubmitChanges()
             Return tmpobj.UtovarID
+        Catch ex As Exception
+            Return 0
+        End Try
+
+    End Function
+    Public Function addKontakt(kontaktobj As arrangemangInfo) As Integer
+        Dim tmpobj As New kk_aj_tbl_Kontakt
+
+        Try
+            tmpobj.fornamn = kontaktobj.Kontaktfornamn
+            tmpobj.Efternamn = kontaktobj.KontaktEfternamn
+            tmpobj.Telefon = kontaktobj.KontaktTelefon
+            tmpobj.Epost = kontaktobj.KontaktEpost
+
+            _linqObj.kk_aj_tbl_Kontakts.InsertOnSubmit(tmpobj)
+            _linqObj.SubmitChanges()
+            Return tmpobj.kontaktid
         Catch ex As Exception
             Return 0
         End Try
@@ -985,7 +1018,31 @@ Public Class arrangemangDAL
                 i.UtovarID = CInt(arrObj.Utovare)
                 i.Publicerad = arrObj.Publicerad
                 i.Datum = Date.Now
+                i.konstform2 = arrObj.Konstform2
+                i.konstform3 = arrObj.Konstform3
+                arrObj.KontaktId = i.kontaktid
+                EditkontaktID(arrObj)
 
+            Next
+            _linqObj.SubmitChanges()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
+    Public Function EditkontaktID(arrObj As arrangemangInfo) As Boolean
+        Try
+            Dim itm = From c In _linqObj.kk_aj_tbl_Kontakts
+                      Where c.kontaktid = arrObj.KontaktId
+                      Select c
+
+            For Each i In itm
+                i.fornamn = arrObj.Kontaktfornamn
+                i.Efternamn = arrObj.KontaktEfternamn
+                i.Epost = arrObj.KontaktEpost
+                i.Telefon = arrObj.KontaktTelefon
             Next
             _linqObj.SubmitChanges()
 

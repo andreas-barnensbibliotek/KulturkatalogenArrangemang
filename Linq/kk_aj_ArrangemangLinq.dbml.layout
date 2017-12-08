@@ -2,10 +2,10 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.375, 9" name="kk_aj_ArrangemangLinq">
   <DataContextMoniker Name="/kk_aj_ArrangemangLinqDataContext" />
   <nestedChildShapes>
-    <classShape Id="46e3f55a-68e5-4abe-8796-8a7ab141a383" absoluteBounds="0.5, 3.5, 2, 1.7708968098958331">
+    <classShape Id="46e3f55a-68e5-4abe-8796-8a7ab141a383" absoluteBounds="0.5, 4.625, 2, 1.7708968098958331">
       <DataClassMoniker Name="/kk_aj_ArrangemangLinqDataContext/kk_aj_tbl_arridtoContent" />
       <nestedChildShapes>
-        <elementListCompartment Id="7c698eb5-4616-49dc-9d58-34288940f08d" absoluteBounds="0.51500000000000012, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7c698eb5-4616-49dc-9d58-34288940f08d" absoluteBounds="0.51500000000000012, 5.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="38f6b084-e8e6-4871-a791-27f1b4751c8d" absoluteBounds="2.875, 3.75, 2, 3.6939111328124996">
@@ -26,10 +26,10 @@
         <elementListCompartment Id="520d988c-2cc0-40b5-9977-c50bd0a0f568" absoluteBounds="5.14, 2.71, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fc5a904b-3e6c-4380-a996-04bd02c4d91e" absoluteBounds="0.5, 5.375, 2, 1.1939925130208333">
+    <classShape Id="fc5a904b-3e6c-4380-a996-04bd02c4d91e" absoluteBounds="0.5, 6.375, 2, 1.1939925130208333">
       <DataClassMoniker Name="/kk_aj_ArrangemangLinqDataContext/kk_aj_tbl_ArrangemangStatus" />
       <nestedChildShapes>
-        <elementListCompartment Id="ebd1bd23-5723-45dc-a3a6-bbd0e46e8600" absoluteBounds="0.51500000000000012, 5.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ebd1bd23-5723-45dc-a3a6-bbd0e46e8600" absoluteBounds="0.51500000000000012, 6.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="c0f8dae7-dc4d-49f2-a4da-2b6de149e27b" absoluteBounds="5, 5.375, 2, 1.1939925130208333">
@@ -80,10 +80,16 @@
         <elementListCompartment Id="67c02b0e-9199-4cdf-a569-d974490916c5" absoluteBounds="9.14, 4.085, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3d185b6c-964a-4fb5-98ca-cc1c8f239391" absoluteBounds="0.5, 0.5, 2, 2.9247054036458331">
+    <classShape Id="39e555b6-75f3-4ac4-a6fd-c60349f0e908" absoluteBounds="5.125, 6.875, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/kk_aj_ArrangemangLinqDataContext/kk_aj_tbl_Kontakt" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0334f148-5edb-433a-8b21-b199f691fecc" absoluteBounds="5.1400000000000006, 7.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="318124af-91b8-426e-b30c-17f451a4ae93" absoluteBounds="0.5, 0.5, 2, 3.5016097005208326">
       <DataClassMoniker Name="/kk_aj_ArrangemangLinqDataContext/kk_aj_tbl_Arrangemang" />
       <nestedChildShapes>
-        <elementListCompartment Id="5029fcc2-bcb6-40f7-a533-fca87738c1fd" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="cd739b37-af1a-4f65-9390-b8f8f5c30bc5" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

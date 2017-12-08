@@ -1,4 +1,7 @@
 ﻿Imports KulturkatalogenArrangemang
+'brytpunkts anrop
+'localhost:60485/Api_v2/updatearrangemang/pubbrytpunkt/id/1/uid/1/val/2017-12-01/devkey/alf
+'localhost:60485/Api_v2/updatearrangemang/pubhuvudbrytpunkt/id/1/uid/1/val/2017-12-01/devkey/alf
 
 Public Class ArrangemangController
 
@@ -104,13 +107,13 @@ Public Class ArrangemangController
                         If _dalobj.BreakpointPubliceraArrangemang(cmdtyp) Then
                             retobj.Status = "Publicerad via brytpunkt " & cmdtyp.UpdValue ' måste vara ett gilltigt datum
                         Else
-                            retobj.Status = "Fel vid uppdatering av brytpunktpublicering!"
+                            retobj.Status = "Fel vid uppdatering av brytpunktpublicering! " & datum.Year
                         End If
                         cmdtyp.UpdValue = datum
                         If _dalobj.BreakpointArkiveraArrangemang(cmdtyp) Then
                             retobj.Status = "Publicerad uppdated to arrid: " & cmdtyp.UpdValue ' måste vara ett gilltigt datum
                         Else
-                            retobj.Status = "Fel vid uppdatering av Publicerad!"
+                            retobj.Status = "Fel vid uppdatering av Publicerad! " & datum.Year
                         End If
                     Case Else
                         retobj.Status = "Fel vid uppdatering. command saknas!"

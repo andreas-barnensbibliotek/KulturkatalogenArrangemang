@@ -44,7 +44,7 @@ Imports KulturkatalogenArrangemang
         cmdtyp.Arrid = 1
         cmdtyp.ArrRollID = 1
         cmdtyp.arrUserid = 1
-        cmdtyp.UpdValue = "2019-12-01"
+        cmdtyp.UpdValue = "20191201"
         cmdtyp.CmdTyp = "pubhuvudbrytpunkt" 'arrstat pub lookedat
 
         Dim testar As New kk_aj_arr_MainController
@@ -131,6 +131,8 @@ Imports KulturkatalogenArrangemang
         tmparr.Konstform = 4 'dans
         'tmparr.MainImage = getimg(vald)
         'tmparr.MediaClip = getmovie(vald)
+        tmparr.Konstform2 = 2
+        tmparr.Konstform3 = 3
         tmparr.MediaList = getmedia()
         tmparr.Rubrik = "Konstrunda Ulricehamn"
         tmparr.UnderRubrik = "av ulricehamnare för ulricehamnare"
@@ -138,6 +140,10 @@ Imports KulturkatalogenArrangemang
         tmparr.UtovareData = addutovare(vald)
         tmparr.Faktalist = faktalista(vald)
         tmparr.Datum = Date.Now
+        tmparr.Kontaktfornamn = "Nisse"
+        tmparr.KontaktEfternamn = "hult"
+        tmparr.KontaktEpost = "nisse@test.se"
+        tmparr.KontaktTelefon = "24680136"
 
 
         Return tmparr
@@ -453,13 +459,15 @@ Imports KulturkatalogenArrangemang
 
         Dim tmpobj As New arrangemangInfo
 
-        Dim arrid As Integer = 28
+        Dim arrid As Integer = 135
         Dim contentid As Integer = 21
 
         tmpobj.Arrid = arrid
         tmpobj.ContentID = contentid
 
         tmpobj.Konstform = 10
+        tmpobj.Konstform2 = 2
+        tmpobj.Konstform3 = 3
         tmpobj.Arrangemangtyp = 5
         tmpobj.Utovare = 4
         tmpobj.Publicerad = "ja"
@@ -467,7 +475,10 @@ Imports KulturkatalogenArrangemang
         tmpobj.Rubrik = "Andreas ändrar igen"
         tmpobj.UnderRubrik = "ändringar fungerar!"
         tmpobj.Innehall = gettext(4)
-
+        tmpobj.KontaktEpost = "testbytt@test.se"
+        tmpobj.KontaktEfternamn = "byttsson"
+        tmpobj.Kontaktfornamn = "göte"
+        tmpobj.KontaktTelefon = "1000000000"
 
         Dim ret As arrangemangcontainerInfo = testar.editArrangemang(tmpobj)
         Dim x As arrangemangcontainerInfo = ret
