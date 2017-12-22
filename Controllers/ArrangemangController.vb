@@ -22,8 +22,15 @@ Public Class ArrangemangController
                 Case "bylatest"
                     retobj = getArrbyLatest(cmdtyp)
 
+                Case "byutovare"
+                    retobj = getArrbyUtovare(cmdtyp)
+
+                Case "granska"
+                    retobj = getArrangemangDetails(cmdtyp)
+
                 Case "details"
                     retobj = getArrangemangDetails(cmdtyp)
+
             End Select
 
             Return retobj
@@ -149,6 +156,22 @@ Public Class ArrangemangController
 
     End Function
 
+    Private Function getArrbyUtovare(cmdtyp As commandTypeInfo) As arrangemangcontainerInfo
+        Dim retobj As New arrangemangcontainerInfo
+        Dim arrList As New List(Of arrangemangInfo)
+
+        Try
+            arrList = _dalobj.getArrangemangByUtovarid(cmdtyp)
+            retobj = getBaseArrangemangData(cmdtyp, arrList)
+
+            Return retobj
+        Catch ex As Exception
+            retobj.Status = "Fel när Arrangemangen listades!"
+
+            Return retobj
+        End Try
+
+    End Function
     Public Function getArrbySearch(cmdtyp As commandTypeInfo) As arrangemangcontainerInfo
         Dim retobj As New arrangemangcontainerInfo
         Dim arrList As New List(Of arrangemangInfo)
@@ -173,14 +196,19 @@ Public Class ArrangemangController
         Dim rollobj As New userHandler
 
         Try
-            arritm = _dalobj.getArrangemangDetails(cmdtyp)
-            retarrlist.Add(arritm)
+            If cmdtyp.CmdTyp = "granska" Then
+                arritm = _dalobj.getArrangemangGranskaDetails(cmdtyp)
+                retarrlist.Add(arritm)
+            Else
+                arritm = _dalobj.getArrangemangDetails(cmdtyp)
+                retarrlist.Add(arritm)
+            End If
 
             retobj = getBaseArrangemangData(cmdtyp, retarrlist)
 
             Return retobj
         Catch ex As Exception
-            retobj.Status = "Fel när Arrangemangdetaljen skulle hämtas!"
+            retobj.Status = "Fel när Arrangemangdetaljen skulle hämtas! " & ex.Message & " -> " & cmdtyp.CmdTyp & " -> " & cmdtyp.ArrID
 
             Return retobj
         End Try
@@ -248,8 +276,6 @@ Public Class ArrangemangController
         End Try
 
     End Function
-
-
 
 
 #Region "Privata funktioner"

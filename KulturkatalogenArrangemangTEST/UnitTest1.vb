@@ -23,7 +23,25 @@ Imports KulturkatalogenArrangemang
         Dim x As arrangemangcontainerInfo = ret
 
     End Sub
+    <TestMethod()> Public Sub TestMethod1Utovare()
 
+        Dim testar As New kk_aj_arr_MainController
+        Dim cmd As New commandTypeInfo
+
+        cmd.CmdTyp = "byutovare"
+        cmd.CmdtypUserid = 0
+        cmd.cmdValue = "78"
+        cmd.ArrStatusTyp = 0
+        cmd.IsAdminRoll = 0
+        cmd.CmdRoll1 = 0
+        cmd.CmdRoll2 = 0
+
+
+        Dim ret As arrangemangcontainerInfo = testar.getArrangemang(cmd)
+
+        Dim x As arrangemangcontainerInfo = ret
+
+    End Sub
     <TestMethod()> Public Sub updatetest()
         Dim cmdtyp As New updatearrcommand
         cmdtyp.Arrid = 1
@@ -106,7 +124,20 @@ Imports KulturkatalogenArrangemang
 
     End Sub
 
+    <TestMethod()> Public Sub getgranskadetaljtest()
 
+        Dim testar As New kk_aj_arr_MainController
+        Dim cmd As New commandTypeInfo
+
+        cmd.CmdTyp = "granska"
+        cmd.ArrID = 143
+        cmd.CmdtypUserid = 2
+
+        Dim ret As arrangemangcontainerInfo = testar.getArrangemang(cmd)
+
+        Dim x As arrangemangcontainerInfo = ret
+
+    End Sub
     <TestMethod> Public Sub searchtest()
 
         Dim testarobj As New kk_aj_arr_MainController

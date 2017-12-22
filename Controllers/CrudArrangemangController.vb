@@ -17,9 +17,12 @@ Public Class CrudArrangemangController
                 If arrData.Utovare <= 0 Then
                     tmputovarid = _dalobj.addutovare(arrData.UtovareData)
                     _dalobj.updateArrUtovare(arrData.Arrid, tmputovarid)
+                Else
+                    arrData.UtovareData.UtovarID = arrData.Utovare
+                    _dalobj.Editutovare(arrData.UtovareData)
                 End If
 
-                If arrData.Arrgruppid > 0 Then
+                    If arrData.Arrgruppid > 0 Then
                     '?? kolla så att arrgruppid finns ??
                     'add arrid and arrgrupid to tblarridtoarrgrupp
                     _dalobj.addArrangemangToArrGrupp(arrData.Arrid, arrData.Arrgruppid)

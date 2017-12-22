@@ -3,8 +3,8 @@
 Imports KulturkatalogenArrangemang
 
 Public Class arrangemangDAL
-    'Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
-    Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
+    Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
+    'Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
     Private _linqObj As New kk_aj_ArrangemangLinqDataContext(_connectionString)
 
     Public Function getArrangemangByStatus(cmdtyp As commandTypeInfo) As List(Of arrangemangInfo)
@@ -106,15 +106,6 @@ Public Class arrangemangDAL
             nobj.Utovare = t.Organisation
             nobj.Username = t.Username
             nobj.Utovarid = t.UtovarID
-            nobj.Arrgruppid = t.arrgruppid
-
-            'Dim tmpbild = New mediaInfo
-            'tmpbild.MediaUrl = t.ImageUrl
-            'tmpbild.MediaAlt = t.ImageAlt
-            'tmpbild.MediaFilename = t.ImageFilename
-            'tmpbild.MediaFoto = t.ImageFotograf
-            'tmpbild.MediaSize = t.ImageSize
-            'nobj.MainImage = tmpbild
 
             tmpobj.Add(nobj)
         Next
@@ -278,6 +269,50 @@ Public Class arrangemangDAL
         Dim arr = (From p In _linqObj.kk_aj_proc_GetArrDetails(cmdtyp.ArrID)
                        Select p).SingleOrDefault
 
+            nobj.Arrid = arr.ArrID
+            nobj.ArrangemangStatus = arr.ArrangemangStatus
+            nobj.Arrangemangtypid = arr.ArrangemangstypID
+            nobj.Arrangemangtyp = arr.arrangemangtyp
+            nobj.Datum = Format(arr.Datum, "yyyy-MM-dd").ToString
+            nobj.ContentID = arr.Contentid
+            nobj.Rubrik = arr.Rubrik
+            nobj.UnderRubrik = arr.Underrubrik
+            nobj.LookedAt = arr.LookedAt
+            nobj.Konstform = arr.konstform
+            nobj.Publicerad = arr.Publicerad
+            nobj.Utovare = arr.Organisation
+            nobj.Utovarid = arr.UtovarID
+            nobj.Username = arr.AdminuserID
+            nobj.Innehall = arr.ContentText
+            nobj.Konstformid = arr.KonstformID
+            nobj.Konstform = arr.konstform
+            nobj.Utovarid = arr.UtovarID
+            nobj.Konstform2 = arr.konstform2
+            nobj.Konstform3 = arr.konstform3
+            nobj.Kontaktfornamn = arr.kontaktfornamn
+            nobj.KontaktEfternamn = arr.kontaktefternamn
+            nobj.KontaktEpost = arr.kontaktepost
+            nobj.KontaktTelefon = arr.Telefon
+
+            nobj.MainImage = fillmedia(arr.ImageUrl, arr.ImageAlt, arr.ImageFilename, arr.ImageFotograf, arr.ImageSize)
+            ' nobj.MediaClip = fillmedia(arr.MovieClipUrl, arr.MovieClipAlt, arr.MovieClipFilename, arr.MovieClipCredits, arr.MovieClipSize)
+            nobj.UtovareData = getutovardata(arr)
+            nobj.MediaList = getMedialist(arr.ArrID)
+            nobj.Faktalist = getfaktalist(arr.ArrID)
+            'Catch ex As Exception
+            '    nobjStatus = "Fel när Arrangemangen listades! Error in: " & cmdtyp.CmdTyp
+            'End Try
+            Return nobj
+
+    End Function
+
+
+    Public Function getArrangemangGranskaDetails(cmdtyp As commandTypeInfo) As arrangemangInfo
+        Dim nobj As New arrangemangInfo
+        'Try
+        Dim arr = (From p In _linqObj.kk_aj_proc_GetArrGranskaDetails(cmdtyp.ArrID)
+                   Select p).SingleOrDefault
+
         nobj.Arrid = arr.ArrID
         nobj.ArrangemangStatus = arr.ArrangemangStatus
         nobj.Arrangemangtypid = arr.ArrangemangstypID
@@ -304,7 +339,6 @@ Public Class arrangemangDAL
         nobj.KontaktTelefon = arr.Telefon
 
         nobj.MainImage = fillmedia(arr.ImageUrl, arr.ImageAlt, arr.ImageFilename, arr.ImageFotograf, arr.ImageSize)
-        ' nobj.MediaClip = fillmedia(arr.MovieClipUrl, arr.MovieClipAlt, arr.MovieClipFilename, arr.MovieClipCredits, arr.MovieClipSize)
         nobj.UtovareData = getutovardata(arr)
         nobj.MediaList = getMedialist(arr.ArrID)
         nobj.Faktalist = getfaktalist(arr.ArrID)
@@ -315,7 +349,7 @@ Public Class arrangemangDAL
 
     End Function
 
-    Private Function getutovardata(arr As kk_aj_proc_GetArrDetailsResult) As utovareInfo
+    Private Function getutovardata(arr As Object) As utovareInfo
         Dim utovare As New utovareInfo
         With utovare
             .Adress = arr.Adress
@@ -780,6 +814,35 @@ Public Class arrangemangDAL
         End Try
 
     End Function
+
+    Public Function Editutovare(utovare As utovareInfo) As Integer
+
+        Try
+            Dim updutovare = From e In _linqObj.kk_aj_tbl_Utovares
+                             Where e.UtovarID = utovare.UtovarID
+                             Select e
+
+            For Each tmpobj In updutovare
+                tmpobj.Organisation = utovare.Organisation
+                tmpobj.Fornamn = utovare.Fornamn
+                tmpobj.Efternamn = utovare.Efternamn
+                tmpobj.Telefonnummer = utovare.Telefon
+                tmpobj.Adress = utovare.Adress
+                tmpobj.Postnr = utovare.Postnr
+                tmpobj.Ort = utovare.Ort
+                tmpobj.Epost = utovare.Epost
+                tmpobj.Kommun = utovare.Kommun
+                tmpobj.Hemsida = utovare.Weburl
+            Next
+
+            _linqObj.SubmitChanges()
+            Return utovare.UtovarID
+        Catch ex As Exception
+            Return 0
+        End Try
+
+    End Function
+
     Public Function addKontakt(kontaktobj As arrangemangInfo) As Integer
         Dim tmpobj As New kk_aj_tbl_Kontakt
 
