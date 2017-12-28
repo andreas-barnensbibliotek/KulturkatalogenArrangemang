@@ -19,7 +19,7 @@ Public Class CrudArrangemangController
                     _dalobj.updateArrUtovare(arrData.Arrid, tmputovarid)
                 Else
                     arrData.UtovareData.UtovarID = arrData.Utovare
-                    _dalobj.Editutovare(arrData.UtovareData)
+                    arrData.Arrgruppid = _dalobj.Editutovare(arrData.UtovareData)
                 End If
 
                     If arrData.Arrgruppid > 0 Then
