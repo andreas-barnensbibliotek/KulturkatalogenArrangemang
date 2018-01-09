@@ -155,6 +155,8 @@ Imports KulturkatalogenArrangemang
     End Sub
     Private Function insertfuntion(vald As Integer) As arrangemangInfo
         Dim tmparr As New arrangemangInfo
+        Dim obj As New mediaInfo
+        obj.MediaUrl = "116_alf-aj.jpg"
 
         tmparr.Arrangemangtyp = 2 'författarbesök
         tmparr.ArrangemangStatus = 1
@@ -175,6 +177,8 @@ Imports KulturkatalogenArrangemang
         tmparr.KontaktEfternamn = "hult"
         tmparr.KontaktEpost = "nisse@test.se"
         tmparr.KontaktTelefon = "24680136"
+        tmparr.MainImage = obj
+
 
 
         Return tmparr

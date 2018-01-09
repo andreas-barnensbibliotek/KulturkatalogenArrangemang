@@ -47,6 +47,7 @@ Public Class CrudArrangemangController
                                 nyttarr.Arrid = arrData.Arrid
                                 tmparrlist.Add(nyttarr)
                                 ret.Arrangemanglist = tmparrlist
+
                                 'sendmail(nyttarr)
                                 ret.Status = "OK! Arrangemanget Inlagt!"
                             Else
