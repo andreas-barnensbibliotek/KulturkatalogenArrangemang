@@ -66,7 +66,8 @@ Public Class CrudArrangemangController
                 ret.Status = "Error fel vid inläggning av arrangemang!"
             End If
         Catch ex As Exception
-            ret.Status = "Error fel! Arrangemanget har inte lagts in!!"
+            ret.Status = "Error fel! Arrangemanget har inte lagts in!! " & ex.message
+
         End Try
 
         Return ret

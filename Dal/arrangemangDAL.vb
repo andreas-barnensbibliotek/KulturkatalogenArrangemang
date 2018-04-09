@@ -3,7 +3,9 @@
 Imports KulturkatalogenArrangemang
 
 Public Class arrangemangDAL
-    Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
+    'Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=kulturkatalogenDB_v1;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
+    Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB_DEV;User ID=kulturkatalogenDB;Password=L0rda1f"
+    'Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
     'Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
     Private _linqObj As New kk_aj_ArrangemangLinqDataContext(_connectionString)
 
