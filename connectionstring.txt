@@ -1,0 +1,1 @@
+﻿Data Source=.\SQLEXPRESS;Initial Catalog=AJDNNDatabase_v5;Persist Security Info=True;User ID=forfAdmin2;Password=Barnbib1;

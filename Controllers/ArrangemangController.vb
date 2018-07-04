@@ -57,6 +57,9 @@ Public Class ArrangemangController
                 Case "freesearch"
                     arrList = _dalobj.getArrangemangByFreeSearch(cmdtyp)
 
+                Case "redovisning"
+                    arrList = _dalobj.getArrangemangByRedovisning(cmdtyp)
+
             End Select
 
             retobj.Arrangemanglist = arrList

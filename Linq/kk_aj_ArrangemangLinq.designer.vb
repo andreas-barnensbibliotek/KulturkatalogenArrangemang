@@ -337,6 +337,12 @@ Partial Public Class kk_aj_ArrangemangLinqDataContext
 		Dim result As IExecuteResult = Me.ExecuteMethodCall(Me, CType(MethodInfo.GetCurrentMethod,MethodInfo), utovarid)
 		Return CType(result.ReturnValue,ISingleResult(Of kk_aj_proc_GetArrBy_UtovareResult))
 	End Function
+	
+	<Global.System.Data.Linq.Mapping.FunctionAttribute(Name:="dbo.kk_aj_proc_Getarrby_Redovisning")>  _
+	Public Function kk_aj_proc_Getarrby_Redovisning() As ISingleResult(Of kk_aj_proc_Getarrby_RedovisningResult)
+		Dim result As IExecuteResult = Me.ExecuteMethodCall(Me, CType(MethodInfo.GetCurrentMethod,MethodInfo))
+		Return CType(result.ReturnValue,ISingleResult(Of kk_aj_proc_Getarrby_RedovisningResult))
+	End Function
 End Class
 
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.kk_aj_tbl_arridtoContent")>  _
@@ -6359,6 +6365,309 @@ Partial Public Class kk_aj_proc_GetArrBy_UtovareResult
 		Set
 			If (Me._konstform3.Equals(value) = false) Then
 				Me._konstform3 = value
+			End If
+		End Set
+	End Property
+End Class
+
+Partial Public Class kk_aj_proc_Getarrby_RedovisningResult
+	
+	Private _ArrID As Integer
+	
+	Private _Rubrik As String
+	
+	Private _Underrubrik As String
+	
+	Private _UtovarID As Integer
+	
+	Private _Organisation As String
+	
+	Private _Fornamn As String
+	
+	Private _Efternamn As String
+	
+	Private _Telefonnummer As String
+	
+	Private _Adress As String
+	
+	Private _Postnr As String
+	
+	Private _Ort As String
+	
+	Private _Epost As String
+	
+	Private _Kommun As String
+	
+	Private _Hemsida As String
+	
+	Private _KonstformID As System.Nullable(Of Integer)
+	
+	Private _ArrangemangstypID As System.Nullable(Of Integer)
+	
+	Private _konstform As String
+	
+	Private _arrangemangtyp As String
+	
+	Private _VisningsPeriod As String
+	
+	Private _Datum As System.Nullable(Of Date)
+	
+	Private _arrangorstod As String
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArrID", DbType:="Int NOT NULL")>  _
+	Public Property ArrID() As Integer
+		Get
+			Return Me._ArrID
+		End Get
+		Set
+			If ((Me._ArrID = value)  _
+						= false) Then
+				Me._ArrID = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Rubrik", DbType:="NVarChar(250)")>  _
+	Public Property Rubrik() As String
+		Get
+			Return Me._Rubrik
+		End Get
+		Set
+			If (String.Equals(Me._Rubrik, value) = false) Then
+				Me._Rubrik = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Underrubrik", DbType:="NVarChar(250)")>  _
+	Public Property Underrubrik() As String
+		Get
+			Return Me._Underrubrik
+		End Get
+		Set
+			If (String.Equals(Me._Underrubrik, value) = false) Then
+				Me._Underrubrik = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UtovarID", DbType:="Int NOT NULL")>  _
+	Public Property UtovarID() As Integer
+		Get
+			Return Me._UtovarID
+		End Get
+		Set
+			If ((Me._UtovarID = value)  _
+						= false) Then
+				Me._UtovarID = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Organisation", DbType:="NVarChar(150)")>  _
+	Public Property Organisation() As String
+		Get
+			Return Me._Organisation
+		End Get
+		Set
+			If (String.Equals(Me._Organisation, value) = false) Then
+				Me._Organisation = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Fornamn", DbType:="NVarChar(70)")>  _
+	Public Property Fornamn() As String
+		Get
+			Return Me._Fornamn
+		End Get
+		Set
+			If (String.Equals(Me._Fornamn, value) = false) Then
+				Me._Fornamn = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Efternamn", DbType:="NVarChar(70)")>  _
+	Public Property Efternamn() As String
+		Get
+			Return Me._Efternamn
+		End Get
+		Set
+			If (String.Equals(Me._Efternamn, value) = false) Then
+				Me._Efternamn = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefonnummer", DbType:="NVarChar(50)")>  _
+	Public Property Telefonnummer() As String
+		Get
+			Return Me._Telefonnummer
+		End Get
+		Set
+			If (String.Equals(Me._Telefonnummer, value) = false) Then
+				Me._Telefonnummer = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Adress", DbType:="NVarChar(150)")>  _
+	Public Property Adress() As String
+		Get
+			Return Me._Adress
+		End Get
+		Set
+			If (String.Equals(Me._Adress, value) = false) Then
+				Me._Adress = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Postnr", DbType:="NVarChar(10)")>  _
+	Public Property Postnr() As String
+		Get
+			Return Me._Postnr
+		End Get
+		Set
+			If (String.Equals(Me._Postnr, value) = false) Then
+				Me._Postnr = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Ort", DbType:="NVarChar(80)")>  _
+	Public Property Ort() As String
+		Get
+			Return Me._Ort
+		End Get
+		Set
+			If (String.Equals(Me._Ort, value) = false) Then
+				Me._Ort = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Epost", DbType:="NVarChar(150)")>  _
+	Public Property Epost() As String
+		Get
+			Return Me._Epost
+		End Get
+		Set
+			If (String.Equals(Me._Epost, value) = false) Then
+				Me._Epost = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Kommun", DbType:="NVarChar(80)")>  _
+	Public Property Kommun() As String
+		Get
+			Return Me._Kommun
+		End Get
+		Set
+			If (String.Equals(Me._Kommun, value) = false) Then
+				Me._Kommun = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Hemsida", DbType:="NVarChar(250)")>  _
+	Public Property Hemsida() As String
+		Get
+			Return Me._Hemsida
+		End Get
+		Set
+			If (String.Equals(Me._Hemsida, value) = false) Then
+				Me._Hemsida = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KonstformID", DbType:="Int")>  _
+	Public Property KonstformID() As System.Nullable(Of Integer)
+		Get
+			Return Me._KonstformID
+		End Get
+		Set
+			If (Me._KonstformID.Equals(value) = false) Then
+				Me._KonstformID = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArrangemangstypID", DbType:="Int")>  _
+	Public Property ArrangemangstypID() As System.Nullable(Of Integer)
+		Get
+			Return Me._ArrangemangstypID
+		End Get
+		Set
+			If (Me._ArrangemangstypID.Equals(value) = false) Then
+				Me._ArrangemangstypID = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_konstform", DbType:="NVarChar(250)")>  _
+	Public Property konstform() As String
+		Get
+			Return Me._konstform
+		End Get
+		Set
+			If (String.Equals(Me._konstform, value) = false) Then
+				Me._konstform = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_arrangemangtyp", DbType:="NVarChar(250)")>  _
+	Public Property arrangemangtyp() As String
+		Get
+			Return Me._arrangemangtyp
+		End Get
+		Set
+			If (String.Equals(Me._arrangemangtyp, value) = false) Then
+				Me._arrangemangtyp = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VisningsPeriod", DbType:="NVarChar(10)")>  _
+	Public Property VisningsPeriod() As String
+		Get
+			Return Me._VisningsPeriod
+		End Get
+		Set
+			If (String.Equals(Me._VisningsPeriod, value) = false) Then
+				Me._VisningsPeriod = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datum", DbType:="DateTime")>  _
+	Public Property Datum() As System.Nullable(Of Date)
+		Get
+			Return Me._Datum
+		End Get
+		Set
+			If (Me._Datum.Equals(value) = false) Then
+				Me._Datum = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_arrangorstod", DbType:="VarChar(MAX)")>  _
+	Public Property arrangorstod() As String
+		Get
+			Return Me._arrangorstod
+		End Get
+		Set
+			If (String.Equals(Me._arrangorstod, value) = false) Then
+				Me._arrangorstod = value
 			End If
 		End Set
 	End Property

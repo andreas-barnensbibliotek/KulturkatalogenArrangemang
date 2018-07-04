@@ -511,4 +511,29 @@
       <Column Name="konstform3" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.kk_aj_proc_Getarrby_Redovisning" Method="kk_aj_proc_Getarrby_Redovisning">
+    <ElementType Name="kk_aj_proc_Getarrby_RedovisningResult">
+      <Column Name="ArrID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Rubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Underrubrik" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="UtovarID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Organisation" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Fornamn" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Efternamn" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="Telefonnummer" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Adress" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Postnr" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Ort" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Epost" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Kommun" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Hemsida" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="KonstformID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ArrangemangstypID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="konstform" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="arrangemangtyp" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="VisningsPeriod" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="arrangorstod" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

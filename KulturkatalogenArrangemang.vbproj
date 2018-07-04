@@ -72,7 +72,7 @@
     <Compile Include="Controllers\CrudArrangemangController.vb" />
     <Compile Include="Controllers\getEventlogController.vb" />
     <Compile Include="Dal\arrangemangDAL.vb" />
-    <Compile Include="Dal\kk_aj_log_DAL.vb" />
+    <Compile Include="Dal\connectionstringHandler.vb" />
     <Compile Include="Info\arrangemangcontainerInfo.vb" />
     <Compile Include="Info\arrangemangInfo.vb" />
     <Compile Include="Info\commandTypeInfo.vb" />
@@ -139,7 +139,9 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="connectionstring.txt" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>

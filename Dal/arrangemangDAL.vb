@@ -1,13 +1,8 @@
-﻿
-
-Imports KulturkatalogenArrangemang
+﻿Imports KulturkatalogenArrangemang
 
 Public Class arrangemangDAL
-    'Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=kulturkatalogenDB_v1;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
-    Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB_DEV;User ID=kulturkatalogenDB;Password=L0rda1f"
-    'Private _connectionString As String = "Data Source=.\SQLEXPRESS;Initial Catalog=dnndev_v902.me;Persist Security Info=True;User ID=dnndev_v902.me;Password=L0rda1f"
-    'Private _connectionString As String = "Data Source=DE-1896;Initial Catalog=kulturkatalogenDB;User ID=kulturkatalogenDB;Password=L0rda1f"
-    Private _linqObj As New kk_aj_ArrangemangLinqDataContext(_connectionString)
+    Dim connstring As New connectionstringHandler
+    Private _linqObj As New kk_aj_ArrangemangLinqDataContext(connstring.CurrentConnectionString)
 
     Public Function getArrangemangByStatus(cmdtyp As commandTypeInfo) As List(Of arrangemangInfo)
 
@@ -499,6 +494,60 @@ Public Class arrangemangDAL
 
         Return tmpobj
 
+    End Function
+
+
+    Public Function getArrangemangByRedovisning(cmdtyp As commandTypeSearchInfo) As List(Of arrangemangInfo)
+        Dim tmpobj As New List(Of arrangemangInfo)
+        Dim filterfaktaobj As New FilterFaktaHelper
+
+        Dim arr = From p In _linqObj.kk_aj_proc_Getarrby_Redovisning()
+                  Select p
+
+        For Each t In arr
+            Dim nobj As New arrangemangInfo
+            nobj.Arrid = t.ArrID
+            nobj.Arrangemangtypid = t.ArrangemangstypID
+            nobj.Arrangemangtyp = t.arrangemangtyp
+            nobj.Datum = Format(t.Datum, "yyyy-MM-dd").ToString()
+            nobj.Rubrik = t.Rubrik
+            nobj.UnderRubrik = t.Underrubrik
+            nobj.Konstformid = t.KonstformID
+            nobj.Konstform = t.konstform
+            nobj.Utovare = t.Organisation
+            nobj.Utovarid = t.UtovarID
+            nobj.UtovareData = getutovardata(t)
+            nobj.Faktalist = redovisningArrangorsstod(t)
+            tmpobj.Add(nobj)
+        Next
+
+        If tmpobj.Count <= 0 Then
+            Dim noresult As New arrangemangInfo
+            noresult.Rubrik = "Finns inget att visa"
+            tmpobj.Add(noresult)
+        End If
+
+        Return tmpobj
+
+    End Function
+
+    Private Function redovisningArrangorsstod(arr) As List(Of faktainfo)
+        Dim faktalist As New List(Of faktainfo)
+        Dim tmp As New faktainfo
+        tmp.Faktarubrik = "Arrangörsstöd"
+        tmp.FaktaTypID = 1
+        tmp.Faktaid = 0
+        tmp.FaktaValue = arr.arrangorstod
+        faktalist.Add(tmp)
+
+        Dim visning As New faktainfo
+        visning.Faktarubrik = "Visningsperiod"
+        visning.FaktaTypID = 99
+        visning.Faktaid = 0
+        visning.FaktaValue = arr.VisningsPeriod
+        faktalist.Add(visning)
+
+        Return faktalist
     End Function
 
 #End Region

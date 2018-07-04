@@ -23,6 +23,23 @@ Imports KulturkatalogenArrangemang
         Dim x As arrangemangcontainerInfo = ret
 
     End Sub
+
+
+
+    <TestMethod()> Public Sub getredovisning()
+
+        Dim testarobj As New kk_aj_arr_MainController
+        Dim cmd As New commandTypeSearchInfo
+        Dim arrobj As New arrangemangcontainerInfo
+        cmd.cmdtyp = "redovisning"
+        'cmd.searchstr = "test"
+
+
+        arrobj = testarobj.searchArrangemang(cmd)
+
+        Dim ret As arrangemangcontainerInfo = arrobj
+
+    End Sub
     <TestMethod()> Public Sub TestMethod1Utovare()
 
         Dim testar As New kk_aj_arr_MainController
@@ -153,6 +170,12 @@ Imports KulturkatalogenArrangemang
 
 
     End Sub
+    <TestMethod> Public Sub connectionstring()
+
+        Dim testarobj As New connectionstringHandler
+        Dim ret As String = testarobj.CurrentConnectionString
+    End Sub
+
     Private Function insertfuntion(vald As Integer) As arrangemangInfo
         Dim tmparr As New arrangemangInfo
         Dim obj As New mediaInfo
