@@ -165,7 +165,7 @@ Public Class arrangemangDAL
                 'If cmdtyp.UpdValue = "2" Then ' om den är godkänd, publicera!
                 '    itm.Publicerad = "ja"
                 'End If
-                If cmdtyp.UpdValue = "3" Then ' om den är nekad, AVpublicera!
+                If cmdtyp.UpdValue = "3" Or cmdtyp.UpdValue = "5" Then ' om den är nekad eller är under behandling, AVpublicera!
                     itm.Publicerad = "nej"
                 End If
                 itm.Datum = Date.Now

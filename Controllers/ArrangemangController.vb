@@ -299,7 +299,7 @@ Public Class ArrangemangController
                 End If
             Case "arrstat"
                 If IsNumeric(cmdtyp.UpdValue) Then
-                    If cmdtyp.UpdValue >= 1 And cmdtyp.UpdValue <= 4 Then
+                    If cmdtyp.UpdValue >= 1 And cmdtyp.UpdValue <= 5 Then
                         ret = True
                     End If
                 End If

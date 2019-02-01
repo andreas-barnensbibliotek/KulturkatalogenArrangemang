@@ -11,4 +11,5 @@ D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Release\KulturkatalogenAr
 D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Release\KulturkatalogenArrangemang.dll
 D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Release\KulturkatalogenArrangemang.xml
 D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Release\KulturkatalogenArrangemang.pdb
-D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Release\KulturkatalogenArrangemang.vbprojResolveAssemblyReference.cache
+D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Release\KulturkatalogenArrangemang.vbprojAssemblyReference.cache
+D:\devprojekt\libraries\KulturkatalogenArrangemang\obj\Release\KulturkatalogenArrangemang.vbproj.CoreCompileInputs.cache
